@@ -1,0 +1,16 @@
+﻿global using SharedKernel.Events;
+global using System.Threading.Channels;
+global using Web.Api.Messaging.Queue;
+global using MediatR;
+global using Web.Api.Messaging.Processing;
+global using Web.Api.Messaging.Bus;
+global using SharedKernel.Exceptions;
+global using SharedKernel.Result;
+global using Web.Api.Interceptor;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using SharedKernel.Audit;
+global using Identity.Application.Features.Register;
+global using Microsoft.AspNetCore.Mvc;
+global using Identity.Application.Common.Dtos;
+global using Identity.Infrastructure.Persistence.AutoMig;

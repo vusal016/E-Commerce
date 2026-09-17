@@ -1,0 +1,9 @@
+﻿global using Identity.Domain.RefreshToken;
+global using Identity.Domain.User;
+global using Microsoft.EntityFrameworkCore;
+global using Identity.Domain.Enums;
+global using Identity.Application.Common.Dtos;
+global using MediatR;
+global using AutoMapper;
+global using Identity.Application.Common.Interfaces;
+global using Microsoft.AspNetCore.Identity;
