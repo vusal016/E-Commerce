@@ -1,4 +1,6 @@
-﻿namespace Web.Api.Interceptor
+﻿using SharedKernel.Audit;
+
+namespace Web.Api.Interceptor
 {
     public sealed class AuditInterceptor : SaveChangesInterceptor
     {

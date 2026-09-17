@@ -6,17 +6,17 @@
     <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="SharedKernel/SharedKernel.csproj" />
-    <Project Path="Web.Api/Web.Api.csproj" />
+    <Project Path="src/SharedKernel/SharedKernel.csproj" />
+    <Project Path="src/Web.Api/Web.Api.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
   <Folder Name="/src/Modules/Cart/" />
   <Folder Name="/src/Modules/Catalog/" />
   <Folder Name="/src/Modules/Engagement/" />
   <Folder Name="/src/Modules/Identity/">
-    <Project Path="Identity.Application/Identity.Application.csproj" />
-    <Project Path="Identity.Domain/Identity.Domain.csproj" />
-    <Project Path="Identity.Infrastructure/Identity.Infrastructure.csproj" Id="17ade364-4252-4a7a-9ffe-c1fc2e6bba84" />
+    <Project Path="src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
+    <Project Path="src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
+    <Project Path="src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Modules/Ordering/" />
   <Folder Name="/src/Modules/Promotions/" />

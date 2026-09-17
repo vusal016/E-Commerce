@@ -1,4 +1,6 @@
-﻿namespace Web.Api.Controllers
+﻿using SharedKernel.Result;
+
+namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
