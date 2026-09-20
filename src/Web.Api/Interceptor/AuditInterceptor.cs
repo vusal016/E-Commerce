@@ -12,7 +12,7 @@
             foreach (var entry in entities)
             {
 
-                if (entry.Entity is IAuiditEntity audit)
+                if (entry.Entity is IAuditEntity audit)
                 {
                     if (entry.State == EntityState.Added)
                         audit.CreatedAt = DateTime.UtcNow;

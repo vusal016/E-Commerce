@@ -14,7 +14,7 @@
 
             await identityDbContext.RefreshTokens.Where(r => r.Id == refToken.Id).ExecuteDeleteAsync(cancellationToken);
 
-            var accestoken = tokenProvider.GenerateAccessToken(user);
+            var accesstoken = tokenProvider.GenerateAccessToken(user);
             var refreshToken = tokenProvider.GenerateRefreshToken();
 
             var newRefreshToken = new RefreshToken
@@ -29,7 +29,7 @@
 
             return new RefreshTokenDto
             (
-                accestoken,
+                accesstoken,
                 newRefreshToken.Token
             );  
         }

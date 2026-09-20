@@ -27,7 +27,7 @@
         }
         [HttpGet("me")]
         [Authorize]
-        public async Task<IActionResult> GetMe(GetMeQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMe(CancellationToken cancellationToken)
         {
             var userId=Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var request = await mediator.Send(new GetMeQuery(userId), cancellationToken);

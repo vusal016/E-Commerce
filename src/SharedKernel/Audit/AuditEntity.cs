@@ -1,6 +1,6 @@
 ﻿namespace SharedKernel.Audit
 {
-    public abstract class AuditEntity:BaseEntity, IAuiditEntity
+    public abstract class AuditEntity:BaseEntity, IAuditEntity
     {
         protected AuditEntity() : base()
         {

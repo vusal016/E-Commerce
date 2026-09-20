@@ -1,4 +1,6 @@
-﻿namespace Identity.UnitTests.ApplicationTests
+﻿using Identity.Application.Common.Mapper;
+
+namespace Identity.UnitTests.ApplicationTests
 {
     public class AutoMapperTests
     {

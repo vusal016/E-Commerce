@@ -1,6 +1,6 @@
 ﻿namespace Identity.Domain.User
 {
-    public sealed class User: IdentityUser<Guid>, IAuiditEntity
+    public sealed class User: IdentityUser<Guid>, IAuditEntity
     {
         private User()
         {

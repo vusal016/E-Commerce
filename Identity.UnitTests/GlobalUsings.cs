@@ -7,7 +7,7 @@ global using Identity.Application.Common.Dtos;
 global using Identity.Domain.Enums;
 global using NSubstitute;
 global using Xunit;
-global using Identity.Application.Common.IdentityMapper;
+global using Identity.Application.Common.Mapper;
 global using Microsoft.Extensions.Logging.Abstractions;
 global using Identity.Application.Features.Login;
 global using Identity.Domain.RefreshToken;
