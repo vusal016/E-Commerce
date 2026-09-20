@@ -1,6 +1,6 @@
-﻿namespace Identity.UnitTests.ApplicationTests
+namespace Identity.UnitTests.ApplicationTests
 {
-    public class UserRegistrationCommandTest
+    public sealed class UserRegistrationCommandTest
     {
         private static readonly UserRegisterCommand Command = new("John", "Bushmaker", "john.bush@gmail.com", "password123");
 

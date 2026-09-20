@@ -1,6 +1,4 @@
-﻿using Identity.Application.Common.Mapper;
-
-namespace Identity.Infrastructure
+﻿namespace Identity.Infrastructure
 {
     public static class DependencyInjection
     {

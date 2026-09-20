@@ -1,4 +1,4 @@
-﻿namespace Identity.Infrastructure.Identity.Settings
+namespace Identity.Infrastructure.Tokens.Settings
 {
     public sealed class JwtSettings
     {

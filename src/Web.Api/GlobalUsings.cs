@@ -14,7 +14,7 @@ global using SharedKernel.Result;
 global using SharedKernel.Audit;
 global using SharedKernel.Events;
 global using Web.Api.DatabaseMigrations;
-global using Web.Api.Extentions;
+global using Web.Api.Extensions;
 global using Web.Api.Messaging;
 global using Web.Api.Middleware;
 global using System.Text.Json.Serialization;

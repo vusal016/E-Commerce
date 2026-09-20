@@ -1,11 +1,14 @@
-﻿namespace Identity.Infrastructure.Persistence.IdentityData
+using Identity.Domain.PaymentMethod;
+
+namespace Identity.Infrastructure.Persistence.IdentityData
 {
     public sealed class IdentityModuleDbContext(DbContextOptions<IdentityModuleDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IIdentityDbContext
     {
-        public DbSet<User> Users { set; get; }
-        public DbSet<RefreshToken> RefreshTokens { set; get; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
 
-        override protected void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.HasDefaultSchema("identity");

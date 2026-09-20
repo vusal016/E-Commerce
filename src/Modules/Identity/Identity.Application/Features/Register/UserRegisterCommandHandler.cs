@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Features.Register
+namespace Identity.Application.Features.Register
 {
     public sealed class UserRegisterCommandHandler(UserManager<User> userManager,IIdentityDbContext identityDbContext,ITokenProvider tokenProvider,IMapper mapper) : IRequestHandler<UserRegisterCommand, AuthResponseDto>
     {

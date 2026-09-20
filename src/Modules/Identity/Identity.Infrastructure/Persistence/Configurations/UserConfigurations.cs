@@ -1,6 +1,6 @@
-﻿namespace Identity.Infrastructure.Persistence.Configurations
+namespace Identity.Infrastructure.Persistence.Configurations
 {
-    public sealed class UserConfigurations : IEntityTypeConfiguration<User>
+    public sealed class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {

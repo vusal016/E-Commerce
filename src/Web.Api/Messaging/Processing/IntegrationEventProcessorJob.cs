@@ -1,6 +1,6 @@
-﻿namespace Web.Api.Messaging.Processing
+namespace Web.Api.Messaging.Processing
 {
-    internal class IntegrationEventProcessorJob(InMemoryMessageQueue queue,IPublisher publisher) : BackgroundService
+    internal sealed class IntegrationEventProcessorJob(InMemoryMessageQueue queue,IPublisher publisher) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

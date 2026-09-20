@@ -1,4 +1,4 @@
-﻿namespace Identity.Infrastructure.Identity
+namespace Identity.Infrastructure.Tokens
 {
     public sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenProvider
     {

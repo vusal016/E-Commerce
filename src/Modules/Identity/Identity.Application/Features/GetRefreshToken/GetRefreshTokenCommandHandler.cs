@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Features.GetRefreshToken
+namespace Identity.Application.Features.GetRefreshToken
 {
     public sealed class GetRefreshTokenCommandHandler(UserManager<User> userManager, IIdentityDbContext identityDbContext, ITokenProvider tokenProvider) : IRequestHandler<GetRefreshTokenCommand, RefreshTokenDto>
     {
@@ -14,7 +14,7 @@
 
             await identityDbContext.RefreshTokens.Where(r => r.Id == refToken.Id).ExecuteDeleteAsync(cancellationToken);
 
-            var accesstoken = tokenProvider.GenerateAccessToken(user);
+            var accessToken = tokenProvider.GenerateAccessToken(user);
             var refreshToken = tokenProvider.GenerateRefreshToken();
 
             var newRefreshToken = new RefreshToken
@@ -29,7 +29,7 @@
 
             return new RefreshTokenDto
             (
-                accesstoken,
+                accessToken,
                 newRefreshToken.Token
             );  
         }

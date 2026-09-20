@@ -7,3 +7,4 @@ global using MediatR;
 global using AutoMapper;
 global using Identity.Application.Common.Interfaces;
 global using Microsoft.AspNetCore.Identity;
+global using Identity.Domain.PaymentMethod;
