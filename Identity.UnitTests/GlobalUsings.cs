@@ -1,0 +1,14 @@
+﻿global using AutoMapper;
+global using Identity.Application.Common.Interfaces;
+global using Identity.Application.Features.Register;
+global using Identity.Domain.User;
+global using Microsoft.AspNetCore.Identity;
+global using Identity.Application.Common.Dtos;
+global using Identity.Domain.Enums;
+global using NSubstitute;
+global using Xunit;
+global using Identity.Application.Common.IdentityMapper;
+global using Microsoft.Extensions.Logging.Abstractions;
+global using Identity.Application.Features.Login;
+global using Identity.Domain.RefreshToken;
+global using MockQueryable.NSubstitute;

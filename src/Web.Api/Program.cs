@@ -1,17 +1,19 @@
-using Web.Api.DatabaseMigrations;
-using Web.Api.Middleware;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(
+        new JsonStringEnumConverter());
+});
 builder.Services.AddOpenApi();
+builder.Services.AddModuleRegistrations(builder.Configuration);
+builder.Services.AddMessaging();
 builder.Services.AddSingleton<ISaveChangesInterceptor, AuditInterceptor>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

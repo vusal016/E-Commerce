@@ -6,11 +6,11 @@
        string FirstName,
         string LastName,
         string Email,
-        string Phone,
+        string? Phone,
         MemberTier MemberTier,
-        string AvatarUrl,
+        string? AvatarUrl,
         bool IsGuest,
         DateTime CreatedAt,
-        DateTime UpdatedAt
+        DateTime? UpdatedAt
     );
 }

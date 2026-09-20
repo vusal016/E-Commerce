@@ -18,3 +18,6 @@ global using Microsoft.IdentityModel.JsonWebTokens;
 global using System.Security.Claims;
 global using System.Text;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using Identity.Infrastructure.Persistence.AutoMig;
+global using Identity.Application.Common.IdentityMapper;
+global using Identity.Application.Features.Register;

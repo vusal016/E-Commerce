@@ -1,6 +1,4 @@
-﻿using Identity.Infrastructure.Persistence.AutoMig;
-
-namespace Identity.Infrastructure
+﻿namespace Identity.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -9,8 +7,8 @@ namespace Identity.Infrastructure
             services.AddDbContext<IdentityModuleDbContext>((sp, options)=>
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-                var interceptors = sp.GetServices<ISaveChangesInterceptor>();
-                options.AddInterceptors(interceptors);
+                var interceptor = sp.GetServices<ISaveChangesInterceptor>();
+                options.AddInterceptors(interceptor);
             });
 
             var jwtSection = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>();
@@ -34,11 +32,25 @@ namespace Identity.Infrastructure
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
+            services.AddIdentityCore<User>(options =>
+            {
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.AllowedForNewUsers = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<IdentityModuleDbContext>()
+            .AddDefaultTokenProviders();
             services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
             services.AddScoped<DatabaseInitializer>();
-            services.AddScoped<IIdentityDbContext,IdentityModuleDbContext>();
+            services.AddScoped<IIdentityDbContext>(sp => sp.GetRequiredService<IdentityModuleDbContext>());
             services.AddScoped<ITokenProvider, TokenProvider>();
+            services.AddMediatR(cfg=>cfg.RegisterServicesFromAssembly(typeof(UserRegisterCommandHandler).Assembly));
+            services.AddAutoMapper(cfg => cfg.AddProfile<IdentityMapper>());
             return services;
         }
     }

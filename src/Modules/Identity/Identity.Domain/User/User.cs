@@ -11,11 +11,12 @@
             SetFirstName(firstName);
             SetLastName(lastName);
             Email=email;
+            UserName=email;
         }
         public string FirstName { get;private set; }
         public string LastName { get;private set; }
         public MemberTier MemberTier { get;private set; }
-        public string AvatarUrl { get;private set; }
+        public string? AvatarUrl { get;private set; }
         public bool IsGuest { get;private set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

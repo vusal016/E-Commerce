@@ -3,6 +3,6 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 </Project>
