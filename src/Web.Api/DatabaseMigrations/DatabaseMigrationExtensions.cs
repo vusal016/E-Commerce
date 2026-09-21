@@ -5,6 +5,7 @@
         public static async Task MigrateAllDatabasesAsync(this IServiceProvider services)
         {
             await services.MigrateIdentityDatabaseAsync();
+            await services.MigrateCatalogDatabaseAsync();
         }
     }
 }

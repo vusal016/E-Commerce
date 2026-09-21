@@ -5,7 +5,7 @@ namespace Web.Api.Extensions
         public static IServiceCollection AddModuleRegistrations(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentityModule(configuration);
-            return services;
+            return services.AddCatalogModule(configuration);
         }
     }
 }

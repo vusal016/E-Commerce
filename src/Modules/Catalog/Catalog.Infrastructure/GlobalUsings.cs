@@ -1,0 +1,10 @@
+﻿global using Catalog.Application.Common.Interfaces;
+global using Catalog.Domain.Brand;
+global using Catalog.Domain.Catalog;
+global using Catalog.Domain.ProductAggregate;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Catalog.Infrastructure.Persistence.CatalogData;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using Microsoft.Extensions.Configuration;

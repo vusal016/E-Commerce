@@ -11,8 +11,7 @@
         public static async Task MigrateIdentityDatabaseAsync(this IServiceProvider services)
         {
             using var scope = services.CreateScope();
-            var initializer = scope.ServiceProvider
-                .GetRequiredService<DatabaseInitializer>();
+            var initializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
             await initializer.InitializeAsync();
         }
     }

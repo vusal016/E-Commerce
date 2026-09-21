@@ -24,3 +24,5 @@ global using Identity.Application.Features.GetRefreshToken;
 global using Microsoft.AspNetCore.Authorization;
 global using Identity.Application.Features.Profile.Queries;
 global using System.Security.Claims;
+global using Catalog.Infrastructure.Persistence.AutoMig;
+global using Catalog.Infrastructure;

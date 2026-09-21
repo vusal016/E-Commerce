@@ -1,6 +1,6 @@
 namespace Identity.Infrastructure.Persistence.Configurations
 {
-    public sealed class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+    public sealed class RefreshTokenConfigurations : IEntityTypeConfiguration<RefreshToken>
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {   

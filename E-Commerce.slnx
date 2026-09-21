@@ -14,17 +14,19 @@
   <Folder Name="/src/tests/" />
   <Folder Name="/src/Modules/Cart/" />
   <Folder Name="/src/Modules/Catalog/">
-    <Project Path="Catalog.Domain/Catalog.Domain.csproj" Id="ebaca704-3254-4eaf-8fd8-a69dd7a4526d" />
+    <Project Path="src/Modules/Catalog/Catalog.Application/Catalog.Application.csproj" Id="bae136f9-610a-4184-abed-fecca96d3ee4" />
+    <Project Path="src/Modules/Catalog/Catalog.Domain/Catalog.Domain.csproj" Id="ebaca704-3254-4eaf-8fd8-a69dd7a4526d" />
+    <Project Path="src/Modules/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj" Id="1eec7f16-2f69-4cf6-adb7-70fc4e5893a4" />
   </Folder>
   <Folder Name="/src/Modules/Identity/">
     <Project Path="src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
     <Project Path="src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
     <Project Path="src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/src/Modules/Identity/Engagement/" />
+  <Folder Name="/src/Modules/Engagement/" />
   <Folder Name="/src/Modules/Ordering/" />
   <Folder Name="/src/Modules/Promotions/" />
   <Folder Name="/src/tests/Modules/">
-    <Project Path="Identity.UnitTests/Identity.UnitTests.csproj" Id="8ac7bb10-7b93-43a5-a9a4-bc8b50ed9535" />
+    <Project Path="src/tests/Modules/Identity.UnitTests/Identity.UnitTests.csproj" Id="8ac7bb10-7b93-43a5-a9a4-bc8b50ed9535" />
   </Folder>
 </Solution>
