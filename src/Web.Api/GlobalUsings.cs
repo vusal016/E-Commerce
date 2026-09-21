@@ -26,3 +26,7 @@ global using Identity.Application.Features.Profile.Queries;
 global using System.Security.Claims;
 global using Catalog.Infrastructure.Persistence.AutoMig;
 global using Catalog.Infrastructure;
+global using Promotions.Infrastructure;
+global using Promotions.Infrastructure.Persistence.AutoMig;
+global using Promotions.Application.Common.Dtos;
+global using Promotions.Application.Features.HeroBanners.Queries;

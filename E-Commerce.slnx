@@ -26,6 +26,11 @@
   <Folder Name="/src/Modules/Engagement/" />
   <Folder Name="/src/Modules/Ordering/" />
   <Folder Name="/src/Modules/Promotions/" />
+  <Folder Name="/src/Modules/Promotions/">
+    <Project Path="src/Modules/Promotions/Promotions.Application/Promotions.Application.csproj" />
+    <Project Path="src/Modules/Promotions/Promotions.Domain/Promotions.Domain.csproj" />
+    <Project Path="src/Modules/Promotions/Promotions.Infrastructure/Promotions.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/tests/Modules/">
     <Project Path="src/tests/Modules/Identity.UnitTests/Identity.UnitTests.csproj" Id="8ac7bb10-7b93-43a5-a9a4-bc8b50ed9535" />
   </Folder>

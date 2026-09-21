@@ -1,4 +1,4 @@
-﻿namespace Web.Api.DatabaseMigrations
+namespace Web.Api.DatabaseMigrations
 {
     public static class DatabaseMigrationExtensions
     {
@@ -6,6 +6,7 @@
         {
             await services.MigrateIdentityDatabaseAsync();
             await services.MigrateCatalogDatabaseAsync();
+            await services.MigratePromotionsDatabaseAsync();
         }
     }
 }
