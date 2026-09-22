@@ -30,3 +30,7 @@ global using Promotions.Infrastructure;
 global using Promotions.Infrastructure.Persistence.AutoMig;
 global using Promotions.Application.Common.Dtos;
 global using Promotions.Application.Features.HeroBanners.Queries;
+global using SharedKernel.Cache;
+global using Web.Api.Behaviors;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;

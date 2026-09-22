@@ -1,5 +1,12 @@
+using SharedKernel.Cache;
+
 namespace Promotions.Application.Features.HeroBanners.Queries
 {
-    public sealed record GetHeroBannersQuery() : IRequest<IReadOnlyList<HeroBannerDto>>;
+    public sealed record GetHeroBannersQuery() : ICachedQuery<List<HeroBannerDto>>
+    {
+        public string Key => "hero-banners";
+
+        public TimeSpan? Expiration => TimeSpan.FromMinutes(2);
+    }
 }
 

@@ -25,7 +25,6 @@
   </Folder>
   <Folder Name="/src/Modules/Engagement/" />
   <Folder Name="/src/Modules/Ordering/" />
-  <Folder Name="/src/Modules/Promotions/" />
   <Folder Name="/src/Modules/Promotions/">
     <Project Path="src/Modules/Promotions/Promotions.Application/Promotions.Application.csproj" />
     <Project Path="src/Modules/Promotions/Promotions.Domain/Promotions.Domain.csproj" />

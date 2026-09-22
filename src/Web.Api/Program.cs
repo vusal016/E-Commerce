@@ -1,3 +1,5 @@
+using Web.Api.Caching;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +12,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddModuleRegistrations(builder.Configuration);
 builder.Services.AddMessaging();
+builder.Services.AddCaching(builder.Configuration);
 builder.Services.AddSingleton<ISaveChangesInterceptor, AuditInterceptor>();
 
 var app = builder.Build();
