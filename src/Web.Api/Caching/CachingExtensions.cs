@@ -11,6 +11,7 @@
                 options.Configuration = connectionString;
             });
 
+            services.AddSingleton<ICacheService, CacheService>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(QueryCachingPipelineBehavior<,>));
             return services;
         }
