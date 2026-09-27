@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Result
+namespace SharedKernel.Result
 {
     public sealed class Result<T>
     {
@@ -10,6 +10,7 @@
         public int StatusCode { get; private set; }
         public IReadOnlyList<string> Errors { get; private set; }
         public T Data { get; private set; }
+        public PaginationInfo PaginationInfo { get;private set; }
 
         public static Result<T> Success(T data, int statusCode)
         {
@@ -45,6 +46,10 @@
                 Errors = new List<string> { error },
                 StatusCode = statusCode
             };
+        }
+        public void SetPaginationInfo(PaginationInfo paginationInfo)
+        {
+            PaginationInfo = paginationInfo;
         }
     }
 }

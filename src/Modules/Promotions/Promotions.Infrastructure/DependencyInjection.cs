@@ -16,6 +16,7 @@ namespace Promotions.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetHeroBannersQueryHandler).Assembly));
             services.AddAutoMapper(cfg => cfg.AddProfile<PromotionsMapper>());
 
+            services.AddScoped<IPromotionsPublicApi,PromotionsPublicApi>();
             return services;
         }
     }

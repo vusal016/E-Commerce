@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Audit
+namespace SharedKernel.Audit
 {
     public interface IAuditEntity
     {

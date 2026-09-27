@@ -1,4 +1,4 @@
-﻿namespace Web.Api.Behaviors
+namespace Web.Api.Behaviors
 {
     public sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(ICacheService cacheService) : IPipelineBehavior<TRequest, TResponse> where TRequest : ICachedQuery
     {

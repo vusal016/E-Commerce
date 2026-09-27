@@ -10,4 +10,3 @@ namespace Promotions.Application.Common.Dtos
         string? ButtonText,
         int DisplayOrder);
 }
-

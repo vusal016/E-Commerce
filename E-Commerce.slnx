@@ -6,14 +6,22 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
   <Folder Name="/src/">
     <Project Path="src/SharedKernel/SharedKernel.csproj" />
     <Project Path="src/Web.Api/Web.Api.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
   <Folder Name="/src/tests/" />
-  <Folder Name="/src/Modules/Cart/" />
+  <Folder Name="/src/Modules/Cart/">
+    <Project Path="src/Modules/Cart/Cart.Application/Cart.Application.csproj" />
+    <Project Path="src/Modules/Cart/Cart.Domain/Cart.Domain.csproj" />
+    <Project Path="src/Modules/Cart/Cart.Infrastructure/Cart.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src/Modules/Catalog/Catalog.Contracts/Catalog.Contracts.csproj" />
     <Project Path="src/Modules/Catalog/Catalog.Application/Catalog.Application.csproj" Id="bae136f9-610a-4184-abed-fecca96d3ee4" />
     <Project Path="src/Modules/Catalog/Catalog.Domain/Catalog.Domain.csproj" Id="ebaca704-3254-4eaf-8fd8-a69dd7a4526d" />
     <Project Path="src/Modules/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj" Id="1eec7f16-2f69-4cf6-adb7-70fc4e5893a4" />
@@ -23,14 +31,29 @@
     <Project Path="src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
     <Project Path="src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/src/Modules/Engagement/" />
-  <Folder Name="/src/Modules/Ordering/" />
+  <Folder Name="/src/Modules/Engagement/">
+    <Project Path="src/Modules/Engagement/Engagement.Application/Engagement.Application.csproj" />
+    <Project Path="src/Modules/Engagement/Engagement.Contracts/Engagement.Contracts.csproj" />
+    <Project Path="src/Modules/Engagement/Engagement.Domain/Engagement.Domain.csproj" />
+    <Project Path="src/Modules/Engagement/Engagement.Infrastructure/Engagement.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Ordering/">
+    <Project Path="src/Modules/Ordering/Ordering.Application/Ordering.Application.csproj" />
+    <Project Path="src/Modules/Ordering/Ordering.Domain/Ordering.Domain.csproj" />
+    <Project Path="src/Modules/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Promotions/">
     <Project Path="src/Modules/Promotions/Promotions.Application/Promotions.Application.csproj" />
+    <Project Path="src/Modules/Promotions/Promotions.Contracts/Promotions.Contracts.csproj" />
     <Project Path="src/Modules/Promotions/Promotions.Domain/Promotions.Domain.csproj" />
     <Project Path="src/Modules/Promotions/Promotions.Infrastructure/Promotions.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/tests/Modules/">
+    <Project Path="src/tests/Modules/Cart.UnitTests/Cart.UnitTests.csproj" />
+    <Project Path="src/tests/Modules/Catalog.UnitTests/Catalog.UnitTests.csproj" />
     <Project Path="src/tests/Modules/Identity.UnitTests/Identity.UnitTests.csproj" Id="8ac7bb10-7b93-43a5-a9a4-bc8b50ed9535" />
+    <Project Path="src/tests/Modules/Promotions.UnitTests/Promotions.UnitTests.csproj" />
   </Folder>
 </Solution>
+
+

@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Cache
+namespace SharedKernel.Cache
 {
     public interface ICacheService
     {

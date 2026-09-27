@@ -1,4 +1,4 @@
-﻿namespace Web.Api.Messaging
+namespace Web.Api.Messaging
 {
     public static class MessagingExtensions
     {

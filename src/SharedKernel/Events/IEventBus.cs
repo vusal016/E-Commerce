@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Events
+namespace SharedKernel.Events
 {
     public interface IEventBus
     {

@@ -1,4 +1,4 @@
-﻿namespace Web.Api.Messaging.Queue
+namespace Web.Api.Messaging.Queue
 {
     internal sealed class InMemoryMessageQueue
     {

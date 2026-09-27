@@ -1,4 +1,4 @@
-﻿namespace Identity.Infrastructure.Persistence.AutoMig
+namespace Identity.Infrastructure.Persistence.AutoMig
 {
     internal sealed class DatabaseInitializer(IdentityModuleDbContext dbContext)
     {

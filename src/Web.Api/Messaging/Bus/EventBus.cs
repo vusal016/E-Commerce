@@ -1,4 +1,4 @@
-﻿namespace Web.Api.Messaging.Bus
+namespace Web.Api.Messaging.Bus
 {
     internal sealed class EventBus(InMemoryMessageQueue queue) : IEventBus
     {
@@ -7,4 +7,4 @@
             await queue.Writer.WriteAsync(integrationEvent, cancellationToken);
         }
     }
-}   
+}

@@ -1,12 +1,18 @@
-global using Microsoft.EntityFrameworkCore;
-global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
-global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
 global using Promotions.Application.Common.Interfaces;
 global using Promotions.Application.Common.Mapper;
 global using Promotions.Application.Features.HeroBanners.Queries;
+global using Promotions.Domain.CouponAggregate;
+global using Promotions.Domain.FlashSaleAggregate;
 global using Promotions.Domain.HeroBannerAggregate;
-global using Promotions.Infrastructure.Persistence.PromotionsData;
+global using Promotions.Domain.NotifyRequestAggregate;
 global using Promotions.Infrastructure.Persistence.AutoMig;
-
+global using Promotions.Infrastructure.Persistence.PromotionsData;
+global using Promotions.Application.PublicApi;
+global using Promotions.Contracts;

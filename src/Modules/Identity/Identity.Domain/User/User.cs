@@ -1,10 +1,9 @@
-﻿namespace Identity.Domain.User
+namespace Identity.Domain.User
 {
     public sealed class User: IdentityUser<Guid>, IAuditEntity
     {
         private User()
         {
-
         }
         public User(string firstName, string lastName, string email)
         {

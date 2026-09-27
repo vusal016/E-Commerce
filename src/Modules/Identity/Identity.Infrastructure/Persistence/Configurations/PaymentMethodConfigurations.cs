@@ -1,4 +1,4 @@
-﻿namespace Identity.Infrastructure.Persistence.Configurations
+namespace Identity.Infrastructure.Persistence.Configurations
 {
     public sealed class PaymentMethodConfigurations : IEntityTypeConfiguration<PaymentMethod>
     {

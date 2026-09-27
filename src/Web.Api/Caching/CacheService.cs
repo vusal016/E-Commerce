@@ -1,4 +1,4 @@
-﻿namespace Web.Api.Caching
+namespace Web.Api.Caching
 {
     public sealed class CacheService(IDistributedCache cache) : ICacheService
     {

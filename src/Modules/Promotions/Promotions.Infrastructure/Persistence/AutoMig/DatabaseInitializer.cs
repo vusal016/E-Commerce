@@ -16,4 +16,3 @@ namespace Promotions.Infrastructure.Persistence.AutoMig
         }
     }
 }
-

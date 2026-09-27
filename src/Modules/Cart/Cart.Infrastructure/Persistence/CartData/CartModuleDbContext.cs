@@ -1,0 +1,29 @@
+namespace Cart.Infrastructure.Persistence.CartData
+{
+    public sealed class CartModuleDbContext(DbContextOptions<CartModuleDbContext> options) : DbContext(options), ICartDbContext
+{
+        public DbSet<Domain.CartAggregate.Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<WishlistItem> WishlistItems { get; set; }
+
+        
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("cart");
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CartModuleDbContext).Assembly);
+        }
+    }
+}
+
+
+
+
+
+

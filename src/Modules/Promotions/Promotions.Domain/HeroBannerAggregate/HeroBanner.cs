@@ -53,4 +53,3 @@ namespace Promotions.Domain.HeroBannerAggregate
         }
     }
 }
-

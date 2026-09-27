@@ -33,6 +33,9 @@ namespace Catalog.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LogoUrl")
                         .IsRequired()
                         .HasColumnType("text");
@@ -55,6 +58,10 @@ namespace Catalog.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -81,7 +88,8 @@ namespace Catalog.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("BasePrice")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<Guid>("BrandId")
                         .HasColumnType("uuid");
@@ -178,10 +186,12 @@ namespace Catalog.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<decimal>("OriginalPrice")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");

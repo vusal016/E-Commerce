@@ -1,5 +1,3 @@
-﻿using Catalog.Infrastructure.Persistence.AutoMig;
-
 namespace Catalog.Infrastructure
 {
     public static class DependencyInjection
@@ -16,8 +14,11 @@ namespace Catalog.Infrastructure
 
             services.AddScoped<ICatalogDbContext>(provider => provider.GetRequiredService<CatalogModuleDbContext>());
             services.AddScoped<DatabaseIntializer>();
-            //MediaTR
+            services.AddScoped<ICatalogPublicApi, CatalogPublicApi>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCuratedPicksQueryHandler).Assembly));
+            services.AddAutoMapper(cfg => cfg.AddProfile<CatalogMapper>());
             return services;
         }
     }
 }
+

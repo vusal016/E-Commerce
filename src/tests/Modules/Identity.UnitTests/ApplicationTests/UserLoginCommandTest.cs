@@ -1,4 +1,4 @@
-﻿namespace Identity.UnitTests.ApplicationTests
+namespace Identity.UnitTests.ApplicationTests
 {
     public class UserLoginCommandTest
     {
@@ -32,7 +32,7 @@
             var emptyRefreshTokens = new List<RefreshToken>().BuildMockDbSet();
             _identityDbContext.RefreshTokens.Returns(emptyRefreshTokens);
 
-            // HƏLL: Null xətası verməməsi üçün Token-ləri mock edirik
+            // H?LL: Null x?tasi verm?m?si ���n Token-l?ri mock edirik
             _tokenProvider.GenerateAccessToken(user).Returns("access_token");
             _tokenProvider.GenerateRefreshToken().Returns("valid_refresh_token_string");
 

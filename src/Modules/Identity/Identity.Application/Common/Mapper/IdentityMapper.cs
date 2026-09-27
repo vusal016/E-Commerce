@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Common.Mapper
+namespace Identity.Application.Common.Mapper
 {
     public sealed class IdentityMapper :Profile
     {

@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Entity
+namespace SharedKernel.Entity
 {
     public abstract class BaseEntity
     {

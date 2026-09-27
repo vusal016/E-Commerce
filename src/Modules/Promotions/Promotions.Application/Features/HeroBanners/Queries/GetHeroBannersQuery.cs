@@ -1,5 +1,3 @@
-using SharedKernel.Cache;
-
 namespace Promotions.Application.Features.HeroBanners.Queries
 {
     public sealed record GetHeroBannersQuery() : ICachedQuery<List<HeroBannerDto>>
@@ -9,4 +7,3 @@ namespace Promotions.Application.Features.HeroBanners.Queries
         public TimeSpan? Expiration => TimeSpan.FromMinutes(2);
     }
 }
-

@@ -1,4 +1,4 @@
-﻿namespace Identity.Domain.Enums
+namespace Identity.Domain.Enums
 {
     public enum MemberTier
     {

@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Exceptions
+namespace SharedKernel.Exceptions
 {
     public sealed class ForbiddenException : Exception
     {

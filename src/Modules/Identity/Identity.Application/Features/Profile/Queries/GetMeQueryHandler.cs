@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Features.Profile.Queries
+namespace Identity.Application.Features.Profile.Queries
 {
     public sealed class GetMeQueryHandler(UserManager<User>userManager,IMapper mapper) : IRequestHandler<GetMeQuery, UserDto>
     {

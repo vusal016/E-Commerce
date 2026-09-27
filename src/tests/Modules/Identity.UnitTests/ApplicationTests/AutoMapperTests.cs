@@ -1,4 +1,3 @@
-﻿using Identity.Application.Common.Mapper;
 
 namespace Identity.UnitTests.ApplicationTests
 {

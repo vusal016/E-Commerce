@@ -1,4 +1,4 @@
-﻿namespace Catalog.Infrastructure.Persistence.AutoMig
+namespace Catalog.Infrastructure.Persistence.AutoMig
 {
     internal sealed class DatabaseIntializer(CatalogModuleDbContext dbContext)
     {

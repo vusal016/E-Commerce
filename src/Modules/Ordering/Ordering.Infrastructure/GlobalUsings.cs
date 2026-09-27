@@ -1,0 +1,13 @@
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+global using Ordering.Application.Common.Interfaces;
+global using Ordering.Domain.OrderAggregate;
+global using Ordering.Domain.ReturnRequestAggregate;
+global using Ordering.Infrastructure.Persistence.OrderingData;
+global using Ordering.Infrastructure.Persistence.AutoMig;

@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Features.Logout
+namespace Identity.Application.Features.Logout
 {
     public sealed class UserLogoutCommandHandler(IIdentityDbContext identityDbContext) : IRequestHandler<UserLogoutCommand, bool>
     {

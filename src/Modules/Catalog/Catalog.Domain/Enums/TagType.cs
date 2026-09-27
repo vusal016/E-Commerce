@@ -1,4 +1,4 @@
-﻿namespace Catalog.Domain.Enums
+namespace Catalog.Domain.Enums
 {
     public enum TagType
     {
@@ -6,5 +6,6 @@
         Sale,
         BestSeller,
         FlashSale,
+        Featured,
     }
 }

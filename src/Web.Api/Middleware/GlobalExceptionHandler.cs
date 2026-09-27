@@ -1,6 +1,3 @@
-﻿using SharedKernel.Exceptions;
-using SharedKernel.Result;
-
 namespace Web.Api.Middleware
 {
     public sealed class GlobalExceptionHandler(RequestDelegate next)

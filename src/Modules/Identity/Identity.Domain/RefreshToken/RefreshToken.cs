@@ -1,10 +1,9 @@
-﻿namespace Identity.Domain.RefreshToken
+namespace Identity.Domain.RefreshToken
 {
     public sealed class RefreshToken:AuditEntity
     {
         private RefreshToken()
         {
-            
         }
         public RefreshToken(Guid userId, string token, DateTime expiresAt)
         {

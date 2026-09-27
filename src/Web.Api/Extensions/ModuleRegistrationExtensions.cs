@@ -7,6 +7,9 @@ namespace Web.Api.Extensions
             services.AddIdentityModule(configuration);
             services.AddCatalogModule(configuration);
             services.AddPromotionsModule(configuration);
+            services.AddCartModule(configuration);
+            services.AddOrderingModule(configuration);
+            services.AddEngagementModule(configuration);
 
             return services;
         }

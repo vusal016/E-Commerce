@@ -1,12 +1,16 @@
-using Identity.Domain.PaymentMethod;
-
 namespace Identity.Infrastructure.Persistence.IdentityData
 {
     public sealed class IdentityModuleDbContext(DbContextOptions<IdentityModuleDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IIdentityDbContext
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
+        
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -16,3 +20,5 @@ namespace Identity.Infrastructure.Persistence.IdentityData
         }
     }
 }
+
+

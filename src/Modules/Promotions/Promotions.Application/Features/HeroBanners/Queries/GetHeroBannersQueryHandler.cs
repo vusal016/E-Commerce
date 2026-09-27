@@ -14,4 +14,3 @@ namespace Promotions.Application.Features.HeroBanners.Queries
         }
     }
 }
-

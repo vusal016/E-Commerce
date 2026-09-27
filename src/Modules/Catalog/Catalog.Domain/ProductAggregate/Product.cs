@@ -1,10 +1,9 @@
-﻿namespace Catalog.Domain.ProductAggregate
+namespace Catalog.Domain.ProductAggregate
 {
     public sealed class Product : AuditEntity
     {
         private Product()
         {
-
         }
         public Product(string name, string description, decimal basePrice, bool isActive, Guid brandId, Guid categoryId)
         {
@@ -22,6 +21,8 @@
         public bool IsActive { get; private set; }
         public Guid BrandId { get; private set; }
         public Guid CategoryId { get; private set; }
+        
+        
         public ICollection<ProductVariant> ProductVariants { get; private set; } = [];
         public ICollection<ProductImage> ProductImages { get; private set; } = [];
         public ICollection<ProductTag> ProductTags { get; private set; } = [];
@@ -55,5 +56,9 @@
                 throw new ArgumentException("Category ID cannot be empty.");
             CategoryId = categoryId;
         }
+
+        
     }
 }
+
+

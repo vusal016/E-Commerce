@@ -1,4 +1,4 @@
-﻿namespace Identity.Domain.PaymentMethod
+namespace Identity.Domain.PaymentMethod
 {
     public sealed class PaymentMethod : BaseEntity
     {

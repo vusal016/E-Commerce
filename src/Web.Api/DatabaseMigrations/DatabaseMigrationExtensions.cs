@@ -7,6 +7,9 @@ namespace Web.Api.DatabaseMigrations
             await services.MigrateIdentityDatabaseAsync();
             await services.MigrateCatalogDatabaseAsync();
             await services.MigratePromotionsDatabaseAsync();
+            await services.MigrateCartDatabaseAsync();
+            await services.MigrateEngagementDatabaseAsync();
+            await services.MigrateOrderingDatabaseAsync();
         }
     }
 }

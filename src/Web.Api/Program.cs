@@ -1,8 +1,5 @@
-using Web.Api.Caching;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -12,6 +9,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddModuleRegistrations(builder.Configuration);
 builder.Services.AddMessaging();
+builder.Services.AddServices();
 builder.Services.AddCaching(builder.Configuration);
 builder.Services.AddSingleton<ISaveChangesInterceptor, AuditInterceptor>();
 
@@ -25,6 +23,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 await app.Services.MigrateAllDatabasesAsync();
+
 
 app.UseMiddleware<GlobalExceptionHandler>();
 

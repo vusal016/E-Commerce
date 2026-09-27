@@ -1,0 +1,14 @@
+global using Engagement.Application.Common.Interfaces;
+global using Engagement.Domain.NotificationAggregate;
+global using Engagement.Domain.ReviewAggregate;
+global using Engagement.Domain.SupportAggregate;
+global using Engagement.Infrastructure.Persistence.EngagementData;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Engagement.Infrastructure.Persistence.AutoMig;
+global using Engagement.Contracts;
+global using Engagement.Application.PublicApi;

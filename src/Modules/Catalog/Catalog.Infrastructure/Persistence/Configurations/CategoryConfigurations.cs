@@ -1,4 +1,4 @@
-﻿namespace Catalog.Infrastructure.Persistence.Configurations
+namespace Catalog.Infrastructure.Persistence.Configurations
 {
     public sealed class CategoryConfigurations : IEntityTypeConfiguration<Category>
     {

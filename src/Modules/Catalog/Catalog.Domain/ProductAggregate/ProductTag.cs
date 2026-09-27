@@ -1,4 +1,4 @@
-﻿namespace Catalog.Domain.ProductAggregate
+namespace Catalog.Domain.ProductAggregate
 {
     public sealed class ProductTag : BaseEntity
     {

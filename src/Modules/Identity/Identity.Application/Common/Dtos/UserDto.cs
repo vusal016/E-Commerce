@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Common.Dtos
+namespace Identity.Application.Common.Dtos
 {
     public record UserDto
   (
