@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.GetCart;
+    namespace Cart.Application.Features.GetCart;
 
 public sealed class GetCartQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartQuery, CartDto>
 {

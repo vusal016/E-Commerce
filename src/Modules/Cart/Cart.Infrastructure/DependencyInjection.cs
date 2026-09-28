@@ -17,7 +17,8 @@ namespace Cart.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CartMapper).Assembly));
             services.AddAutoMapper(cfg => cfg.AddProfile<CartMapper>());
 
-            return services;
+            services.AddScoped<Cart.Contracts.ICartPublicApi, Cart.Application.PublicApi.CartPublicApi>();
+        return services;
         }
     }
 }

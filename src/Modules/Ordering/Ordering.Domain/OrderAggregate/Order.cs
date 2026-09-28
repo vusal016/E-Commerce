@@ -38,6 +38,12 @@ namespace Ordering.Domain.OrderAggregate
         public ICollection<OrderItem> Items { get; private set; } = [];
         public ICollection<OrderStatusHistory> StatusHistory { get; private set; } = [];
 
+        public void AddItem(Guid productVariantId, string productName, decimal price, int quantity)
+        {
+            var item = new OrderItem(Id, productVariantId, productName, null, null, price, quantity);
+            Items.Add(item);
+        }
+
         private void SetUserId(Guid? userId) => UserId = userId;
         
         private void SetOrderNumber(string orderNumber)
@@ -104,3 +110,4 @@ namespace Ordering.Domain.OrderAggregate
         }
     }
 }
+

@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Catalog.Contracts\Catalog.Contracts.csproj" />
     <ProjectReference Include="..\..\Engagement\Engagement.Contracts\Engagement.Contracts.csproj" />
     <ProjectReference Include="..\..\Promotions\Promotions.Contracts\Promotions.Contracts.csproj" />
+    <ProjectReference Include="..\..\Ordering\Ordering.Contracts\Ordering.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Catalog.Infrastructure" />

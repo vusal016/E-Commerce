@@ -6,7 +6,7 @@ namespace Ordering.Application.Common.Interfaces
         DbSet<OrderItem> OrderItems { get; set; }
         DbSet<OrderStatusHistory> OrderStatusHistories { get; set; }
         DbSet<ReturnRequest> ReturnRequests { get; set; }
+        DbSet<CheckoutSession> CheckoutSessions { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
-

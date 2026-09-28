@@ -23,3 +23,6 @@ global using Cart.Application.Features.ToggleSaveForLater;
 global using Cart.Application.Features.ApplyCoupon;
 global using Cart.Application.Features.MergeCart;
 global using Cart.Application.Features.GetCartSummary;
+
+global using SharedKernel.Events;
+global using Ordering.Contracts.Events;

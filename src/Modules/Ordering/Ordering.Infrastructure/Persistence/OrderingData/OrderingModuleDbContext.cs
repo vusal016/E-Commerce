@@ -6,8 +6,8 @@ namespace Ordering.Infrastructure.Persistence.OrderingData
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderStatusHistory> OrderStatusHistories { get; set; }
         public DbSet<ReturnRequest> ReturnRequests { get; set; }
+        public DbSet<CheckoutSession> CheckoutSessions { get; set; }
 
-        
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
@@ -21,7 +21,3 @@ namespace Ordering.Infrastructure.Persistence.OrderingData
         }
     }
 }
-
-
-
-

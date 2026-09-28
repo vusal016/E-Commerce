@@ -8,9 +8,14 @@ global using Catalog.Domain.ProductAggregate;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using SharedKernel.Cache;
-global using SharedKernel.Pagination;global using Catalog.Application.Common.Helpers;
+global using SharedKernel.Pagination;
+global using Catalog.Application.Common.Helpers;
 
 global using Catalog.Contracts;
 
 global using Engagement.Contracts;
 global using Promotions.Contracts;
+
+global using SharedKernel.Events;
+global using Ordering.Contracts.Events;
+

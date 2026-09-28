@@ -17,6 +17,7 @@
   <Folder Name="/src/tests/" />
   <Folder Name="/src/Modules/Cart/">
     <Project Path="src/Modules/Cart/Cart.Application/Cart.Application.csproj" />
+    <Project Path="src/Modules/Cart/Cart.Contracts/Cart.Contracts.csproj" />
     <Project Path="src/Modules/Cart/Cart.Domain/Cart.Domain.csproj" />
     <Project Path="src/Modules/Cart/Cart.Infrastructure/Cart.Infrastructure.csproj" />
   </Folder>
@@ -39,6 +40,7 @@
   </Folder>
   <Folder Name="/src/Modules/Ordering/">
     <Project Path="src/Modules/Ordering/Ordering.Application/Ordering.Application.csproj" />
+    <Project Path="src/Modules/Ordering/Ordering.Contracts/Ordering.Contracts.csproj" />
     <Project Path="src/Modules/Ordering/Ordering.Domain/Ordering.Domain.csproj" />
     <Project Path="src/Modules/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj" />
   </Folder>
@@ -52,6 +54,7 @@
     <Project Path="src/tests/Modules/Cart.UnitTests/Cart.UnitTests.csproj" />
     <Project Path="src/tests/Modules/Catalog.UnitTests/Catalog.UnitTests.csproj" />
     <Project Path="src/tests/Modules/Identity.UnitTests/Identity.UnitTests.csproj" Id="8ac7bb10-7b93-43a5-a9a4-bc8b50ed9535" />
+    <Project Path="src/tests/Modules/Ordering.UnitTests/Ordering.UnitTests.csproj" />
     <Project Path="src/tests/Modules/Promotions.UnitTests/Promotions.UnitTests.csproj" />
   </Folder>
 </Solution>

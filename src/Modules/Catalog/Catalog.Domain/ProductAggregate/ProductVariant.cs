@@ -62,6 +62,13 @@ namespace Catalog.Domain.ProductAggregate
                 throw new ArgumentException("Product variant stock quantity cannot be negative.");
             StockQuantity = stockQuantity;
         }
+        public void DecreaseStock(int quantity)
+        {
+            if (quantity < 0) throw new ArgumentException("Decrease quantity cannot be negative.");
+            if (StockQuantity - quantity < 0) throw new InvalidOperationException("Insufficient stock.");
+            StockQuantity -= quantity;
+        }
+
         private void SetProductId(Guid productId)
         {
             if (productId == Guid.Empty)
@@ -70,3 +77,4 @@ namespace Catalog.Domain.ProductAggregate
         }
     }
 }
+
