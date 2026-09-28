@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.CartActions;
+namespace Cart.Application.Features.ApplyCoupon;
 
 public sealed class ApplyCouponCommandHandler(ICartDbContext dbContext, IPromotionsPublicApi promotionsApi, ICatalogPublicApi catalogApi, IMediator mediator) : IRequestHandler<ApplyCouponCommand, CartDto>
 {
@@ -35,6 +35,7 @@ public sealed class ApplyCouponCommandHandler(ICartDbContext dbContext, IPromoti
         return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);
     }
 }
+
 
 
 

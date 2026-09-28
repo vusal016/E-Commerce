@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.Item;
+namespace Cart.Application.Features.AddItem;
 
 public sealed class AddItemCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IMediator mediator) : IRequestHandler<AddItemCommand, CartDto>
 {
@@ -28,7 +28,7 @@ public sealed class AddItemCommandHandler(ICartDbContext dbContext, ICatalogPubl
             dbContext.Carts.Add(cart);
         }
 
-                var existingItem = cart.Items.FirstOrDefault(i => i.ProductVariantId == request.ProductVariantId);
+        var existingItem = cart.Items.FirstOrDefault(i => i.ProductVariantId == request.ProductVariantId);
         int newTotalQuantity = existingItem != null ? existingItem.Quantity + request.Quantity : request.Quantity;
 
         if (newTotalQuantity > product.StockQuantity)
@@ -45,9 +45,10 @@ public sealed class AddItemCommandHandler(ICartDbContext dbContext, ICatalogPubl
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-                return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);
+       return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);
     }
 }
+
 
 
 

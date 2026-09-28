@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.CartActions;
+namespace Cart.Application.Features.MergeCart;
 
 public sealed class MergeCartCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<MergeCartCommand, CartDto>
 {
@@ -44,6 +44,7 @@ public sealed class MergeCartCommandHandler(ICartDbContext dbContext, IMediator 
         return await mediator.Send(new GetCartQuery(request.UserId, null), cancellationToken);
     }
 }
+
 
 
 

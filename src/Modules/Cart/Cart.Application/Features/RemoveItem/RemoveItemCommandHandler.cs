@@ -1,8 +1,8 @@
-namespace Cart.Application.Features.Item;
+namespace Cart.Application.Features.RemoveItem;
 
-public sealed class ToggleSaveForLaterCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<ToggleSaveForLaterCommand, CartDto>
+public sealed class RemoveItemCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<RemoveItemCommand, CartDto>
 {
-    public async Task<CartDto> Handle(ToggleSaveForLaterCommand request, CancellationToken cancellationToken)
+    public async Task<CartDto> Handle(RemoveItemCommand request, CancellationToken cancellationToken)
     {
         var cart = await dbContext.Carts
             .Include(c => c.Items)
@@ -15,12 +15,13 @@ public sealed class ToggleSaveForLaterCommandHandler(ICartDbContext dbContext, I
         var item = cart.Items.FirstOrDefault(i => i.Id == request.ItemId);
         if (item == null) throw new KeyNotFoundException("Cart item not found.");
 
-        item.ToggleSaveForLater();
+        cart.Items.Remove(item);
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);
     }
 }
+
 
 
 

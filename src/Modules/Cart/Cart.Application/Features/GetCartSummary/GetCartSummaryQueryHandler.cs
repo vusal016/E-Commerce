@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.CartActions;
+namespace Cart.Application.Features.GetCartSummary;
 
 public sealed class GetCartSummaryQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartSummaryQuery, CartSummaryDto>
 {
@@ -17,34 +17,38 @@ public sealed class GetCartSummaryQueryHandler(ICartDbContext dbContext, ICatalo
         if (variantIds.Count == 0) return new CartSummaryDto(0, 0, 0, 0);
 
         var products = await catalogApi.GetBasketProductsAsync(variantIds, cancellationToken);
+        var productDiscounts = (await promotionsApi.GetActiveDiscountsAsync(variantIds, cancellationToken))
+            .ToDictionary(d => d.ProductVariantId);
         
         decimal subtotal = 0;
         foreach (var item in cart.Items.Where(i => !i.IsSavedForLater))
         {
             var p = products.FirstOrDefault(x => x.VariantId == item.ProductVariantId);
-            if (p != null) subtotal += p.Price * item.Quantity;
+            if (p != null)
+            {
+                var discount = productDiscounts.ContainsKey(item.ProductVariantId) ? productDiscounts[item.ProductVariantId].DiscountPercentage : 0m;
+                var finalPrice = Math.Round(Math.Max(0, p.Price - (p.Price * discount / 100m)), 2);
+                subtotal += finalPrice * item.Quantity;
+            }
         }
 
-        decimal discount = 0;
+        decimal discountValue = 0;
         if (!string.IsNullOrWhiteSpace(cart.AppliedCouponCode))
         {
             var coupon = await promotionsApi.GetCouponAsync(cart.AppliedCouponCode, cancellationToken);
             if (coupon != null && coupon.IsActive && coupon.ExpiresAt > DateTime.UtcNow && subtotal >= coupon.MinOrderAmount)
             {
                 if (coupon.DiscountType == "Percentage")
-                    discount = Math.Round(subtotal * (coupon.DiscountValue / 100), 2);
+                    discountValue = Math.Round(subtotal * (coupon.DiscountValue / 100), 2);
                 else
-                    discount = coupon.DiscountValue;
+                    discountValue = coupon.DiscountValue;
             }
         }
 
         decimal shipping = subtotal >= 50 ? 0 : 5.99m;         
-        decimal total = subtotal + shipping - discount;
+        decimal total = subtotal + shipping - discountValue;
         if (total < 0) total = 0;
 
-        return new CartSummaryDto(subtotal, shipping, discount, total);
+        return new CartSummaryDto(subtotal, shipping, discountValue, total);
     }
 }
-
-
-

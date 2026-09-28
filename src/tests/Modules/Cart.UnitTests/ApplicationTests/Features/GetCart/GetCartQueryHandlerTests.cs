@@ -4,13 +4,15 @@ public sealed class GetCartQueryHandlerTests
 {
     private readonly ICartDbContext _dbContext;
     private readonly ICatalogPublicApi _catalogPublicApi;
+    private readonly IPromotionsPublicApi _promotionsApi;
     private readonly GetCartQueryHandler _handler;
 
     public GetCartQueryHandlerTests()
     {
         _dbContext = Substitute.For<ICartDbContext>();
         _catalogPublicApi = Substitute.For<ICatalogPublicApi>();
-        _handler = new GetCartQueryHandler(_dbContext, _catalogPublicApi);
+        _promotionsApi = Substitute.For<IPromotionsPublicApi>();
+        _handler = new GetCartQueryHandler(_dbContext, _catalogPublicApi, _promotionsApi);
     }
 
     [Fact]
@@ -59,6 +61,10 @@ public sealed class GetCartQueryHandlerTests
 
         _catalogPublicApi.GetBasketProductsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>())
             .Returns(basketProducts);
+            
+        var discounts = new List<ActiveDiscountDto>();
+        _promotionsApi.GetActiveDiscountsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>())
+            .Returns(discounts);
 
         var result = await _handler.Handle(query, CancellationToken.None);
 

@@ -1,4 +1,4 @@
-namespace Cart.Application.Features.Item;
+namespace Cart.Application.Features.UpdateItemQuantity;
 
 public sealed class UpdateItemQuantityCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IMediator mediator) : IRequestHandler<UpdateItemQuantityCommand, CartDto>
 {
@@ -32,6 +32,7 @@ public sealed class UpdateItemQuantityCommandHandler(ICartDbContext dbContext, I
         return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);
     }
 }
+
 
 
 

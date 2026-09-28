@@ -55,10 +55,16 @@ global using Engagement.Infrastructure.Persistence.AutoMig;
 global using Ordering.Infrastructure.Persistence.AutoMig;
 global using SharedKernel.CurrentUser;
 global using Web.Api.Services;
-global using Cart.Application.Features.Item;
-global using Cart.Application.Features.CartActions;
 global using Cart.Application.Features.Queries;
 global using Cart.Application.Features.GetCart;
 global using Web.Api.Requests;
 
 global using Cart.Application.Common.Dtos;
+
+global using Cart.Application.Features.AddItem;
+global using Cart.Application.Features.UpdateItemQuantity;
+global using Cart.Application.Features.RemoveItem;
+global using Cart.Application.Features.ToggleSaveForLater;
+global using Cart.Application.Features.ApplyCoupon;
+global using Cart.Application.Features.MergeCart;
+global using Cart.Application.Features.GetCartSummary;
