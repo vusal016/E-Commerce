@@ -12,3 +12,6 @@ global using Ordering.Application.Common.Dtos;
 global using Ordering.Contracts.Events;
 global using SharedKernel.Events;
 
+
+global using SharedKernel.Pagination;
+global using Catalog.Contracts;

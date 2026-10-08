@@ -1,20 +1,19 @@
 global using Catalog.Application.Common.Interfaces;
 global using Catalog.Application.Common.Mapper;
 global using Catalog.Application.Features.CuratedPicks.Queries;
+global using Catalog.Application.PublicApi;
+global using Catalog.Contracts;
 global using Catalog.Domain.Brand;
 global using Catalog.Domain.Catalog;
 global using Catalog.Domain.ProductAggregate;
 global using Catalog.Infrastructure.Persistence.AutoMig;
 global using Catalog.Infrastructure.Persistence.CatalogData;
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Migrations;
 global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-
-global using Catalog.Contracts;
-global using Catalog.Application.PublicApi;

@@ -28,8 +28,6 @@ namespace Cart.Domain.CartAggregate
             AppliedCouponCode = null;
         }
 
-        
-
         public void AssignUser(Guid userId)
         {
             UserId = userId;
@@ -37,7 +35,7 @@ namespace Cart.Domain.CartAggregate
 
         private void SetUserId(Guid? userId)
         {
-            if(userId==Guid.Empty)
+            if (userId == Guid.Empty)
                 throw new ArgumentException("User ID cannot be empty.");
             UserId = userId;
         }
@@ -49,8 +47,3 @@ namespace Cart.Domain.CartAggregate
         }
     }
 }
-
-
-
-
-

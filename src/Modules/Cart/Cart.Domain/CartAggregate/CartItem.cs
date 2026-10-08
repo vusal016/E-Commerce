@@ -55,6 +55,3 @@ namespace Cart.Domain.CartAggregate
         }
     }
 }
-
-
-

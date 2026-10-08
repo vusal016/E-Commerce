@@ -16,3 +16,4 @@ global using Ordering.Application.Features.PlaceOrder;
 global using SharedKernel.Events;
 global using Ordering.Contracts.Events;
 global using Ordering.Domain.OrderAggregate;
+global using Catalog.Contracts;

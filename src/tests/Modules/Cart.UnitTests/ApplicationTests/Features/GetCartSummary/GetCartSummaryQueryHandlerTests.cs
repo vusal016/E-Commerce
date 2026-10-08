@@ -25,3 +25,5 @@ public sealed class GetCartSummaryQueryHandlerTests
         result.Total.Should().Be(0);
     }
 }
+
+

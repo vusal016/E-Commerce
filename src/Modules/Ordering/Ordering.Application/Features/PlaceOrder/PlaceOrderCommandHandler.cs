@@ -1,6 +1,6 @@
 namespace Ordering.Application.Features.PlaceOrder;
 
-internal sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, ICartPublicApi cartApi, IEventBus eventBus) : IRequestHandler<PlaceOrderCommand, Guid>
+public sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, ICartPublicApi cartApi, ICatalogPublicApi catalogApi, IEventBus eventBus) : IRequestHandler<PlaceOrderCommand, Guid>
 {
     public async Task<Guid> Handle(PlaceOrderCommand request, CancellationToken cancellationToken)
     {
@@ -11,6 +11,20 @@ internal sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, IC
         
         var cartInfo = await cartApi.GetCartForCheckoutAsync(request.UserId, request.SessionId, cancellationToken);
         if (cartInfo is null || cartInfo.Items.Count == 0) throw new InvalidOperationException("Cart is empty.");
+
+        var variantIds = cartInfo.Items.Select(i => i.ProductVariantId).Distinct().ToList();
+        var basketProducts = await catalogApi.GetBasketProductsAsync(variantIds, cancellationToken);
+
+        foreach (var cartItem in cartInfo.Items)
+        {
+            var product = basketProducts.FirstOrDefault(p => p.VariantId == cartItem.ProductVariantId);
+
+            if (product is null)
+                throw new InvalidOperationException($"Product {cartItem.ProductName} not found.");
+
+            if (product.StockQuantity < cartItem.Quantity)
+                throw new ArgumentException($"Insufficient stock for {cartItem.ProductName}. Available: {product.StockQuantity}, Requested: {cartItem.Quantity}");
+        }
 
         decimal totalPrice = cartInfo.Subtotal - cartInfo.CartDiscount + session.ShippingPrice;
         totalPrice = totalPrice < 0 ? 0 : totalPrice;
@@ -38,3 +52,4 @@ internal sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, IC
         return order.Id;
     }
 }
+

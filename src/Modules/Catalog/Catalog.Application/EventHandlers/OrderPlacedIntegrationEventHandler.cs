@@ -1,20 +1,16 @@
-
-namespace Catalog.Application.EventHandlers;
-
-internal sealed class OrderPlacedIntegrationEventHandler(ICatalogDbContext dbContext) : IIntegrationEventHandler<OrderPlacedIntegrationEvent>
+namespace Catalog.Application.EventHandlers
 {
-    public async Task Handle(OrderPlacedIntegrationEvent integrationEvent, CancellationToken cancellationToken)
+    internal sealed class OrderPlacedIntegrationEventHandler(ICatalogDbContext dbContext) : IIntegrationEventHandler<OrderPlacedIntegrationEvent>
     {
-        var variantIds = integrationEvent.Items.Select(i => i.ProductVariantId).ToList();
-
-        var variants = await dbContext.ProductVariants.Where(v => variantIds.Contains(v.Id)).ToListAsync(cancellationToken);
-
-        foreach (var item in integrationEvent.Items)
+        public async Task Handle(OrderPlacedIntegrationEvent integrationEvent, CancellationToken cancellationToken)
         {
-            variants.FirstOrDefault(v => v.Id == item.ProductVariantId)?.DecreaseStock(item.Quantity);
+            var variantIds = integrationEvent.Items.Select(i => i.ProductVariantId).ToList();
+            var variants = await dbContext.ProductVariants.Where(v => variantIds.Contains(v.Id)).ToListAsync(cancellationToken);
+            foreach (var item in integrationEvent.Items)
+            {
+                variants.FirstOrDefault(v => v.Id == item.ProductVariantId)?.DecreaseStock(item.Quantity);
+            }
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
-
-        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
-

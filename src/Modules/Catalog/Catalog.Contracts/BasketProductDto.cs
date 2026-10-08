@@ -1,4 +1,4 @@
-﻿namespace Catalog.Contracts
+namespace Catalog.Contracts
 {
     public sealed record BasketProductDto
     (

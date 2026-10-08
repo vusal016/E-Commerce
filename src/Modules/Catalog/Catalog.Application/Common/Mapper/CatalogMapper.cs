@@ -6,12 +6,11 @@ namespace Catalog.Application.Common.Mapper
         {
             CreateMap<Product, CuratedPickDto>();
             CreateMap<Category, HomeCategoryDto>();
-            
             CreateMap<Brand, BrandInfoDto>();
             CreateMap<Product, BrandStoreProductDto>()
-                .ForCtorParam("PrimaryImageUrl", opt => opt.MapFrom(src => 
-                    src.ProductImages.FirstOrDefault(i => i.IsPrimary) != null 
-                        ? src.ProductImages.FirstOrDefault(i => i.IsPrimary)!.ImageUrl 
+                .ForCtorParam("PrimaryImageUrl", opt => opt.MapFrom(src =>
+                    src.ProductImages.FirstOrDefault(i => i.IsPrimary) != null
+                        ? src.ProductImages.FirstOrDefault(i => i.IsPrimary)!.ImageUrl
                         : null));
         }
     }

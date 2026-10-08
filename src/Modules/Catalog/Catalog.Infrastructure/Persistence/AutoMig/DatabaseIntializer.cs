@@ -5,7 +5,6 @@ namespace Catalog.Infrastructure.Persistence.AutoMig
         public Task InitializeAsync(CancellationToken cancellationToken = default)
         => dbContext.Database.MigrateAsync(cancellationToken);
     }
-
     public static class DatabaseIntializerExtensions
     {
         public static async Task MigrateCatalogDatabaseAsync(this IServiceProvider services)

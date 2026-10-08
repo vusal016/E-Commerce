@@ -10,8 +10,6 @@ namespace Catalog.Infrastructure
                 var interceptor = sp.GetServices<ISaveChangesInterceptor>();
                 options.AddInterceptors(interceptor);
             });
-
-
             services.AddScoped<ICatalogDbContext>(provider => provider.GetRequiredService<CatalogModuleDbContext>());
             services.AddScoped<DatabaseIntializer>();
             services.AddScoped<ICatalogPublicApi, CatalogPublicApi>();
@@ -21,4 +19,3 @@ namespace Catalog.Infrastructure
         }
     }
 }
-

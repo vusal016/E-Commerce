@@ -13,12 +13,11 @@ namespace Cart.Infrastructure
 
             services.AddScoped<ICartDbContext>(provider => provider.GetRequiredService<CartModuleDbContext>());
             services.AddScoped<DatabaseInitializer>();
-            
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CartMapper).Assembly));
-            services.AddAutoMapper(cfg => cfg.AddProfile<CartMapper>());
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Cart.Application.Features.AddItem.AddItemCommand).Assembly));
 
             services.AddScoped<Cart.Contracts.ICartPublicApi, Cart.Application.PublicApi.CartPublicApi>();
-        return services;
+            return services;
         }
     }
 }

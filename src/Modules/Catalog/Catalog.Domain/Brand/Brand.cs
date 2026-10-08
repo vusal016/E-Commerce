@@ -1,6 +1,6 @@
 namespace Catalog.Domain.Brand
 {
-    public sealed class Brand: BaseEntity
+    public sealed class Brand : BaseEntity
     {
         private Brand()
         {
@@ -15,8 +15,8 @@ namespace Catalog.Domain.Brand
         }
         public string Name { get; private set; }
         public string Slug { get; private set; }
-        public string LogoUrl { get;private set; }
-        public string Description { get;private set; }
+        public string LogoUrl { get; private set; }
+        public string Description { get; private set; }
         public bool IsActive { get; private set; }
         private void SetName(string name)
         {
@@ -40,4 +40,3 @@ namespace Catalog.Domain.Brand
         }
     }
 }
-

@@ -14,19 +14,15 @@ namespace Catalog.Domain.ProductAggregate
             SetBrandId(brandId);
             SetCategoryId(categoryId);
         }
-
         public string Name { get; private set; }
         public string Description { get; private set; }
         public decimal BasePrice { get; private set; }
         public bool IsActive { get; private set; }
         public Guid BrandId { get; private set; }
         public Guid CategoryId { get; private set; }
-        
-        
         public ICollection<ProductVariant> ProductVariants { get; private set; } = [];
         public ICollection<ProductImage> ProductImages { get; private set; } = [];
         public ICollection<ProductTag> ProductTags { get; private set; } = [];
-
         private void SetName(string name)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name, "Product name cannot be empty.");
@@ -43,7 +39,6 @@ namespace Catalog.Domain.ProductAggregate
                 throw new ArgumentException("Product base price cannot be negative.");
             BasePrice = basePrice;
         }
-
         private void SetBrandId(Guid brandId)
         {
             if (brandId == Guid.Empty)
@@ -56,9 +51,5 @@ namespace Catalog.Domain.ProductAggregate
                 throw new ArgumentException("Category ID cannot be empty.");
             CategoryId = categoryId;
         }
-
-        
     }
 }
-
-

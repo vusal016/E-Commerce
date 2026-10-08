@@ -44,6 +44,11 @@ namespace Ordering.Domain.OrderAggregate
             Items.Add(item);
         }
 
+        public void ChangeStatus(string newStatus)
+        {
+            Status = newStatus;
+        }
+
         private void SetUserId(Guid? userId) => UserId = userId;
         
         private void SetOrderNumber(string orderNumber)
@@ -110,4 +115,6 @@ namespace Ordering.Domain.OrderAggregate
         }
     }
 }
+
+
 

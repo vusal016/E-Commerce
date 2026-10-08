@@ -1,4 +1,4 @@
-global using Cart.Infrastructure.Persistence.AutoMig;
+﻿global using Cart.Infrastructure.Persistence.AutoMig;
 global using Cart.Infrastructure;
 global using Catalog.Application.Common.Dtos;
 global using Catalog.Application.Features.CuratedPicks.Queries;
@@ -73,3 +73,20 @@ global using Ordering.Application.Features.GetCheckoutSummary;
 global using Ordering.Application.Common.Dtos;
 
 global using Ordering.Application.Features.PlaceOrder;
+
+
+global using Cart.Application.Features.AddWishlistItem;
+
+global using Cart.Application.Features.CreateWishlist;
+
+global using Cart.Application.Features.GetWishlistItems;
+
+global using Cart.Application.Features.GetWishlists;
+
+global using Cart.Application.Features.NotifyWishlistItem;
+
+global using Cart.Application.Features.RemoveWishlistItem;
+
+global using Cart.Application.Features.ShareWishlist;
+
+

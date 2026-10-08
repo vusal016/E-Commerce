@@ -5,7 +5,7 @@ namespace Catalog.Application.Features.CuratedPicks.Queries
         public async Task<List<CuratedPickDto>> Handle(GetCuratedPicksQuery request, CancellationToken cancellationToken)
         {
             var curatedPicks = await catalogDbContext.Products
-                .Where(p => p.IsActive && p.ProductTags.Any(t => t.TagType == Catalog.Domain.Enums.TagType.Featured))
+                .Where(p => p.IsActive && p.ProductTags.Any(t => t.TagType == TagType.Featured))
                 .Take(10)
                 .Select(p => new CuratedPickDto(
                     p.Id,
@@ -13,7 +13,6 @@ namespace Catalog.Application.Features.CuratedPicks.Queries
                     p.Description,
                     p.BasePrice))
                 .ToListAsync(cancellationToken);
-
             return curatedPicks;
         }
     }

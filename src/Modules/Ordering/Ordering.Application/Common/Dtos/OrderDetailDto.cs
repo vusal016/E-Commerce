@@ -1,0 +1,2 @@
+namespace Ordering.Application.Common.Dtos;
+public sealed record OrderDetailDto(Guid Id, string OrderNumber, string Status, DateTime PlacedAt, DateTime? EstimatedDeliveryStart, DateTime? EstimatedDeliveryEnd, string ShippingMethod, string? TrackingNumber, string? Carrier, Guid ShippingAddressId, Guid PaymentMethodId, decimal Subtotal, decimal ShippingCost, decimal Tax, decimal Discount, decimal Total, IEnumerable<OrderItemDto> Items, IEnumerable<OrderStatusHistoryDto> StatusHistory);

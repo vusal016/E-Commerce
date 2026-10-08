@@ -12,6 +12,8 @@ namespace Ordering.Infrastructure
             services.AddScoped<IOrderingDbContext>(provider => provider.GetRequiredService<OrderingModuleDbContext>());
             services.AddScoped<DatabaseInitializer>();
             
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Ordering.Application.Features.PlaceOrder.PlaceOrderCommand).Assembly));
+            
             return services;
         }
     }

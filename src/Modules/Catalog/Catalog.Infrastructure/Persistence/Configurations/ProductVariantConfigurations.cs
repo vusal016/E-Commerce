@@ -6,10 +6,7 @@ namespace Catalog.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("product_variants");
             builder.HasKey(pv => pv.Id);
-
             builder.HasIndex(pv => pv.Sku).IsUnique();
         }
     }
 }
-
-

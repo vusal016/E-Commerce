@@ -8,13 +8,10 @@ namespace Catalog.Infrastructure.Persistence.CatalogData
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
-
-        
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
         }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -23,4 +20,3 @@ namespace Catalog.Infrastructure.Persistence.CatalogData
         }
     }
 }
-

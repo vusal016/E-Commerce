@@ -26,7 +26,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Cart.Domain.CartAggregate.Cart", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("AppliedCouponCode")
@@ -53,7 +52,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Cart.Domain.CartAggregate.CartItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AddedAt")
@@ -87,7 +85,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Cart.Domain.WishlistAggregate.Wishlist", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -96,6 +93,9 @@ namespace Cart.Infrastructure.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("ShareToken")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -111,7 +111,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Cart.Domain.WishlistAggregate.WishlistItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AddedAt")
@@ -120,11 +119,18 @@ namespace Cart.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<decimal>("PriceAtAdd")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
                     b.Property<Guid>("ProductVariantId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("WantsRestockNotification")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid>("WishlistId")
                         .HasColumnType("uuid");

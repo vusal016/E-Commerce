@@ -4,6 +4,7 @@ public sealed class PlaceOrderCommandHandlerTests
 {
     private readonly IOrderingDbContext _dbContext;
     private readonly ICartPublicApi _cartApi;
+    private readonly ICatalogPublicApi _catalogApi;
     private readonly IEventBus _eventBus;
     private readonly PlaceOrderCommandHandler _handler;
 
@@ -11,8 +12,9 @@ public sealed class PlaceOrderCommandHandlerTests
     {
         _dbContext = Substitute.For<IOrderingDbContext>();
         _cartApi = Substitute.For<ICartPublicApi>();
+        _catalogApi = Substitute.For<ICatalogPublicApi>();
         _eventBus = Substitute.For<IEventBus>();
-        _handler = new PlaceOrderCommandHandler(_dbContext, _cartApi, _eventBus);
+        _handler = new PlaceOrderCommandHandler(_dbContext, _cartApi, _catalogApi, _eventBus);
     }
 
     [Fact]
@@ -37,6 +39,12 @@ public sealed class PlaceOrderCommandHandlerTests
         };
         var cartInfo = new CartCheckoutInfoDto(cartItems, 100.0m, 10.0m);
         _cartApi.GetCartForCheckoutAsync(userId, "session", Arg.Any<CancellationToken>()).Returns(cartInfo);
+
+        var basketProducts = new List<BasketProductDto>
+        {
+            new BasketProductDto(cartItems[0].ProductVariantId, "Product A", "Red", "M", null, 50.0m, 50.0m, 10)
+        };
+        _catalogApi.GetBasketProductsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>()).Returns(basketProducts);
 
         var result = await _handler.Handle(command, CancellationToken.None);
 

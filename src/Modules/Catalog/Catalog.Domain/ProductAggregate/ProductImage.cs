@@ -5,7 +5,6 @@ namespace Catalog.Domain.ProductAggregate
         private ProductImage()
         {
         }
-
         public ProductImage(Guid productId, string imageUrl, int displayOrder, bool isPrimary)
         {
             SetProductId(productId);
@@ -13,13 +12,11 @@ namespace Catalog.Domain.ProductAggregate
             SetDisplayOrder(displayOrder);
             IsPrimary = isPrimary;
         }
-
         public Guid ProductId { get; private set; }
         public Product Product { get; private set; }
         public string ImageUrl { get; private set; }
         public int DisplayOrder { get; private set; }
         public bool IsPrimary { get; private set; }
-
         private void SetImageUrl(string imageUrl)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(imageUrl, "Product image URL cannot be empty.");
@@ -37,6 +34,5 @@ namespace Catalog.Domain.ProductAggregate
                 throw new ArgumentException("Product ID cannot be empty.");
             ProductId = productId;
         }
-
     }
 }

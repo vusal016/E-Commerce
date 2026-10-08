@@ -27,3 +27,5 @@ public sealed class ApplyCouponCommandHandlerTests
             .Should().ThrowAsync<KeyNotFoundException>();
     }
 }
+
+

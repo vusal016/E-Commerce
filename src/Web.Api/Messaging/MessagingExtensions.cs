@@ -7,7 +7,9 @@ namespace Web.Api.Messaging
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(
-                    typeof(Program).Assembly
+                    typeof(Program).Assembly,
+                    typeof(Ordering.Application.Features.PlaceOrder.PlaceOrderCommand).Assembly,
+                    typeof(Cart.Application.Features.AddItem.AddItemCommand).Assembly
                 );  
             });
             services.AddSingleton<InMemoryMessageQueue>();

@@ -4,7 +4,7 @@ namespace Catalog.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<ProductImage> builder)
         {
-            builder.ToTable("product_images");  
+            builder.ToTable("product_images");
             builder.HasKey(pi => pi.Id);
         }
     }

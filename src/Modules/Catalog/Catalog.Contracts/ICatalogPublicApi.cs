@@ -1,7 +1,8 @@
-namespace Catalog.Contracts;
-
-public interface ICatalogPublicApi
+namespace Catalog.Contracts
 {
-    Task<IReadOnlyList<ProductSummaryDto>> GetProductSummariesAsync(IEnumerable<Guid> variantIds, CancellationToken cancellationToken = default);
-    Task<IReadOnlyList<BasketProductDto>> GetBasketProductsAsync(IEnumerable<Guid> variantIds, CancellationToken cancellationToken = default);
+    public interface ICatalogPublicApi
+    {
+        Task<IReadOnlyList<ProductSummaryDto>> GetProductSummariesAsync(IEnumerable<Guid> variantIds, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<BasketProductDto>> GetBasketProductsAsync(IEnumerable<Guid> variantIds, CancellationToken cancellationToken = default);
+    }
 }

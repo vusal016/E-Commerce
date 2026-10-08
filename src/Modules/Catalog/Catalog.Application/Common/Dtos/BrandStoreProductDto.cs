@@ -6,4 +6,3 @@ namespace Catalog.Application.Common.Dtos
         decimal BasePrice,
         string? PrimaryImageUrl);
 }
-

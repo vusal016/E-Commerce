@@ -15,10 +15,24 @@ namespace Identity.Infrastructure.Persistence.IdentityData
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+                        foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                var idProperty = entityType.FindProperty("Id");
+                if (idProperty != null && idProperty.ClrType == typeof(Guid))
+                {
+                    idProperty.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.Never;
+                }
+            }
             builder.HasDefaultSchema("identity");
             builder.ApplyConfigurationsFromAssembly(typeof(IdentityModuleDbContext).Assembly);
         }
     }
 }
+
+
+
+
+
+
 
 

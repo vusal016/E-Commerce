@@ -1,17 +1,15 @@
-
-namespace Cart.Application.EventHandlers;
-
-internal sealed class OrderPlacedIntegrationEventHandler(ICartDbContext dbContext) : IIntegrationEventHandler<OrderPlacedIntegrationEvent>
+namespace Cart.Application.EventHandlers
 {
-    public async Task Handle(OrderPlacedIntegrationEvent notification, CancellationToken cancellationToken)
+    internal sealed class OrderPlacedIntegrationEventHandler(ICartDbContext dbContext)
+        : IIntegrationEventHandler<OrderPlacedIntegrationEvent>
     {
-        var cart = await dbContext.Carts.Include(c => c.Items).FirstOrDefaultAsync(c => (notification.UserId != null && c.UserId == notification.UserId) || (notification.SessionId != null && c.SessionId == notification.SessionId), cancellationToken);
-
-        if (cart != null)
+        public async Task Handle(OrderPlacedIntegrationEvent integrationEvent, CancellationToken cancellationToken)
         {
-            dbContext.Carts.Remove(cart);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.Carts
+                .Where(c =>
+                    (integrationEvent.UserId != null && c.UserId == integrationEvent.UserId) ||
+                    c.SessionId == integrationEvent.SessionId)
+                .ExecuteDeleteAsync(cancellationToken);
         }
     }
 }
-

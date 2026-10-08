@@ -6,6 +6,7 @@ namespace Ordering.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("orders");
             builder.HasKey(o => o.Id);
+            builder.Property<uint>("xmin").HasColumnType("xid").IsRowVersion();
             builder.HasIndex(o => o.OrderNumber).IsUnique();
             builder.HasMany(o => o.Items)
                 .WithOne(i => i.Order)
@@ -18,5 +19,7 @@ namespace Ordering.Infrastructure.Persistence.Configurations
         }
     }
 }
+
+
 
 

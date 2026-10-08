@@ -7,8 +7,6 @@ namespace Cart.Application.Common.Interfaces
         DbSet<Wishlist> Wishlists { get; set; }
         DbSet<WishlistItem> WishlistItems { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker ChangeTracker { get; }
     }
 }
-
-
-

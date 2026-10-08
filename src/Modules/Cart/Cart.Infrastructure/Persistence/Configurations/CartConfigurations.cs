@@ -13,7 +13,3 @@ namespace Cart.Infrastructure.Persistence.Configurations
         }
     }
 }
-
-
-
-

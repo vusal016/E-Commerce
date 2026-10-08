@@ -14,6 +14,7 @@ namespace Cart.Domain.WishlistAggregate
 
         public Guid UserId { get; private set; }
         public string Name { get; private set; } = null!;
+        public Guid? ShareToken { get; private set; }
 
         public ICollection<WishlistItem> Items { get; private set; } = [];
 
@@ -29,6 +30,13 @@ namespace Cart.Domain.WishlistAggregate
             ArgumentException.ThrowIfNullOrWhiteSpace(name, "Wishlist name cannot be empty.");
             Name = name;
         }
+
+        public void GenerateShareToken()
+        {
+            if (ShareToken is null || ShareToken == Guid.Empty)
+            {
+                ShareToken = Guid.NewGuid();
+            }
+        }
     }
 }
-

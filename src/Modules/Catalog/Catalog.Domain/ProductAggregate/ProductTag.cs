@@ -5,7 +5,6 @@ namespace Catalog.Domain.ProductAggregate
         private ProductTag()
         {
         }
-
         public ProductTag(Guid productId, TagType tagType, string value)
         {
             SetProductId(productId);
@@ -16,7 +15,6 @@ namespace Catalog.Domain.ProductAggregate
         public Product Product { get; private set; }
         public TagType TagType { get; private set; }
         public string Value { get; private set; }
-
         private void SetProductId(Guid productId)
         {
             if (productId == Guid.Empty)

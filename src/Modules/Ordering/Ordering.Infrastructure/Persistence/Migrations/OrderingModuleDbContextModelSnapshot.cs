@@ -26,7 +26,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Ordering.Domain.CheckoutAggregate.CheckoutSession", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Address")
@@ -88,7 +87,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Ordering.Domain.OrderAggregate.Order", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Carrier")
@@ -153,6 +151,12 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
 
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderNumber")
@@ -164,7 +168,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Ordering.Domain.OrderAggregate.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("ColorSnapshot")
@@ -206,7 +209,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Ordering.Domain.OrderAggregate.OrderStatusHistory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ChangedAt")
@@ -235,7 +237,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Ordering.Domain.ReturnRequestAggregate.ReturnRequest", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("AdditionalNotes")

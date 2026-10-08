@@ -4,13 +4,12 @@ namespace Catalog.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-           builder.ToTable("categories");
+            builder.ToTable("categories");
             builder.HasKey(c => c.Id);
-
             builder.HasOne<Category>()
                 .WithMany()
                 .HasForeignKey(c => c.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

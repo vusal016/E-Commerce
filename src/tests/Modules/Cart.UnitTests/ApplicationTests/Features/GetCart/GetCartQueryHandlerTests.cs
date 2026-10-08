@@ -87,3 +87,5 @@ public sealed class GetCartQueryHandlerTests
         item2.StockWarning.Should().Be("Only 3 left");
     }
 }
+
+
