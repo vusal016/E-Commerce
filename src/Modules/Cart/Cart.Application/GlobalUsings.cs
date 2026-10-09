@@ -1,7 +1,9 @@
 global using Cart.Application.Common.Dtos;
 global using Cart.Application.Common.Interfaces;
 global using Cart.Application.Features.AddItem;
+global using Cart.Application.Features.ClearCart;
 global using Cart.Application.Features.Queries;
+global using Cart.Contracts;
 global using Cart.Domain.CartAggregate;
 global using Cart.Domain.WishlistAggregate;
 global using Catalog.Contracts;
@@ -10,5 +12,4 @@ global using Microsoft.EntityFrameworkCore;
 global using Ordering.Contracts.Events;
 global using Promotions.Contracts;
 global using SharedKernel.Events;
-global using Cart.Application.Features.ClearCart;
-global using Cart.Contracts;    
+global using CartEntity = Cart.Domain.CartAggregate.Cart;

@@ -10,4 +10,3 @@ namespace Engagement.Infrastructure.Persistence.Configurations
         }
     }
 }
-

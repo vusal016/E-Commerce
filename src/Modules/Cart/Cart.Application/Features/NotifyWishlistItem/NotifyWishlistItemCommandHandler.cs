@@ -33,5 +33,4 @@ namespace Cart.Application.Features.NotifyWishlistItem
             return true;
         }
     }
-
 }

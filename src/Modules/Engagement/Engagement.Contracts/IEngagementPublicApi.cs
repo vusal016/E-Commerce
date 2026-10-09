@@ -1,7 +1,8 @@
-namespace Engagement.Contracts;
-
-public interface IEngagementPublicApi
+namespace Engagement.Contracts
 {
-    Task<ProductRatingDto> GetProductRatingAsync(Guid productId, CancellationToken cancellationToken = default);
-    Task<List<ProductRatingDto>> GetProductRatingsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default);
+    public interface IEngagementPublicApi
+    {
+        Task<ProductRatingDto> GetProductRatingAsync(Guid productId, CancellationToken cancellationToken = default);
+        Task<List<ProductRatingDto>> GetProductRatingsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default);
+    }
 }

@@ -24,5 +24,4 @@ namespace Cart.Application.Features.RemoveWishlistItem
             return true;
         }
     }
-
 }

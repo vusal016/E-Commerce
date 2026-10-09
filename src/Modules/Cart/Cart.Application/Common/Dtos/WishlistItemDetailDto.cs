@@ -11,5 +11,4 @@ namespace Cart.Application.Common.Dtos
         decimal PriceAtAdd,
         IReadOnlyList<string> DynamicStatuses
     );
-
 }

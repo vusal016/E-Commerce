@@ -31,5 +31,4 @@ namespace Cart.Application.Features.AddWishlistItem
             return wishlistItem.Id;
         }
     }
-
 }

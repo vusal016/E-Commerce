@@ -13,5 +13,4 @@ namespace Cart.Application.Features.ClearCart
             }
         }
     }
-
 }

@@ -54,5 +54,4 @@ namespace Cart.Application.Features.GetWishlistItems
             return result;
         }
     }
-
 }

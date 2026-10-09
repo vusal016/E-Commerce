@@ -6,13 +6,10 @@ namespace Engagement.Infrastructure.Persistence.EngagementData
         public DbSet<Faq> Faqs { get; set; }
         public DbSet<SupportArticle> SupportArticles { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-
-        
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -29,13 +26,3 @@ namespace Engagement.Infrastructure.Persistence.EngagementData
         }
     }
 }
-    
-
-
-
-
-
-
-
-
-
