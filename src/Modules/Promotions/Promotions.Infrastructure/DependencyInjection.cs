@@ -10,13 +10,11 @@ namespace Promotions.Infrastructure
                 var interceptor = sp.GetServices<ISaveChangesInterceptor>();
                 options.AddInterceptors(interceptor);
             });
-
             services.AddScoped<IPromotionsDbContext>(provider => provider.GetRequiredService<PromotionsModuleDbContext>());
             services.AddScoped<DatabaseInitializer>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetHeroBannersQueryHandler).Assembly));
             services.AddAutoMapper(cfg => cfg.AddProfile<PromotionsMapper>());
-
-            services.AddScoped<IPromotionsPublicApi,PromotionsPublicApi>();
+            services.AddScoped<IPromotionsPublicApi, PromotionsPublicApi>();
             return services;
         }
     }

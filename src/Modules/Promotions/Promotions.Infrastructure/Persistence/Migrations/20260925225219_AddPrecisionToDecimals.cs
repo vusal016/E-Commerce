@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Promotions.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -20,7 +18,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "MinOrderAmount",
                 schema: "promotions",
@@ -31,7 +28,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "DiscountValue",
                 schema: "promotions",
@@ -43,7 +39,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +52,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "MinOrderAmount",
                 schema: "promotions",
@@ -68,7 +62,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "DiscountValue",
                 schema: "promotions",

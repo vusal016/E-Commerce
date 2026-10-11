@@ -1,8 +1,6 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-
+using System;
 #nullable disable
-
 namespace Ordering.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -37,20 +35,17 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_checkout_sessions", x => x.Id);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_checkout_sessions_SessionId",
                 schema: "ordering",
                 table: "checkout_sessions",
                 column: "SessionId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_checkout_sessions_UserId",
                 schema: "ordering",
                 table: "checkout_sessions",
                 column: "UserId");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

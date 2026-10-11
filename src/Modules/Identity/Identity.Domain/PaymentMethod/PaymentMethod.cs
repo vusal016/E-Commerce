@@ -5,7 +5,6 @@ namespace Identity.Domain.PaymentMethod
         private PaymentMethod()
         {
         }
-
         public PaymentMethod(Guid userId, CardType cardType, string lastFourDigits, int expiryMonth, int expiryYear, string cardHolderName, bool isDefault)
         {
             SetUserId(userId);
@@ -23,15 +22,12 @@ namespace Identity.Domain.PaymentMethod
         public int ExpiryYear { get; private set; }
         public string CardHolderName { get; private set; }
         public bool IsDefault { get; private set; }
-
-
         private void SetUserId(Guid userId)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException("User ID cannot be empty.");
             UserId = userId;
         }
-
         private void SetCardType(CardType cardType)
         {
             if (!Enum.IsDefined(cardType))

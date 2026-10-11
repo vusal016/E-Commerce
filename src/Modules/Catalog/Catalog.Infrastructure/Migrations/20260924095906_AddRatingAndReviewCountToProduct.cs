@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -16,7 +14,6 @@ namespace Catalog.Infrastructure.Migrations
                 type: "numeric",
                 nullable: false,
                 defaultValue: 0m);
-
             migrationBuilder.AddColumn<int>(
                 name: "ReviewCount",
                 schema: "Catalog",
@@ -25,7 +22,6 @@ namespace Catalog.Infrastructure.Migrations
                 nullable: false,
                 defaultValue: 0);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +29,6 @@ namespace Catalog.Infrastructure.Migrations
                 name: "RatingAverage",
                 schema: "Catalog",
                 table: "products");
-
             migrationBuilder.DropColumn(
                 name: "ReviewCount",
                 schema: "Catalog",

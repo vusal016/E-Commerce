@@ -4,7 +4,6 @@ namespace SharedKernel.Entity
     {
         protected BaseEntity() : this(Guid.NewGuid())
         {
-
         }
         protected BaseEntity(Guid id)
         {

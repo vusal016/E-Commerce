@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Ordering.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -15,7 +13,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 schema: "ordering",
                 table: "return_requests",
                 column: "OrderItemId");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_return_requests_order_items_OrderItemId",
                 schema: "ordering",
@@ -26,7 +23,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -34,7 +30,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 name: "FK_return_requests_order_items_OrderItemId",
                 schema: "ordering",
                 table: "return_requests");
-
             migrationBuilder.DropIndex(
                 name: "IX_return_requests_OrderItemId",
                 schema: "ordering",

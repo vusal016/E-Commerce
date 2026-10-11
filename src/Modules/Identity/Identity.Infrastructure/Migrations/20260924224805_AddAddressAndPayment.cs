@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Identity.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -35,7 +33,6 @@ namespace Identity.Infrastructure.Migrations
                     table.PrimaryKey("PK_addresses", x => x.Id);
                 });
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

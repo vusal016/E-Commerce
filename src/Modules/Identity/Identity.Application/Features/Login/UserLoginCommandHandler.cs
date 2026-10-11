@@ -1,12 +1,12 @@
 namespace Identity.Application.Features.Login
 {
-    public sealed class UserLoginCommandHandler(UserManager<User> userManager,IIdentityDbContext identityDbContext,ITokenProvider tokenProvider,IMapper mapper) : IRequestHandler<UserLoginCommand, AuthResponseDto>
+    public sealed class UserLoginCommandHandler(UserManager<User> userManager, IIdentityDbContext identityDbContext, ITokenProvider tokenProvider, IMapper mapper) : IRequestHandler<UserLoginCommand, AuthResponseDto>
     {
         public async Task<AuthResponseDto> Handle(UserLoginCommand request, CancellationToken cancellationToken)
         {
             var user = await userManager.FindByEmailAsync(request.Email)
             ?? throw new UnauthorizedAccessException("Unauthorized access");
-            if(await userManager.IsLockedOutAsync(user)) throw new UnauthorizedAccessException("Unauthorized access");
+            if (await userManager.IsLockedOutAsync(user)) throw new UnauthorizedAccessException("Unauthorized access");
             var isPasswordValid = await userManager.CheckPasswordAsync(user, request.Password);
             if (!isPasswordValid)
             {
@@ -26,7 +26,6 @@ namespace Identity.Application.Features.Login
             await identityDbContext.RefreshTokens.AddAsync(newRefreshToken, cancellationToken);
             await identityDbContext.SaveChangesAsync(cancellationToken);
             var userDto = mapper.Map<UserDto>(user);
-
             return new AuthResponseDto
             (
                 userDto,

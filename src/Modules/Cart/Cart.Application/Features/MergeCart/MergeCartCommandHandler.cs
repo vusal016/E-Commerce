@@ -7,14 +7,11 @@ namespace Cart.Application.Features.MergeCart
             var userCart = await dbContext.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.UserId == request.UserId, cancellationToken);
-
             var guestCart = await dbContext.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.SessionId == request.SessionId && c.UserId == null, cancellationToken);
-
             if (guestCart == null)
                 return await mediator.Send(new GetCartQuery(request.UserId, null), cancellationToken);
-
             if (userCart == null)
             {
                 guestCart.AssignUser(request.UserId);
@@ -39,7 +36,6 @@ namespace Cart.Application.Features.MergeCart
                 }
                 dbContext.Carts.Remove(guestCart);
             }
-
             await dbContext.SaveChangesAsync(cancellationToken);
             return await mediator.Send(new GetCartQuery(request.UserId, null), cancellationToken);
         }

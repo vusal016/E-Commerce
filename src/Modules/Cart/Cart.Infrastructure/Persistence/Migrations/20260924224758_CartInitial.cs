@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Cart.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "cart");
-
             migrationBuilder.CreateTable(
                 name: "carts",
                 schema: "cart",
@@ -27,7 +24,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_carts", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "wishlists",
                 schema: "cart",
@@ -43,7 +39,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_wishlists", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "cart_items",
                 schema: "cart",
@@ -69,7 +64,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "wishlist_items",
                 schema: "cart",
@@ -93,35 +87,29 @@ namespace Cart.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_cart_items_CartId",
                 schema: "cart",
                 table: "cart_items",
                 column: "CartId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_wishlist_items_WishlistId",
                 schema: "cart",
                 table: "wishlist_items",
                 column: "WishlistId");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "cart_items",
                 schema: "cart");
-
             migrationBuilder.DropTable(
                 name: "wishlist_items",
                 schema: "cart");
-
             migrationBuilder.DropTable(
                 name: "carts",
                 schema: "cart");
-
             migrationBuilder.DropTable(
                 name: "wishlists",
                 schema: "cart");

@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -20,7 +18,6 @@ namespace Catalog.Infrastructure.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Price",
                 schema: "Catalog",
@@ -31,7 +28,6 @@ namespace Catalog.Infrastructure.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "OriginalPrice",
                 schema: "Catalog",
@@ -43,7 +39,6 @@ namespace Catalog.Infrastructure.Migrations
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +52,6 @@ namespace Catalog.Infrastructure.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Price",
                 schema: "Catalog",
@@ -68,7 +62,6 @@ namespace Catalog.Infrastructure.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "OriginalPrice",
                 schema: "Catalog",

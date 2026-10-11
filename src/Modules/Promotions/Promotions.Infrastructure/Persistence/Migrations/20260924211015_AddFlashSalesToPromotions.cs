@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Promotions.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -26,7 +24,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_flash_sales", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "flash_sale_items",
                 schema: "promotions",
@@ -52,21 +49,18 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_flash_sale_items_FlashSaleId",
                 schema: "promotions",
                 table: "flash_sale_items",
                 column: "FlashSaleId");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "flash_sale_items",
                 schema: "promotions");
-
             migrationBuilder.DropTable(
                 name: "flash_sales",
                 schema: "promotions");

@@ -5,7 +5,6 @@ namespace Promotions.Infrastructure.Persistence.AutoMig
         public Task InitializeAsync(CancellationToken cancellationToken = default)
             => dbContext.Database.MigrateAsync(cancellationToken);
     }
-
     public static class DatabaseMigrationExtensions
     {
         public static async Task MigratePromotionsDatabaseAsync(this IServiceProvider services)

@@ -1,6 +1,6 @@
 ﻿namespace Web.Api.Extensions
 {
-    public static class ServiceExtensions
+    internal static class ServiceExtensions
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {

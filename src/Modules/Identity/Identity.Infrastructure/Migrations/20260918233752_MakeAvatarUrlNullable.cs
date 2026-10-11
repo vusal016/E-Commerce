@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Identity.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -18,7 +16,6 @@ namespace Identity.Infrastructure.Migrations
                 oldClrType: typeof(string),
                 oldType: "text");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

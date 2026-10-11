@@ -7,13 +7,10 @@ namespace Promotions.Infrastructure.Persistence.PromotionsData
         public DbSet<FlashSaleItem> FlashSaleItems { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<NotifyRequest> NotifyRequests { get; set; }
-
-        
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,13 +27,3 @@ namespace Promotions.Infrastructure.Persistence.PromotionsData
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

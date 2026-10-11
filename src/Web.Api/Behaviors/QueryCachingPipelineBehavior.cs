@@ -1,6 +1,6 @@
 namespace Web.Api.Behaviors
 {
-    public sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(ICacheService cacheService) : IPipelineBehavior<TRequest, TResponse> where TRequest : ICachedQuery
+    internal sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(ICacheService cacheService) : IPipelineBehavior<TRequest, TResponse> where TRequest : ICachedQuery
     {
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
@@ -8,7 +8,7 @@ namespace Web.Api.Behaviors
              request.Key,
              _ => next(),
              request.Expiration,
-             cancellationToken 
+             cancellationToken
             );
         }
     }

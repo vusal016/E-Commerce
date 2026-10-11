@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Engagement.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -21,7 +19,6 @@ namespace Engagement.Infrastructure.Persistence.Migrations
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

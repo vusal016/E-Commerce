@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -14,13 +12,11 @@ namespace Catalog.Infrastructure.Migrations
                 name: "RatingAverage",
                 schema: "Catalog",
                 table: "products");
-
             migrationBuilder.DropColumn(
                 name: "ReviewCount",
                 schema: "Catalog",
                 table: "products");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +27,6 @@ namespace Catalog.Infrastructure.Migrations
                 type: "numeric",
                 nullable: false,
                 defaultValue: 0m);
-
             migrationBuilder.AddColumn<int>(
                 name: "ReviewCount",
                 schema: "Catalog",

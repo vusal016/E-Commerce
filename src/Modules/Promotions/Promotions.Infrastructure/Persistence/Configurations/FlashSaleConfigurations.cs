@@ -6,7 +6,6 @@ namespace Promotions.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("flash_sales");
             builder.HasKey(x => x.Id);
-
             builder.HasMany(x => x.Items)
                    .WithOne(x => x.FlashSale)
                    .HasForeignKey(x => x.FlashSaleId)

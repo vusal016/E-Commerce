@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Catalog.Infrastructure.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "Catalog");
-
             migrationBuilder.CreateTable(
                 name: "brands",
                 schema: "Catalog",
@@ -27,7 +24,6 @@ namespace Catalog.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_brands", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "categories",
                 schema: "Catalog",
@@ -49,7 +45,6 @@ namespace Catalog.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
             migrationBuilder.CreateTable(
                 name: "products",
                 schema: "Catalog",
@@ -83,7 +78,6 @@ namespace Catalog.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
             migrationBuilder.CreateTable(
                 name: "product_images",
                 schema: "Catalog",
@@ -106,7 +100,6 @@ namespace Catalog.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "product_tags",
                 schema: "Catalog",
@@ -128,7 +121,6 @@ namespace Catalog.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "product_variants",
                 schema: "Catalog",
@@ -155,74 +147,61 @@ namespace Catalog.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_categories_ParentCategoryId",
                 schema: "Catalog",
                 table: "categories",
                 column: "ParentCategoryId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_product_images_ProductId",
                 schema: "Catalog",
                 table: "product_images",
                 column: "ProductId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_product_tags_ProductId",
                 schema: "Catalog",
                 table: "product_tags",
                 column: "ProductId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_product_variants_ProductId",
                 schema: "Catalog",
                 table: "product_variants",
                 column: "ProductId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_product_variants_Sku",
                 schema: "Catalog",
                 table: "product_variants",
                 column: "Sku",
                 unique: true);
-
             migrationBuilder.CreateIndex(
                 name: "IX_products_BrandId",
                 schema: "Catalog",
                 table: "products",
                 column: "BrandId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_products_CategoryId",
                 schema: "Catalog",
                 table: "products",
                 column: "CategoryId");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "product_images",
                 schema: "Catalog");
-
             migrationBuilder.DropTable(
                 name: "product_tags",
                 schema: "Catalog");
-
             migrationBuilder.DropTable(
                 name: "product_variants",
                 schema: "Catalog");
-
             migrationBuilder.DropTable(
                 name: "products",
                 schema: "Catalog");
-
             migrationBuilder.DropTable(
                 name: "brands",
                 schema: "Catalog");
-
             migrationBuilder.DropTable(
                 name: "categories",
                 schema: "Catalog");

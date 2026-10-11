@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Ordering.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -20,7 +18,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Tax",
                 schema: "ordering",
@@ -31,7 +28,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Subtotal",
                 schema: "ordering",
@@ -42,7 +38,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "ShippingCost",
                 schema: "ordering",
@@ -53,7 +48,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Discount",
                 schema: "ordering",
@@ -64,7 +58,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "PriceSnapshot",
                 schema: "ordering",
@@ -76,7 +69,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldClrType: typeof(decimal),
                 oldType: "numeric");
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -90,7 +82,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Tax",
                 schema: "ordering",
@@ -101,7 +92,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Subtotal",
                 schema: "ordering",
@@ -112,7 +102,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "ShippingCost",
                 schema: "ordering",
@@ -123,7 +112,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "Discount",
                 schema: "ordering",
@@ -134,7 +122,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 oldType: "numeric(18,2)",
                 oldPrecision: 18,
                 oldScale: 2);
-
             migrationBuilder.AlterColumn<decimal>(
                 name: "PriceSnapshot",
                 schema: "ordering",

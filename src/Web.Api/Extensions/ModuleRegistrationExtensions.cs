@@ -1,6 +1,6 @@
 namespace Web.Api.Extensions
 {
-    public static class ModuleRegistrationExtensions
+    internal static class ModuleRegistrationExtensions
     {
         public static IServiceCollection AddModuleRegistrations(this IServiceCollection services, IConfiguration configuration)
         {
@@ -10,7 +10,6 @@ namespace Web.Api.Extensions
             services.AddCartModule(configuration);
             services.AddOrderingModule(configuration);
             services.AddEngagementModule(configuration);
-
             return services;
         }
     }

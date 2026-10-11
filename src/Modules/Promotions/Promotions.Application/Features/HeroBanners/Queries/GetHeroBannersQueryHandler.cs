@@ -9,7 +9,6 @@ namespace Promotions.Application.Features.HeroBanners.Queries
                 .Where(b => b.IsActive)
                 .OrderBy(b => b.DisplayOrder)
                 .ToListAsync(cancellationToken);
-
             return mapper.Map<List<HeroBannerDto>>(banners);
         }
     }

@@ -10,16 +10,12 @@ namespace Cart.Application.Features.GetCartSummary
                 .FirstOrDefaultAsync(c =>
                     (request.UserId != null && c.UserId == request.UserId) ||
                     (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
-
             if (cart == null) return new CartSummaryDto(0, 0, 0, 0);
-
             var variantIds = cart.Items.Where(i => !i.IsSavedForLater).Select(i => i.ProductVariantId).ToList();
             if (variantIds.Count == 0) return new CartSummaryDto(0, 0, 0, 0);
-
             var products = await catalogApi.GetBasketProductsAsync(variantIds, cancellationToken);
             var productDiscounts = (await promotionsApi.GetActiveDiscountsAsync(variantIds, cancellationToken))
                 .ToDictionary(d => d.ProductVariantId);
-
             decimal subtotal = 0;
             foreach (var item in cart.Items.Where(i => !i.IsSavedForLater))
             {
@@ -31,7 +27,6 @@ namespace Cart.Application.Features.GetCartSummary
                     subtotal += finalPrice * item.Quantity;
                 }
             }
-
             decimal discountValue = 0;
             if (!string.IsNullOrWhiteSpace(cart.AppliedCouponCode))
             {
@@ -44,11 +39,9 @@ namespace Cart.Application.Features.GetCartSummary
                         discountValue = coupon.DiscountValue;
                 }
             }
-
             decimal shipping = subtotal >= 50 ? 0 : 5.99m;
             decimal total = subtotal + shipping - discountValue;
             if (total < 0) total = 0;
-
             return new CartSummaryDto(subtotal, shipping, discountValue, total);
         }
     }

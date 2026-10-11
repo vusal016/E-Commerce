@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Engagement.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Engagement.Infrastructure.Persistence.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "engagement");
-
             migrationBuilder.CreateTable(
                 name: "faqs",
                 schema: "engagement",
@@ -29,7 +26,6 @@ namespace Engagement.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_faqs", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "notifications",
                 schema: "engagement",
@@ -48,7 +44,6 @@ namespace Engagement.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_notifications", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "reviews",
                 schema: "engagement",
@@ -70,7 +65,6 @@ namespace Engagement.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_reviews", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "support_articles",
                 schema: "engagement",
@@ -88,22 +82,18 @@ namespace Engagement.Infrastructure.Persistence.Migrations
                     table.PrimaryKey("PK_support_articles", x => x.Id);
                 });
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "faqs",
                 schema: "engagement");
-
             migrationBuilder.DropTable(
                 name: "notifications",
                 schema: "engagement");
-
             migrationBuilder.DropTable(
                 name: "reviews",
                 schema: "engagement");
-
             migrationBuilder.DropTable(
                 name: "support_articles",
                 schema: "engagement");

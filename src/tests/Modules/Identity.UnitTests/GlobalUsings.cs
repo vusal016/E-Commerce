@@ -12,4 +12,3 @@ global using Microsoft.Extensions.Logging.Abstractions;
 global using MockQueryable.NSubstitute;
 global using NSubstitute;
 global using Xunit;
-global using Identity.Application.Common.Mapper;

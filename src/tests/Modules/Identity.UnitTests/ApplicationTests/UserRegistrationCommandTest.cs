@@ -3,14 +3,11 @@ namespace Identity.UnitTests.ApplicationTests
     public sealed class UserRegistrationCommandTest
     {
         private static readonly UserRegisterCommand Command = new("John", "Bushmaker", "john.bush@gmail.com", "password123");
-
         private readonly UserRegisterCommandHandler _handler;
         private readonly UserManager<User> _userManagerMock;
         private readonly IIdentityDbContext _identityDbContextMock;
         private readonly ITokenProvider _tokenProviderMock;
         private readonly IMapper _mapperMock;
-
-
         public UserRegistrationCommandTest()
         {
             var userStoreMock = Substitute.For<IUserStore<User>>();
@@ -18,10 +15,8 @@ namespace Identity.UnitTests.ApplicationTests
             _identityDbContextMock = Substitute.For<IIdentityDbContext>();
             _tokenProviderMock = Substitute.For<ITokenProvider>();
             _mapperMock = Substitute.For<IMapper>();
-
             _handler = new UserRegisterCommandHandler(_userManagerMock, _identityDbContextMock, _tokenProviderMock, _mapperMock);
         }
-
         [Fact]
         public async Task Handle_ShouldReturnError_WhenUserAlreadyExists()
         {
@@ -30,11 +25,9 @@ namespace Identity.UnitTests.ApplicationTests
             _userManagerMock.FindByEmailAsync(Command.Email).Returns(existingUser);
             // Act
             var exception = await Assert.ThrowsAsync<InvalidOperationException>((() => _handler.Handle(Command, CancellationToken.None)));
-
             // Assert
             Assert.Equal("User with this email already exists.", exception.Message);
         }
-
         [Fact]
         public async Task Handle_ShouldSaveChanges_WhenUserIsCreatedSuccessfully()
         {
@@ -45,10 +38,8 @@ namespace Identity.UnitTests.ApplicationTests
             _tokenProviderMock.GenerateAccessToken(Arg.Any<User>()).Returns("access_token");
             _tokenProviderMock.GenerateRefreshToken().Returns("refresh_token");
             _userManagerMock.CreateAsync(Arg.Do<User>(u => u.Id = Guid.NewGuid()), Command.Password).Returns(IdentityResult.Success);
-
             // Act
             var result = await _handler.Handle(Command, CancellationToken.None);
-
             // Assert
             await _identityDbContextMock.Received(1).SaveChangesAsync(CancellationToken.None);
             Assert.Equal(userDto, result.User);

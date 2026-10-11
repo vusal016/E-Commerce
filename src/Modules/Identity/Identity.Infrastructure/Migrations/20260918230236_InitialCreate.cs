@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Identity.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Identity.Infrastructure.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "identity");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 schema: "identity",
@@ -26,7 +23,6 @@ namespace Identity.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "refresh_tokens",
                 schema: "identity",
@@ -43,7 +39,6 @@ namespace Identity.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_refresh_tokens", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "users",
                 schema: "identity",
@@ -76,7 +71,6 @@ namespace Identity.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_users", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 schema: "identity",
@@ -99,7 +93,6 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 schema: "identity",
@@ -122,7 +115,6 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 schema: "identity",
@@ -144,7 +136,6 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 schema: "identity",
@@ -171,7 +162,6 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 schema: "identity",
@@ -193,51 +183,43 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 schema: "identity",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
-
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "identity",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true);
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
                 schema: "identity",
                 table: "AspNetUserClaims",
                 column: "UserId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
                 schema: "identity",
                 table: "AspNetUserLogins",
                 column: "UserId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_RoleId",
                 schema: "identity",
                 table: "AspNetUserRoles",
                 column: "RoleId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_refresh_tokens_Token",
                 schema: "identity",
                 table: "refresh_tokens",
                 column: "Token",
                 unique: true);
-
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 schema: "identity",
                 table: "users",
                 column: "NormalizedEmail");
-
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 schema: "identity",
@@ -245,38 +227,30 @@ namespace Identity.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "AspNetUserClaims",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "AspNetUserLogins",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "AspNetUserRoles",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "refresh_tokens",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoles",
                 schema: "identity");
-
             migrationBuilder.DropTable(
                 name: "users",
                 schema: "identity");

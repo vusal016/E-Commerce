@@ -1,6 +1,6 @@
 namespace Web.Api.DatabaseMigrations
 {
-    public static class DatabaseMigrationExtensions
+    internal static class DatabaseMigrationExtensions
     {
         public static async Task MigrateAllDatabasesAsync(this IServiceProvider services)
         {

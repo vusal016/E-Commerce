@@ -1,6 +1,6 @@
 namespace Web.Api.Middleware
 {
-    public sealed class GlobalExceptionHandler(RequestDelegate next)
+    internal sealed class GlobalExceptionHandler(RequestDelegate next)
     {
         public async Task InvokeAsync(HttpContext context)
         {
@@ -19,13 +19,10 @@ namespace Web.Api.Middleware
                     InvalidOperationException => 409,
                     _ => 500
                 };
-
                 var response = Result<string>.Fail(
                     ex.Message,
                     statusCode);
-
                 context.Response.StatusCode = statusCode;
-
                 await context.Response.WriteAsJsonAsync(response);
             }
         }

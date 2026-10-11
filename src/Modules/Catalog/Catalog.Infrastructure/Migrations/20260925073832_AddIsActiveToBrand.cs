@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -18,7 +16,6 @@ namespace Catalog.Infrastructure.Migrations
                 nullable: false,
                 defaultValue: false);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

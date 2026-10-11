@@ -1,6 +1,6 @@
 namespace Web.Api.Messaging
 {
-    public static class MessagingExtensions
+    internal static class MessagingExtensions
     {
         public static IServiceCollection AddMessaging(this IServiceCollection services)
         {
@@ -10,7 +10,7 @@ namespace Web.Api.Messaging
                     typeof(Program).Assembly,
                     typeof(Ordering.Application.Features.PlaceOrder.PlaceOrderCommand).Assembly,
                     typeof(Cart.Application.Features.AddItem.AddItemCommand).Assembly
-                );  
+                );
             });
             services.AddSingleton<InMemoryMessageQueue>();
             services.AddSingleton<IEventBus, EventBus>();

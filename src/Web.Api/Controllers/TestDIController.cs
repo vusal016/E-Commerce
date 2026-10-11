@@ -1,17 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-
-namespace Web.Api.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
-public class TestDIController(IServiceProvider sp) : ControllerBase
+namespace Web.Api.Controllers
 {
-    [HttpGet]
-    public IActionResult Get()
+    [Route("api/[controller]")]
+    [ApiController]
+    internal class TestDIController(IServiceProvider sp) : ControllerBase
     {
-        var services = sp.GetServices<IRequestHandler<Ordering.Application.Features.PlaceOrder.PlaceOrderCommand, Guid>>();
-        return Ok(services.Select(x => x.GetType().FullName));
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var services = sp.GetServices<IRequestHandler<Ordering.Application.Features.PlaceOrder.PlaceOrderCommand, Guid>>();
+            return Ok(services.Select(x => x.GetType().FullName));
+        }
     }
 }

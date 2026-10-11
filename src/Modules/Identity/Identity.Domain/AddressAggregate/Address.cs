@@ -5,7 +5,6 @@ namespace Identity.Domain.AddressAggregate
         private Address()
         {
         }
-
         public Address(Guid userId, string label, string firstName, string lastName, string addressLine1, string? addressLine2, string city, string state, string postalCode, string country, string phone, bool isDefault)
         {
             SetUserId(userId);
@@ -21,7 +20,6 @@ namespace Identity.Domain.AddressAggregate
             SetPhone(phone);
             IsDefault = isDefault;
         }
-
         public Guid UserId { get; private set; }
         public string Label { get; private set; }
         public string FirstName { get; private set; }
@@ -34,7 +32,6 @@ namespace Identity.Domain.AddressAggregate
         public string Country { get; private set; }
         public string Phone { get; private set; }
         public bool IsDefault { get; private set; }
-
         private void SetUserId(Guid userId)
         {
             if (userId == Guid.Empty)

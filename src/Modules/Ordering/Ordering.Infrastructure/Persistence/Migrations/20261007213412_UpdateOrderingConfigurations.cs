@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
+using Microsoft.EntityFrameworkCore.Migrations;
 #nullable disable
-
 namespace Ordering.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -19,7 +17,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 nullable: false,
                 defaultValue: 0u);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

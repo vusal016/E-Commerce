@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Promotions.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -28,7 +26,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_coupons", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "notify_requests",
                 schema: "promotions",
@@ -44,7 +41,6 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_notify_requests", x => x.Id);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_coupons_Code",
                 schema: "promotions",
@@ -52,14 +48,12 @@ namespace Promotions.Infrastructure.Persistence.Migrations
                 column: "Code",
                 unique: true);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "coupons",
                 schema: "promotions");
-
             migrationBuilder.DropTable(
                 name: "notify_requests",
                 schema: "promotions");

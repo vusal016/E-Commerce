@@ -1,13 +1,13 @@
 global using AutoMapper;
+global using Catalog.Contracts;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using Promotions.Application.Common.Dtos;
 global using Promotions.Application.Common.Interfaces;
+global using Promotions.Contracts;
 global using Promotions.Domain.CouponAggregate;
 global using Promotions.Domain.FlashSaleAggregate;
 global using Promotions.Domain.HeroBannerAggregate;
 global using Promotions.Domain.NotifyRequestAggregate;
 global using SharedKernel.Cache;
 global using SharedKernel.Result;
-global using Promotions.Contracts;
-global using Catalog.Contracts;

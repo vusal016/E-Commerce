@@ -10,5 +10,3 @@ namespace Promotions.Infrastructure.Persistence.Configurations
         }
     }
 }
-
-

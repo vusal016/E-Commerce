@@ -1,27 +1,24 @@
-namespace Ordering.Application.Features.SubmitShipping;
-
-public sealed class SubmitShippingCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitShippingCommand, Guid>
+namespace Ordering.Application.Features.SubmitShipping
 {
-    public async Task<Guid> Handle(SubmitShippingCommand request, CancellationToken cancellationToken)
+    public sealed class SubmitShippingCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitShippingCommand, Guid>
     {
-        var checkOutSession = await orderingDb.CheckoutSessions.FirstOrDefaultAsync(cs => (request.UserId != null && cs.UserId == request.UserId) || (request.SessionId != null && cs.SessionId == request.SessionId), cancellationToken);
-
-        if (checkOutSession is null)
+        public async Task<Guid> Handle(SubmitShippingCommand request, CancellationToken cancellationToken)
         {
-            checkOutSession = new CheckoutSession(request.UserId, request.SessionId!);
-            orderingDb.CheckoutSessions.Add(checkOutSession);
+            var checkOutSession = await orderingDb.CheckoutSessions.FirstOrDefaultAsync(cs => (request.UserId != null && cs.UserId == request.UserId) || (request.SessionId != null && cs.SessionId == request.SessionId), cancellationToken);
+            if (checkOutSession is null)
+            {
+                checkOutSession = new CheckoutSession(request.UserId, request.SessionId!);
+                orderingDb.CheckoutSessions.Add(checkOutSession);
+            }
+            decimal shippingPrice = request.ShippingMethod switch
+            {
+                "Express" => 15.99m,
+                "Same-Day" => 25.99m,
+                _ => 5.99m
+            };
+            checkOutSession.SetShippingInfo(request.Email, request.FirstName, request.LastName, request.Address, request.City, request.ZipCode, request.ShippingMethod, shippingPrice);
+            await orderingDb.SaveChangesAsync(cancellationToken);
+            return checkOutSession.Id;
         }
-
-        decimal shippingPrice = request.ShippingMethod switch
-        {
-            "Express" => 15.99m,
-            "Same-Day" => 25.99m,
-            _ => 5.99m 
-        };
-
-        checkOutSession.SetShippingInfo(request.Email, request.FirstName, request.LastName, request.Address, request.City, request.ZipCode, request.ShippingMethod, shippingPrice);
-        
-        await orderingDb.SaveChangesAsync(cancellationToken);
-        return checkOutSession.Id;
     }
 }

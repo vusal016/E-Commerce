@@ -1,4 +1,5 @@
 global using AutoMapper;
+global using Catalog.Contracts;
 global using FluentAssertions;
 global using MockQueryable.NSubstitute;
 global using NSubstitute;
@@ -10,7 +11,3 @@ global using Promotions.Application.Features.FlashSales.Queries.GetUpcomingFlash
 global using Promotions.Domain.FlashSaleAggregate;
 global using System.Reflection;
 global using Xunit;
-global using Promotions.Application.Features.FlashSales.Queries.GetActiveFlashSales;
-global using Promotions.Application.Features.FlashSales.Queries.GetUpcomingFlashSales;
-
-global using Catalog.Contracts;

@@ -1,3 +1,4 @@
-namespace Web.Api.Requests.Checkout;
-
-public sealed record SubmitPaymentRequest(string PaymentMethod, string? CardNumber, string? Cvv, string? ExpiryDate);
+namespace Web.Api.Requests.Checkout
+{
+    internal sealed record SubmitPaymentRequest(string PaymentMethod, string? CardNumber, string? Cvv, string? ExpiryDate);
+}

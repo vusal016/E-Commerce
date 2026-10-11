@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
-
 #nullable disable
-
 namespace Cart.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -17,7 +15,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 table: "wishlists",
                 type: "uuid",
                 nullable: true);
-
             migrationBuilder.AddColumn<decimal>(
                 name: "PriceAtAdd",
                 schema: "cart",
@@ -27,7 +24,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 scale: 2,
                 nullable: false,
                 defaultValue: 0m);
-
             migrationBuilder.AddColumn<bool>(
                 name: "WantsRestockNotification",
                 schema: "cart",
@@ -36,7 +32,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 nullable: false,
                 defaultValue: false);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -44,12 +39,10 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 name: "ShareToken",
                 schema: "cart",
                 table: "wishlists");
-
             migrationBuilder.DropColumn(
                 name: "PriceAtAdd",
                 schema: "cart",
                 table: "wishlist_items");
-
             migrationBuilder.DropColumn(
                 name: "WantsRestockNotification",
                 schema: "cart",

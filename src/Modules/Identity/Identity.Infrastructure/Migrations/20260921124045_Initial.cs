@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Identity.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -34,19 +32,16 @@ namespace Identity.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_refresh_tokens_UserId",
                 schema: "identity",
                 table: "refresh_tokens",
                 column: "UserId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_payment_methods_UserId",
                 schema: "identity",
                 table: "payment_methods",
                 column: "UserId");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_refresh_tokens_users_UserId",
                 schema: "identity",
@@ -57,7 +52,6 @@ namespace Identity.Infrastructure.Migrations
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -65,11 +59,9 @@ namespace Identity.Infrastructure.Migrations
                 name: "FK_refresh_tokens_users_UserId",
                 schema: "identity",
                 table: "refresh_tokens");
-
             migrationBuilder.DropTable(
                 name: "payment_methods",
                 schema: "identity");
-
             migrationBuilder.DropIndex(
                 name: "IX_refresh_tokens_UserId",
                 schema: "identity",

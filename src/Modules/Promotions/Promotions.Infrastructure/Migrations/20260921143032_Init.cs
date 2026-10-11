@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Promotions.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Promotions.Infrastructure.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "promotions");
-
             migrationBuilder.CreateTable(
                 name: "hero_banners",
                 schema: "promotions",
@@ -34,7 +31,6 @@ namespace Promotions.Infrastructure.Migrations
                     table.PrimaryKey("PK_hero_banners", x => x.Id);
                 });
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

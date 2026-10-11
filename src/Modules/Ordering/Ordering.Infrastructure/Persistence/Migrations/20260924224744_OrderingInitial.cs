@@ -1,6 +1,4 @@
-
 #nullable disable
-
 namespace Ordering.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -11,7 +9,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
         {
             migrationBuilder.EnsureSchema(
                 name: "ordering");
-
             migrationBuilder.CreateTable(
                 name: "orders",
                 schema: "ordering",
@@ -41,7 +38,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_orders", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "return_requests",
                 schema: "ordering",
@@ -62,7 +58,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_return_requests", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "order_items",
                 schema: "ordering",
@@ -90,7 +85,6 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "order_status_history",
                 schema: "ordering",
@@ -114,19 +108,16 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_order_items_OrderId",
                 schema: "ordering",
                 table: "order_items",
                 column: "OrderId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_order_status_history_OrderId",
                 schema: "ordering",
                 table: "order_status_history",
                 column: "OrderId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_orders_OrderNumber",
                 schema: "ordering",
@@ -134,22 +125,18 @@ namespace Ordering.Infrastructure.Persistence.Migrations
                 column: "OrderNumber",
                 unique: true);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "order_items",
                 schema: "ordering");
-
             migrationBuilder.DropTable(
                 name: "order_status_history",
                 schema: "ordering");
-
             migrationBuilder.DropTable(
                 name: "return_requests",
                 schema: "ordering");
-
             migrationBuilder.DropTable(
                 name: "orders",
                 schema: "ordering");

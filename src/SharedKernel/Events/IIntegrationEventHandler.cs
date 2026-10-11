@@ -1,8 +1,7 @@
-
-namespace SharedKernel.Events;
-
-public interface IIntegrationEventHandler<TIntegrationEvent> : INotificationHandler<TIntegrationEvent> 
-    where TIntegrationEvent : IIntegrationEvent
+namespace SharedKernel.Events
 {
+    public interface IIntegrationEventHandler<TIntegrationEvent> : INotificationHandler<TIntegrationEvent>
+        where TIntegrationEvent : IIntegrationEvent
+    {
+    }
 }
-

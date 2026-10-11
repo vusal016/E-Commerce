@@ -6,7 +6,6 @@ namespace Ordering.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("return_requests");
             builder.HasKey(r => r.Id);
-
             builder.HasOne<OrderItem>()
                 .WithMany()
                 .HasForeignKey(r => r.OrderItemId)

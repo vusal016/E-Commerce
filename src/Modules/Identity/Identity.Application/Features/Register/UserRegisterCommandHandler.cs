@@ -1,6 +1,6 @@
 namespace Identity.Application.Features.Register
 {
-    public sealed class UserRegisterCommandHandler(UserManager<User> userManager,IIdentityDbContext identityDbContext,ITokenProvider tokenProvider,IMapper mapper) : IRequestHandler<UserRegisterCommand, AuthResponseDto>
+    public sealed class UserRegisterCommandHandler(UserManager<User> userManager, IIdentityDbContext identityDbContext, ITokenProvider tokenProvider, IMapper mapper) : IRequestHandler<UserRegisterCommand, AuthResponseDto>
     {
         public async Task<AuthResponseDto> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
         {
@@ -18,7 +18,7 @@ namespace Identity.Application.Features.Register
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new InvalidOperationException($"Invalid email or password. Details: {errors}");
             }
-            var userDto=mapper.Map<UserDto>(user);
+            var userDto = mapper.Map<UserDto>(user);
             var accessToken = tokenProvider.GenerateAccessToken(user);
             var refreshToken = tokenProvider.GenerateRefreshToken();
             var refreshTokenEntity = new RefreshToken
@@ -37,7 +37,5 @@ namespace Identity.Application.Features.Register
                 );
         }
     }
+    // Create User ve Refresh token elavesi ayri transaction daxilinde calisir(refactor xatirlatmasi)
 }
-
-
-// Create User ve Refresh token elavesi ayri transaction daxilinde calisir(refactor xatirlatmasi)

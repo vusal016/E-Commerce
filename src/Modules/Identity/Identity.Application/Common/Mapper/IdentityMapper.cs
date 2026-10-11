@@ -1,6 +1,6 @@
 namespace Identity.Application.Common.Mapper
 {
-    public sealed class IdentityMapper :Profile
+    public sealed class IdentityMapper : Profile
     {
         public IdentityMapper()
         {

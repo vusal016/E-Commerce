@@ -1,1 +1,1 @@
-﻿global using SharedKernel.Events;
+global using SharedKernel.Events;

@@ -1,6 +1,6 @@
 namespace Identity.Domain.RefreshToken
 {
-    public sealed class RefreshToken:AuditEntity
+    public sealed class RefreshToken : AuditEntity
     {
         private RefreshToken()
         {
@@ -11,11 +11,9 @@ namespace Identity.Domain.RefreshToken
             SetToken(token);
             ExpiresAt = expiresAt;
         }
-
-        public Guid UserId { get;private set; }
-        public string Token { get;private set; }
-        public DateTime ExpiresAt { get;private set; }
-
+        public Guid UserId { get; private set; }
+        public string Token { get; private set; }
+        public DateTime ExpiresAt { get; private set; }
         private void SetUserId(Guid userId)
         {
             if (userId == Guid.Empty)

@@ -1,3 +1,4 @@
-namespace Ordering.Application.Features.GetCheckoutSummary;
-
-public sealed record GetCheckoutSummaryQuery(Guid? UserId, string? SessionId) : IRequest<CheckoutSummaryDto>;
+namespace Ordering.Application.Features.GetCheckoutSummary
+{
+    public sealed record GetCheckoutSummaryQuery(Guid? UserId, string? SessionId) : IRequest<CheckoutSummaryDto>;
+}

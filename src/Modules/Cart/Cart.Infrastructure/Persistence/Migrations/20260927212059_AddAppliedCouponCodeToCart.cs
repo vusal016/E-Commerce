@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore.Migrations;
-
 #nullable disable
-
 namespace Cart.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -17,7 +15,6 @@ namespace Cart.Infrastructure.Persistence.Migrations
                 type: "text",
                 nullable: true);
         }
-
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {

@@ -5,5 +5,8 @@ namespace SharedKernel.Exceptions
         public ForbiddenException(string message) : base(message)
         {
         }
+        public ForbiddenException()
+        {
+        }
     }
 }

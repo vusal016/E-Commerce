@@ -8,7 +8,6 @@ namespace Identity.UnitTests.ApplicationTests
         private readonly IIdentityDbContext _identityDbContext;
         private readonly ITokenProvider _tokenProvider;
         private readonly IMapper _mapper;
-
         public UserLoginCommandTest()
         {
             var userStoreMock = Substitute.For<IUserStore<User>>();
@@ -18,49 +17,38 @@ namespace Identity.UnitTests.ApplicationTests
             _mapper = Substitute.For<IMapper>();
             _handler = new UserLoginCommandHandler(_userManager, _identityDbContext, _tokenProvider, _mapper);
         }
-
         [Fact]
         public async Task RefreshToken_ShouldBeDeleted()
         {
             // Arrange
             var user = new User("John", "Doe", Command.Email) { Id = Guid.NewGuid() };
-
             _userManager.FindByEmailAsync(Command.Email).Returns(user);
             _userManager.IsLockedOutAsync(user).Returns(false);
             _userManager.CheckPasswordAsync(user, Command.Password).Returns(true);
-
             var emptyRefreshTokens = new List<RefreshToken>().BuildMockDbSet();
             _identityDbContext.RefreshTokens.Returns(emptyRefreshTokens);
-
-            // H?LL: Null x?tasi verm?m?si üçün Token-l?ri mock edirik
+            // H?LL: Null x?tasi verm?m?si Ã¼Ã§Ã¼n Token-l?ri mock edirik
             _tokenProvider.GenerateAccessToken(user).Returns("access_token");
             _tokenProvider.GenerateRefreshToken().Returns("valid_refresh_token_string");
-
             // Act
             await _handler.Handle(Command, CancellationToken.None);
-
             // Assert
             var _ = _identityDbContext.Received().RefreshTokens;
         }
-
         [Fact]
         public async Task RefSaveChanges_ShouldBeCalled_WhenLoginIsSuccessful()
         {
             // Arrange
             var user = new User("John", "Doe", Command.Email) { Id = Guid.NewGuid() };
-
             _userManager.FindByEmailAsync(Command.Email).Returns(user);
             _userManager.IsLockedOutAsync(user).Returns(false);
             _userManager.CheckPasswordAsync(user, Command.Password).Returns(true);
-
             var emptyRefreshTokens = new List<RefreshToken>().BuildMockDbSet();
             _identityDbContext.RefreshTokens.Returns(emptyRefreshTokens);
             _tokenProvider.GenerateAccessToken(user).Returns("access_token");
             _tokenProvider.GenerateRefreshToken().Returns("refresh_token");
-
             // Act
             await _handler.Handle(Command, CancellationToken.None);
-
             // Assert
             await _identityDbContext.Received(1).SaveChangesAsync(CancellationToken.None);
         }

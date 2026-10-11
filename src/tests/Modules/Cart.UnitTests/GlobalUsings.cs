@@ -1,44 +1,31 @@
-﻿global using System;
+global using Cart.Application.Common.Dtos;
+global using Cart.Application.Common.Interfaces;
+global using Cart.Application.Features.AddItem;
+global using Cart.Application.Features.AddWishlistItem;
+global using Cart.Application.Features.ApplyCoupon;
+global using Cart.Application.Features.CreateWishlist;
+global using Cart.Application.Features.GetCart;
+global using Cart.Application.Features.GetCartSummary;
+global using Cart.Application.Features.GetWishlistItems;
+global using Cart.Application.Features.GetWishlists;
+global using Cart.Application.Features.MergeCart;
+global using Cart.Application.Features.NotifyWishlistItem;
+global using Cart.Application.Features.Queries;
+global using Cart.Application.Features.RemoveItem;
+global using Cart.Application.Features.RemoveWishlistItem;
+global using Cart.Application.Features.ShareWishlist;
+global using Cart.Application.Features.ToggleSaveForLater;
+global using Cart.Application.Features.UpdateItemQuantity;
+global using Cart.Domain.WishlistAggregate;
+global using Catalog.Contracts;
+global using FluentAssertions;
+global using MediatR;
+global using MockQueryable.NSubstitute;
+global using NSubstitute;
+global using Promotions.Contracts;
+global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading;
 global using System.Threading.Tasks;
-global using Cart.Application.Common.Dtos;
-global using Cart.Application.Features.Queries;
-global using Cart.Application.Common.Interfaces;
-global using Catalog.Contracts;
-global using Promotions.Contracts;
-global using MediatR;
-global using FluentAssertions;
 global using Xunit;
-global using NSubstitute;
-global using MockQueryable.NSubstitute;
-global using Cart.Application.Features.GetCart;
-
-global using Cart.Application.Features.AddItem;
-global using Cart.Application.Features.UpdateItemQuantity;
-global using Cart.Application.Features.RemoveItem;
-global using Cart.Application.Features.ToggleSaveForLater;
-global using Cart.Application.Features.ApplyCoupon;
-global using Cart.Application.Features.MergeCart;
-global using Cart.Application.Features.GetCartSummary;
-global using Cart.Application.Features.AddWishlistItem;
-
-global using Cart.Application.Features.CreateWishlist;
-
-global using Cart.Application.Features.GetWishlistItems;
-
-global using Cart.Application.Features.GetWishlists;
-
-global using Cart.Application.Features.NotifyWishlistItem;
-
-global using Cart.Application.Features.RemoveWishlistItem;
-
-global using Cart.Application.Features.ShareWishlist;
-
-
-global using Cart.Domain.WishlistAggregate;
-
-global using Cart.Domain.WishlistAggregate;
-
-

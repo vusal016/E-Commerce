@@ -19,7 +19,3 @@ namespace Ordering.Infrastructure.Persistence.Configurations
         }
     }
 }
-
-
-
-

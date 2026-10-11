@@ -2,17 +2,15 @@ namespace Identity.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddIdentityModule(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddIdentityModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityModuleDbContext>((sp, options)=>
+            services.AddDbContext<IdentityModuleDbContext>((sp, options) =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
                 var interceptor = sp.GetServices<ISaveChangesInterceptor>();
                 options.AddInterceptors(interceptor);
             });
-
             var jwtSection = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -23,7 +21,7 @@ namespace Identity.Infrastructure
                 o.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection.Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection.Secret)),
                     ValidateIssuer = true,
                     ValidIssuer = jwtSection.Issuer,
                     ValidateAudience = true,
@@ -49,7 +47,7 @@ namespace Identity.Infrastructure
             services.AddScoped<DatabaseInitializer>();
             services.AddScoped<IIdentityDbContext>(sp => sp.GetRequiredService<IdentityModuleDbContext>());
             services.AddScoped<ITokenProvider, TokenProvider>();
-            services.AddMediatR(cfg=>cfg.RegisterServicesFromAssembly(typeof(UserRegisterCommandHandler).Assembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UserRegisterCommandHandler).Assembly));
             services.AddAutoMapper(cfg => cfg.AddProfile<IdentityMapper>());
             return services;
         }

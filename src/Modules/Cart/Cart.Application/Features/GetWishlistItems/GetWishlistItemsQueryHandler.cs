@@ -6,23 +6,17 @@ namespace Cart.Application.Features.GetWishlistItems
         {
             if (request.UserId is null || request.UserId == Guid.Empty)
                 throw new UnauthorizedAccessException("Only authenticated users can view wishlists.");
-
             var wishlist = await dbContext.Wishlists
                 .AsNoTracking()
                 .Include(w => w.Items)
                 .FirstOrDefaultAsync(w => w.Id == request.WishlistId && (w.UserId == request.UserId), cancellationToken);
-
             if (wishlist == null)
                 throw new KeyNotFoundException("Wishlist not found.");
-
             if (wishlist.Items.Count == 0)
                 return [];
-
             var variantIds = wishlist.Items.Select(i => i.ProductVariantId).ToList();
             var products = await catalogApi.GetBasketProductsAsync(variantIds, cancellationToken);
-
             var result = new List<WishlistItemDetailDto>();
-
             foreach (var item in wishlist.Items)
             {
                 var product = products.FirstOrDefault(p => p.VariantId == item.ProductVariantId);
@@ -33,10 +27,8 @@ namespace Cart.Application.Features.GetWishlistItems
                         statuses.Add("outOfStock");
                     else
                         statuses.Add("inStock");
-
                     if (product.Price < item.PriceAtAdd)
                         statuses.Add("priceDropped");
-
                     result.Add(new WishlistItemDetailDto(
                         item.Id,
                         item.ProductVariantId,
@@ -50,7 +42,6 @@ namespace Cart.Application.Features.GetWishlistItems
                     ));
                 }
             }
-
             return result;
         }
     }

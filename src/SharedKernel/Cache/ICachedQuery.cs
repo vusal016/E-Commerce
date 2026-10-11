@@ -5,7 +5,7 @@ namespace SharedKernel.Cache
         public string Key { get; }
         TimeSpan? Expiration { get; }
     }
-    public interface ICachedQuery<TResponse> :IRequest<TResponse>, ICachedQuery
+    public interface ICachedQuery<TResponse> : IRequest<TResponse>, ICachedQuery
     {
     }
 }
