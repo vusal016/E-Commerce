@@ -1,6 +1,6 @@
 namespace Cart.Application.PublicApi
 {
-    public sealed class CartPublicApi(IMediator mediator) : ICartPublicApi
+    internal sealed class CartPublicApi(IMediator mediator) : ICartPublicApi
     {
         public async Task<CartCheckoutInfoDto?> GetCartForCheckoutAsync(Guid? userId, string? sessionId, CancellationToken cancellationToken = default)
         {
@@ -16,8 +16,15 @@ namespace Cart.Application.PublicApi
         }
         public async Task<bool> AddItemAsync(Guid? userId, string? sessionId, Guid productVariantId, int quantity, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.Send(new AddItemCommand(userId, sessionId, productVariantId, quantity), cancellationToken);
-            return result != null;
+            try
+            {
+                CartDto result = await mediator.Send(new AddItemCommand(userId, sessionId, productVariantId, quantity), cancellationToken);
+                return result != null;
+            }
+            catch (Exception ex) when (ex is ArgumentException or KeyNotFoundException)
+            {
+                return false;
+            }
         }
     }
 }
