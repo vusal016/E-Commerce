@@ -1,11 +1,13 @@
 namespace Catalog.Application.Features.HomeCategoriesWithFilters
 {
-    public sealed class GetProductsWithFiltersQueryHandler(
+    internal sealed class GetProductsWithFiltersQueryHandler(
         ICatalogDbContext dbContext,
         IPromotionsPublicApi promotionsApi) : IRequestHandler<GetProductsWithFiltersQuery, (List<GetProductsWithFiltersDto> Products, PaginationInfo Pagination)>
     {
         public async Task<(List<GetProductsWithFiltersDto> Products, PaginationInfo Pagination)> Handle(GetProductsWithFiltersQuery request, CancellationToken cancellationToken)
         {
+            int limit = Math.Clamp(request.Limit, 1, 50);
+            int page = Math.Max(request.Page, 1);
             var productsQuery = dbContext.Products
                 .AsNoTracking()
                 .Include(p => p.ProductImages)
@@ -29,13 +31,11 @@ namespace Catalog.Application.Features.HomeCategoriesWithFilters
                 var color = request.Color.ToLower();
                 query = query.Where(x => x.Product.ProductVariants.Any(v => v.Color.ToLower() == color));
             }
-            if (request.MinPrice.HasValue)
+            if (request.MinPrice.HasValue || request.MaxPrice.HasValue)
             {
-                query = query.Where(x => x.Product.ProductVariants.Any(v => v.Price >= request.MinPrice.Value));
-            }
-            if (request.MaxPrice.HasValue)
-            {
-                query = query.Where(x => x.Product.ProductVariants.Any(v => v.Price <= request.MaxPrice.Value));
+                query = query.Where(x => x.Product.ProductVariants.Any(v =>
+                    (!request.MinPrice.HasValue || v.Price >= request.MinPrice.Value) &&
+                    (!request.MaxPrice.HasValue || v.Price <= request.MaxPrice.Value)));
             }
             var sortMode = request.Sort?.ToLower() ?? "relevance";
             query = sortMode switch
@@ -47,8 +47,8 @@ namespace Catalog.Application.Features.HomeCategoriesWithFilters
             };
             var totalRecords = await query.CountAsync(cancellationToken);
             var items = await query
-                .Skip((request.Page - 1) * request.Limit)
-                .Take(request.Limit)
+                .Skip((page - 1) * limit)
+                .Take(limit)
                 .ToListAsync(cancellationToken);
             var variantIds = items.SelectMany(x => x.Product.ProductVariants).Select(v => v.Id).ToList();
             var discounts = new Dictionary<Guid, ActiveDiscountDto>();
@@ -76,8 +76,8 @@ namespace Catalog.Application.Features.HomeCategoriesWithFilters
                         v.StockQuantity > 0);
                 }).ToList()
             )).ToList();
-            var totalPages = (int)Math.Ceiling(totalRecords / (double)request.Limit);
-            var pagination = new PaginationInfo(request.Page, totalPages, request.Limit, totalRecords);
+            int totalPages = (int)Math.Ceiling(totalRecords / (double)limit);
+            PaginationInfo pagination = new PaginationInfo(page, totalPages, limit, totalRecords);
             return (dtos, pagination);
         }
     }

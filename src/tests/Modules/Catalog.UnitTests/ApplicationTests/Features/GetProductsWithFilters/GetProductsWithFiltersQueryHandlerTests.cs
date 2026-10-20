@@ -55,5 +55,28 @@ namespace Catalog.UnitTests.ApplicationTests.Features.GetProductsWithFilters
             result.Products.Should().HaveCount(1);
             result.Products.First().Name.Should().Be("P2");
         }
+        [Fact]
+        public async Task Handle_ShouldClampPageAndLimit_WhenZeroOrNegativeProvided()
+        {
+            Catalog.Domain.Catalog.Category category = new Catalog.Domain.Catalog.Category("Electronics", "electronics", "icon");
+            typeof(Catalog.Domain.Catalog.Category).GetProperty("Id")?.SetValue(category, Guid.NewGuid());
+            Product product = new Product("Smartphone", "Desc", 500, true, Guid.NewGuid(), category.Id);
+            typeof(Product).GetProperty("Id")?.SetValue(product, Guid.NewGuid());
+            List<Product> productsList = new List<Product> { product };
+            DbSet<Product> mockProductsDbSet = productsList.BuildMockDbSet();
+            _catalogDbContext.Products.Returns(mockProductsDbSet);
+            List<Catalog.Domain.Catalog.Category> categoriesList = new List<Catalog.Domain.Catalog.Category> { category };
+            DbSet<Catalog.Domain.Catalog.Category> mockCategoriesDbSet = categoriesList.BuildMockDbSet();
+            _catalogDbContext.Categories.Returns(mockCategoriesDbSet);
+            _promotionsApi.GetActiveDiscountsAsync(Arg.Any<List<Guid>>(), Arg.Any<CancellationToken>())
+                .Returns(new List<Promotions.Contracts.ActiveDiscountDto>());
+            Catalog.Application.Features.HomeCategoriesWithFilters.GetProductsWithFiltersQuery query = new Catalog.Application.Features.HomeCategoriesWithFilters.GetProductsWithFiltersQuery(null, null, null, null, null, null, 0, 0);
+            Func<Task<(List<Catalog.Application.Common.Dtos.GetProductsWithFiltersDto> Products, SharedKernel.Pagination.PaginationInfo Pagination)>> act = async () => await _handler.Handle(query, CancellationToken.None);
+            (List<Catalog.Application.Common.Dtos.GetProductsWithFiltersDto> Products, SharedKernel.Pagination.PaginationInfo Pagination) result = (await act.Should().NotThrowAsync()).Subject;
+            result.Pagination.CurrentPage.Should().Be(1);
+            result.Pagination.Limit.Should().Be(1);
+            result.Pagination.TotalPages.Should().Be(1);
+            result.Products.Should().HaveCount(1);
+        }
     }
 }
