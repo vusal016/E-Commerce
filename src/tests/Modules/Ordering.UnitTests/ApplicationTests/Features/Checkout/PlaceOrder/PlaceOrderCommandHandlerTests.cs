@@ -38,6 +38,7 @@ namespace Ordering.UnitTests.ApplicationTests.Features.Checkout.PlaceOrder
                 new BasketProductDto(cartItems[0].ProductVariantId, "Product A", "Red", "M", null, 50.0m, 50.0m, 10)
             };
             _catalogApi.GetBasketProductsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>()).Returns(basketProducts);
+            _catalogApi.TryReserveStockAsync(Arg.Any<Guid>(), Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(true);
             var result = await _handler.Handle(command, CancellationToken.None);
             result.Should().NotBeEmpty();
             _dbContext.Orders.Received(1).Add(Arg.Is<Order>(o => o.Total == 95.99m && o.Items.Count == 1));
@@ -64,7 +65,102 @@ namespace Ordering.UnitTests.ApplicationTests.Features.Checkout.PlaceOrder
             var sessions = new List<CheckoutSession> { session }.BuildMockDbSet();
             _dbContext.CheckoutSessions.Returns(sessions);
             Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
-            await act.Should().ThrowAsync<InvalidOperationException>().WithMessage("Checkout session is already completed.");
+            await act.Should().ThrowAsync<KeyNotFoundException>();
+        }
+        [Fact]
+        public async Task Handle_ShouldPreventIdor_WhenAuthenticatedUserUsesGuestSessionId()
+        {
+            var guestSession = new CheckoutSession(null, "shared-session-id");
+            var sessions = new List<CheckoutSession> { guestSession }.BuildMockDbSet();
+            _dbContext.CheckoutSessions.Returns(sessions);
+            var command = new PlaceOrderCommand(Guid.NewGuid(), "shared-session-id");
+            Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
+            await act.Should().ThrowAsync<KeyNotFoundException>();
+        }
+        [Fact]
+        public async Task Handle_ShouldPreventIdor_WhenGuestUsesAuthenticatedUsersSessionId()
+        {
+            var ownerId = Guid.NewGuid();
+            var userSession = new CheckoutSession(ownerId, "user-session-id");
+            var sessions = new List<CheckoutSession> { userSession }.BuildMockDbSet();
+            _dbContext.CheckoutSessions.Returns(sessions);
+            var command = new PlaceOrderCommand(null, "user-session-id");
+            Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
+            await act.Should().ThrowAsync<KeyNotFoundException>();
+        }
+        [Fact]
+        public async Task Handle_ShouldRollbackReservedStock_WhenSecondItemReservationFails()
+        {
+            var userId = Guid.NewGuid();
+            var variantId1 = Guid.NewGuid();
+            var variantId2 = Guid.NewGuid();
+            var command = new PlaceOrderCommand(userId, "session");
+            var session = new CheckoutSession(userId, "session");
+            var sessions = new List<CheckoutSession> { session }.BuildMockDbSet();
+            _dbContext.CheckoutSessions.Returns(sessions);
+            var cartItems = new List<CartCheckoutItemDto>
+            {
+                new CartCheckoutItemDto(variantId1, "Product 1", null, 2, 25.0m),
+                new CartCheckoutItemDto(variantId2, "Product 2", null, 3, 40.0m)
+            };
+            session.SetShippingInfo("t@t.com", "John", "Doe", "Address", "City", "Zip", "Standard", 5.99m);
+            session.SetPaymentInfo("CreditCard", "1234");
+            var cartInfo = new CartCheckoutInfoDto(cartItems, 170.0m, 0m);
+            _cartApi.GetCartForCheckoutAsync(userId, "session", Arg.Any<CancellationToken>()).Returns(cartInfo);
+            var basketProducts = new List<BasketProductDto>
+            {
+                new BasketProductDto(variantId1, "Product 1", "Black", "M", null, 25.0m, 25.0m, 10),
+                new BasketProductDto(variantId2, "Product 2", "Blue", "L", null, 40.0m, 40.0m, 10)
+            };
+            _catalogApi.GetBasketProductsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>()).Returns(basketProducts);
+            _catalogApi.TryReserveStockAsync(variantId1, 2, Arg.Any<CancellationToken>()).Returns(true);
+            _catalogApi.TryReserveStockAsync(variantId2, 3, Arg.Any<CancellationToken>()).Returns(false);
+            Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
+            await act.Should().ThrowAsync<InvalidOperationException>();
+            await _catalogApi.Received(1).ReleaseStockAsync(variantId1, 2, Arg.Any<CancellationToken>());
+            await _catalogApi.DidNotReceive().ReleaseStockAsync(variantId2, Arg.Any<int>(), Arg.Any<CancellationToken>());
+        }
+        [Fact]
+        public async Task Handle_ShouldRollbackReservedStock_WhenSaveChangesThrowsException()
+        {
+            var userId = Guid.NewGuid();
+            var variantId = Guid.NewGuid();
+            var command = new PlaceOrderCommand(userId, "session");
+            var session = new CheckoutSession(userId, "session");
+            var sessions = new List<CheckoutSession> { session }.BuildMockDbSet();
+            _dbContext.CheckoutSessions.Returns(sessions);
+            var orders = new List<Order>().BuildMockDbSet();
+            _dbContext.Orders.Returns(orders);
+            var cartItems = new List<CartCheckoutItemDto>
+            {
+                new CartCheckoutItemDto(variantId, "Product 1", null, 2, 50.0m)
+            };
+            session.SetShippingInfo("t@t.com", "John", "Doe", "Address", "City", "Zip", "Standard", 5.99m);
+            session.SetPaymentInfo("CreditCard", "1234");
+            var cartInfo = new CartCheckoutInfoDto(cartItems, 100.0m, 0m);
+            _cartApi.GetCartForCheckoutAsync(userId, "session", Arg.Any<CancellationToken>()).Returns(cartInfo);
+            var basketProducts = new List<BasketProductDto>
+            {
+                new BasketProductDto(variantId, "Product 1", "Red", "M", null, 50.0m, 50.0m, 10)
+            };
+            _catalogApi.GetBasketProductsAsync(Arg.Any<IEnumerable<Guid>>(), Arg.Any<CancellationToken>()).Returns(basketProducts);
+            _catalogApi.TryReserveStockAsync(variantId, 2, Arg.Any<CancellationToken>()).Returns(true);
+            _dbContext.SaveChangesAsync(Arg.Any<CancellationToken>()).Returns<Task<int>>(_ => throw new DbUpdateException("Database failure"));
+            Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
+            await act.Should().ThrowAsync<DbUpdateException>();
+            await _catalogApi.Received(1).ReleaseStockAsync(variantId, 2, Arg.Any<CancellationToken>());
+        }
+        [Fact]
+        public async Task Handle_ShouldThrowInvalidOperationException_WhenShippingOrPaymentInfoIsIncomplete()
+        {
+            Guid userId = Guid.NewGuid();
+            PlaceOrderCommand command = new PlaceOrderCommand(userId, "session");
+            CheckoutSession session = new CheckoutSession(userId, "session");
+            DbSet<CheckoutSession> sessions = new List<CheckoutSession> { session }.BuildMockDbSet();
+            _dbContext.CheckoutSessions.Returns(sessions);
+            Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
+            await act.Should().ThrowAsync<InvalidOperationException>()
+                .WithMessage("Shipping and payment information must be completed.");
         }
     }
 }
