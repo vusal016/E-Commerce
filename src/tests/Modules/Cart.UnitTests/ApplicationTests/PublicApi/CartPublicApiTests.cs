@@ -1,5 +1,3 @@
-using Cart.Application.PublicApi;
-
 namespace Cart.UnitTests.ApplicationTests.PublicApi
 {
     public sealed class CartPublicApiTests

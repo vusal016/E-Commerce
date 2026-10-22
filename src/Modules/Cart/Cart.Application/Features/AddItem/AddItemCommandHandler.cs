@@ -6,6 +6,8 @@ namespace Cart.Application.Features.AddItem
         {
             if (request.Quantity <= 0)
                 throw new ArgumentException("Quantity must be greater than zero.");
+            if (request.UserId == null && string.IsNullOrWhiteSpace(request.SessionId))
+                throw new ArgumentException("Session ID is required for guest users.");
             var catalogProducts = await catalogPublicApi.GetBasketProductsAsync(new[] { request.ProductVariantId }, cancellationToken);
             var product = catalogProducts.FirstOrDefault();
             if (product == null)
@@ -14,14 +16,12 @@ namespace Cart.Application.Features.AddItem
                 .Include(c => c.Items)
                 .ForOwner(request.UserId, request.SessionId)
                 .FirstOrDefaultAsync(cancellationToken);
-            CartItem? existingItem = cart?.Items.FirstOrDefault(i => i.ProductVariantId == request.ProductVariantId);
+            var existingItem = cart?.Items.FirstOrDefault(i => i.ProductVariantId == request.ProductVariantId);
             int newTotalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
             if (newTotalQuantity > product.StockQuantity)
                 throw new ArgumentException("Not enough stock available.");
             if (cart == null)
             {
-                if (request.UserId == null && string.IsNullOrWhiteSpace(request.SessionId))
-                    throw new ArgumentException("Session ID is required for guest users.");
                 cart = new CartEntity(request.UserId, request.SessionId!);
                 dbContext.Carts.Add(cart);
             }
