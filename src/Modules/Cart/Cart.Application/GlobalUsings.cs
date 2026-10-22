@@ -1,4 +1,5 @@
 global using Cart.Application.Common.Dtos;
+global using Cart.Application.Common.Extensions;
 global using Cart.Application.Common.Interfaces;
 global using Cart.Application.Features.AddItem;
 global using Cart.Application.Features.ClearCart;
@@ -12,4 +13,5 @@ global using Microsoft.EntityFrameworkCore;
 global using Ordering.Contracts.Events;
 global using Promotions.Contracts;
 global using SharedKernel.Events;
+global using SharedKernel.Pricing;
 global using CartEntity = Cart.Domain.CartAggregate.Cart;

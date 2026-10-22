@@ -1,6 +1,6 @@
 namespace Promotions.Application.Features.FlashSales.Queries.GetActiveFlashSales
 {
-    public sealed class GetActiveFlashSalesQueryHandler(IPromotionsDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<GetActiveFlashSalesQuery, IReadOnlyList<FlashSaleDto>>
+    internal sealed class GetActiveFlashSalesQueryHandler(IPromotionsDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<GetActiveFlashSalesQuery, IReadOnlyList<FlashSaleDto>>
     {
         public async Task<IReadOnlyList<FlashSaleDto>> Handle(GetActiveFlashSalesQuery request, CancellationToken cancellationToken)
         {
@@ -24,7 +24,7 @@ namespace Promotions.Application.Features.FlashSales.Queries.GetActiveFlashSales
                     .Select(item =>
                     {
                         var product = products[item.ProductVariantId];
-                        var discountedPrice = Math.Round(Math.Max(0, product.Price - (product.Price * item.DiscountPercentage / 100m)), 2);
+                        decimal discountedPrice = PriceCalculator.CalculateDiscountedPrice(product.Price, item.DiscountPercentage);
                         var soldPercentage = item.StockLimit > 0 ? (double)item.SoldCount / item.StockLimit * 100 : 0;
                         return new FlashSaleItemDto(
                             item.Id,

@@ -10,4 +10,5 @@ global using Promotions.Domain.FlashSaleAggregate;
 global using Promotions.Domain.HeroBannerAggregate;
 global using Promotions.Domain.NotifyRequestAggregate;
 global using SharedKernel.Cache;
+global using SharedKernel.Pricing;
 global using SharedKernel.Result;

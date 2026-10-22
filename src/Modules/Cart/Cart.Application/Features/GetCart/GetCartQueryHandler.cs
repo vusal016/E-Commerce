@@ -1,14 +1,14 @@
 namespace Cart.Application.Features.GetCart
 {
-    public sealed class GetCartQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartQuery, CartDto>
+    internal sealed class GetCartQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartQuery, CartDto>
     {
         public async Task<CartDto> Handle(GetCartQuery request, CancellationToken cancellationToken)
         {
             var cart = await dbContext.Carts
                 .AsNoTracking()
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c =>
-                    (request.UserId != null && c.UserId == request.UserId) || c.SessionId == request.SessionId, cancellationToken);
+                .ForOwner(request.UserId, request.SessionId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (cart is null) throw new KeyNotFoundException("Basket not found.");
             var activeItems = cart.Items.Where(i => !i.IsSavedForLater).ToList();
             var variantIds = activeItems.Select(i => i.ProductVariantId).ToList();
@@ -23,7 +23,7 @@ namespace Cart.Application.Features.GetCart
                     : null;
                 var discount = discounts.ContainsKey(item.ProductVariantId) ? discounts[item.ProductVariantId].DiscountPercentage : 0m;
                 var basePrice = basket?.Price ?? 0;
-                var finalPrice = Math.Round(Math.Max(0, basePrice - (basePrice * discount / 100m)), 2);
+                decimal finalPrice = PriceCalculator.CalculateDiscountedPrice(basePrice, discount);
                 return new CartItemDto(
                     item.Id,
                     item.ProductVariantId,

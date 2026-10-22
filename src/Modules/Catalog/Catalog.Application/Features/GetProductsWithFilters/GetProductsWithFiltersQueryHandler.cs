@@ -66,7 +66,7 @@ namespace Catalog.Application.Features.HomeCategoriesWithFilters
                 x.Product.ProductVariants.Select(v =>
                 {
                     var discount = discounts.ContainsKey(v.Id) ? discounts[v.Id].DiscountPercentage : 0m;
-                    var currentPrice = Math.Round(Math.Max(0, v.Price - (v.Price * discount / 100m)), 2);
+                    decimal currentPrice = PriceCalculator.CalculateDiscountedPrice(v.Price, discount);
                     return new VariantSimpleDto(
                         v.Id,
                         v.Color,

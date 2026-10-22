@@ -1,25 +1,31 @@
 namespace Cart.Application.Features.ApplyCoupon
 {
-    public sealed class ApplyCouponCommandHandler(ICartDbContext dbContext, IPromotionsPublicApi promotionsApi, ICatalogPublicApi catalogApi, IMediator mediator) : IRequestHandler<ApplyCouponCommand, CartDto>
+    internal sealed class ApplyCouponCommandHandler(ICartDbContext dbContext, IPromotionsPublicApi promotionsApi, ICatalogPublicApi catalogApi, IMediator mediator) : IRequestHandler<ApplyCouponCommand, CartDto>
     {
         public async Task<CartDto> Handle(ApplyCouponCommand request, CancellationToken cancellationToken)
         {
             var cart = await dbContext.Carts
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c =>
-                    (request.UserId != null && c.UserId == request.UserId) ||
-                    (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
+                .ForOwner(request.UserId, request.SessionId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (cart == null) throw new KeyNotFoundException("Cart not found.");
             var coupon = await promotionsApi.GetCouponAsync(request.Code, cancellationToken);
             if (coupon == null || !coupon.IsActive || coupon.ExpiresAt < DateTime.UtcNow)
                 throw new ArgumentException("Invalid or expired coupon.");
             var variantIds = cart.Items.Where(i => !i.IsSavedForLater).Select(i => i.ProductVariantId).ToList();
             var products = await catalogApi.GetBasketProductsAsync(variantIds, cancellationToken);
+            var productDiscounts = (await promotionsApi.GetActiveDiscountsAsync(variantIds, cancellationToken))
+                .ToDictionary(d => d.ProductVariantId);
             decimal subtotal = 0;
             foreach (var item in cart.Items.Where(i => !i.IsSavedForLater))
             {
                 var p = products.FirstOrDefault(x => x.VariantId == item.ProductVariantId);
-                if (p != null) subtotal += p.Price * item.Quantity;
+                if (p != null)
+                {
+                    var discount = productDiscounts.ContainsKey(item.ProductVariantId) ? productDiscounts[item.ProductVariantId].DiscountPercentage : 0m;
+                    decimal finalPrice = PriceCalculator.CalculateDiscountedPrice(p.Price, discount);
+                    subtotal += finalPrice * item.Quantity;
+                }
             }
             if (subtotal < coupon.MinOrderAmount)
                 throw new ArgumentException($"Minimum order amount of {coupon.MinOrderAmount} is required.");

@@ -1,15 +1,14 @@
 namespace Cart.Application.Features.GetCartSummary
 {
-    public sealed class GetCartSummaryQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartSummaryQuery, CartSummaryDto>
+    internal sealed class GetCartSummaryQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi, IPromotionsPublicApi promotionsApi) : IRequestHandler<GetCartSummaryQuery, CartSummaryDto>
     {
         public async Task<CartSummaryDto> Handle(GetCartSummaryQuery request, CancellationToken cancellationToken)
         {
             var cart = await dbContext.Carts
                 .AsNoTracking()
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c =>
-                    (request.UserId != null && c.UserId == request.UserId) ||
-                    (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
+                .ForOwner(request.UserId, request.SessionId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (cart == null) return new CartSummaryDto(0, 0, 0, 0);
             var variantIds = cart.Items.Where(i => !i.IsSavedForLater).Select(i => i.ProductVariantId).ToList();
             if (variantIds.Count == 0) return new CartSummaryDto(0, 0, 0, 0);
@@ -23,7 +22,7 @@ namespace Cart.Application.Features.GetCartSummary
                 if (p != null)
                 {
                     var discount = productDiscounts.ContainsKey(item.ProductVariantId) ? productDiscounts[item.ProductVariantId].DiscountPercentage : 0m;
-                    var finalPrice = Math.Round(Math.Max(0, p.Price - (p.Price * discount / 100m)), 2);
+                    decimal finalPrice = PriceCalculator.CalculateDiscountedPrice(p.Price, discount);
                     subtotal += finalPrice * item.Quantity;
                 }
             }

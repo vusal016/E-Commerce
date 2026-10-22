@@ -15,3 +15,6 @@ global using Promotions.Contracts;
 global using SharedKernel.Cache;
 global using SharedKernel.Events;
 global using SharedKernel.Pagination;
+global using SharedKernel.Pricing;
+global using SharedKernel.Pricing;
+global using SharedKernel.Pagination;

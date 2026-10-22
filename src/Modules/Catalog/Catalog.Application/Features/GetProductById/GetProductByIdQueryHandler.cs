@@ -1,6 +1,6 @@
 namespace Catalog.Application.Features.GetProductById
 {
-    public sealed class GetProductByIdQueryHandler(
+    internal sealed class GetProductByIdQueryHandler(
         ICatalogDbContext catalogDbContext,
         IEngagementPublicApi engagementApi,
         IPromotionsPublicApi promotionsApi) : IRequestHandler<GetProductByIdQuery, GetProductByIdDto>
@@ -45,7 +45,7 @@ namespace Catalog.Application.Features.GetProductById
                 product.ProductVariants.Select(v =>
                 {
                     var discount = discounts.ContainsKey(v.Id) ? discounts[v.Id].DiscountPercentage : 0m;
-                    var currentPrice = Math.Round(Math.Max(0, v.Price - (v.Price * discount / 100m)), 2);
+                    decimal currentPrice = PriceCalculator.CalculateDiscountedPrice(v.Price, discount);
                     return new ProductVariantDto(v.Id, v.Color, v.Size, v.Sku, currentPrice, v.OriginalPrice > 0 ? v.OriginalPrice : v.Price, v.StockQuantity);
                 }).ToList(),
                 relatedProducts
