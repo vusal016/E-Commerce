@@ -1,6 +1,7 @@
 global using AutoMapper;
 global using Catalog.Contracts;
 global using FluentAssertions;
+global using Microsoft.EntityFrameworkCore;
 global using MockQueryable.NSubstitute;
 global using NSubstitute;
 global using Promotions.Application.Common.Dtos;
@@ -8,6 +9,8 @@ global using Promotions.Application.Common.Interfaces;
 global using Promotions.Application.Common.Mapper;
 global using Promotions.Application.Features.FlashSales.Queries.GetActiveFlashSales;
 global using Promotions.Application.Features.FlashSales.Queries.GetUpcomingFlashSales;
+global using Promotions.Application.PublicApi;
+global using Promotions.Contracts;
 global using Promotions.Domain.FlashSaleAggregate;
 global using SharedKernel.Pricing;
 global using System.Reflection;

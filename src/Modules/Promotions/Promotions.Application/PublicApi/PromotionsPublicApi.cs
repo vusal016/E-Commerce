@@ -6,13 +6,17 @@ namespace Promotions.Application.PublicApi
         {
             var ids = variantIds.Distinct().ToList();
             var now = DateTime.UtcNow;
-            return await dbContext.FlashSales
+            List<ActiveDiscountDto> items = await dbContext.FlashSales
                 .AsNoTracking()
                 .Where(fs => fs.IsActive && fs.StartsAt <= now && fs.EndsAt > now)
                 .SelectMany(fs => fs.Items)
                 .Where(i => ids.Contains(i.ProductVariantId))
                 .Select(i => new ActiveDiscountDto(i.ProductVariantId, i.DiscountPercentage))
                 .ToListAsync(cancellationToken);
+            return items
+                .GroupBy(d => d.ProductVariantId)
+                .Select(g => new ActiveDiscountDto(g.Key, g.Max(d => d.DiscountPercentage)))
+                .ToList();
         }
         public async Task<CouponDto?> GetCouponAsync(string code, CancellationToken cancellationToken = default)
         {
