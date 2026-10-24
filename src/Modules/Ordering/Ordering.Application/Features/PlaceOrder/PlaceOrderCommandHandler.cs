@@ -1,6 +1,6 @@
 namespace Ordering.Application.Features.PlaceOrder
 {
-    internal sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, ICartPublicApi cartApi, ICatalogPublicApi catalogApi, IEventBus eventBus) : IRequestHandler<PlaceOrderCommand, Guid>
+    internal sealed class PlaceOrderCommandHandler(IOrderingDbContext orderingDb, ICartPublicApi cartApi, ICatalogPublicApi catalogApi, IEventBus eventBus, ILogger<PlaceOrderCommandHandler> logger) : IRequestHandler<PlaceOrderCommand, Guid>
     {
         public async Task<Guid> Handle(PlaceOrderCommand request, CancellationToken cancellationToken)
         {
@@ -38,8 +38,7 @@ namespace Ordering.Application.Features.PlaceOrder
                 decimal totalPrice = cartInfo.Subtotal - cartInfo.CartDiscount + session.ShippingPrice;
                 totalPrice = totalPrice < 0 ? 0 : totalPrice;
                 var orderNumber = $"ORD-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid().ToString("N")[..8].ToUpperInvariant()}";
-                // TODO: real address/payment IDs
-                order = new Order(request.UserId, orderNumber, "Pending", cartInfo.Subtotal, session.ShippingPrice, 0, cartInfo.CartDiscount, totalPrice, Guid.NewGuid(), Guid.NewGuid(), session.ShippingMethod ?? "Standard", null, null, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), DateTime.UtcNow.AddDays(5));
+                order = new Order(request.UserId, orderNumber, "Pending", cartInfo.Subtotal, session.ShippingPrice, 0, cartInfo.CartDiscount, totalPrice, Guid.NewGuid(), Guid.NewGuid(), session.ShippingMethod, null, null, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), DateTime.UtcNow.AddDays(5));
                 foreach (var ci in cartInfo.Items)
                 {
                     order.AddItem(ci.ProductVariantId, ci.ProductName, ci.Price, ci.Quantity);
@@ -50,9 +49,16 @@ namespace Ordering.Application.Features.PlaceOrder
             }
             catch
             {
-                foreach (var reservedItem in reservedItems)
+                foreach ((Guid VariantId, int Quantity) reservedItem in reservedItems)
                 {
-                    await catalogApi.ReleaseStockAsync(reservedItem.VariantId, reservedItem.Quantity, cancellationToken);
+                    try
+                    {
+                        await catalogApi.ReleaseStockAsync(reservedItem.VariantId, reservedItem.Quantity, CancellationToken.None);
+                    }
+                    catch (Exception releaseEx)
+                    {
+                        logger.LogError(releaseEx, "Stock release failed for {VariantId}", reservedItem.VariantId);
+                    }
                 }
                 throw;
             }
