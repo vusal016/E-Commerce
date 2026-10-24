@@ -36,6 +36,7 @@ global using Ordering.Domain.ReturnRequestAggregate;
 global using Ordering.Infrastructure.Persistence.OrderingData;
 global using Ordering.UnitTests.ApplicationTests.Features.GetOrders;
 global using SharedKernel.Events;
+global using SharedKernel.Pagination;
 global using System.Net;
 global using Testcontainers.PostgreSql;
 global using Xunit;

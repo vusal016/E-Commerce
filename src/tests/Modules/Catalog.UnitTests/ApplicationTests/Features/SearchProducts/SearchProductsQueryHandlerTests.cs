@@ -50,5 +50,27 @@ namespace Catalog.UnitTests.ApplicationTests.Features.SearchProducts
             result.Data.Products.Should().BeEmpty();
             result.Data.SuggestedQuery.Should().Be("Samsung");
         }
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-3)]
+        public async Task Handle_WhenPageIsZeroOrNegative_ShouldNotThrowAndShouldClampCurrentPageToOne(int invalidPage)
+        {
+            Brand brand = new Brand("Nike", "nike", "logo", "url");
+            typeof(Brand).GetProperty("Id")?.SetValue(brand, Guid.NewGuid());
+            typeof(Brand).GetProperty("IsActive")?.SetValue(brand, true);
+            Product product = new Product("Air Max", "Shoes", 120, true, brand.Id, Guid.NewGuid());
+            DbSet<Product> mockProductsDbSet = new List<Product> { product }.BuildMockDbSet();
+            _catalogDbContext.Products.Returns(mockProductsDbSet);
+            DbSet<Brand> mockBrandsDbSet = new List<Brand> { brand }.BuildMockDbSet();
+            _catalogDbContext.Brands.Returns(mockBrandsDbSet);
+            SearchProductsQuery query = new SearchProductsQuery("air", invalidPage, 10);
+            Func<Task<(SearchResponseDto Data, PaginationInfo Pagination)>> act = async () => await _handler.Handle(query, CancellationToken.None);
+            await act.Should().NotThrowAsync();
+            (SearchResponseDto Data, PaginationInfo Pagination) result = await _handler.Handle(query, CancellationToken.None);
+            result.Pagination.CurrentPage.Should().Be(1);
+            SearchProductsQuery emptyQuery = new SearchProductsQuery("", invalidPage, 10);
+            (SearchResponseDto Data, PaginationInfo Pagination) emptyResult = await _handler.Handle(emptyQuery, CancellationToken.None);
+            emptyResult.Pagination.CurrentPage.Should().Be(1);
+        }
     }
 }

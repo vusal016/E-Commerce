@@ -1,17 +1,3 @@
-using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using Ordering.Application.Common.Interfaces;
-using Ordering.Application.Features.GetOrders;
-using Ordering.Domain.CheckoutAggregate;
-using Ordering.Domain.OrderAggregate;
-using Ordering.Domain.ReturnRequestAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 namespace Ordering.UnitTests.ApplicationTests.Features.GetOrders
 {
     internal class TestOrderingDbContext : DbContext, IOrderingDbContext
@@ -65,6 +51,30 @@ namespace Ordering.UnitTests.ApplicationTests.Features.GetOrders
             var result4 = await handler.Handle(query4, CancellationToken.None);
             result4.Data.Should().BeEmpty();
             result4.Pagination.TotalPages.Should().Be(1);
+        }
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-3)]
+        public async Task Handle_WhenPageIsZeroOrNegative_ShouldNotThrowAndShouldClampCurrentPageToOne(int invalidPage)
+        {
+            DbContextOptions<TestOrderingDbContext> options = new DbContextOptionsBuilder<TestOrderingDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            using TestOrderingDbContext dbContext = new TestOrderingDbContext(options);
+            Guid userId = Guid.NewGuid();
+            Order order = new Order(userId, "ORD-001", "Processing", 100, 10, 5, 0, 115, Guid.NewGuid(), Guid.NewGuid(), "Standard", null, null, DateTime.UtcNow, null, null);
+            order.AddItem(Guid.NewGuid(), "iPhone 14", 100, 1);
+            dbContext.Orders.Add(order);
+            await dbContext.SaveChangesAsync();
+            IOrderingDbContext mockDbContext = Substitute.For<IOrderingDbContext>();
+            mockDbContext.Orders.Returns(dbContext.Orders);
+            GetOrdersQueryHandler handler = new GetOrdersQueryHandler(mockDbContext);
+            GetOrdersQuery query = new GetOrdersQuery(userId, null, null, invalidPage);
+            Func<Task<(IEnumerable<OrderDto> Data, PaginationInfo Pagination)>> act = async () => await handler.Handle(query, CancellationToken.None);
+            await act.Should().NotThrowAsync();
+            (IEnumerable<OrderDto> Data, PaginationInfo Pagination) result = await handler.Handle(query, CancellationToken.None);
+            result.Pagination.CurrentPage.Should().Be(1);
+            result.Data.Should().HaveCount(1);
         }
     }
 }
