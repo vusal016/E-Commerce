@@ -1,6 +1,6 @@
 namespace Catalog.Application.Features.HomeCategories.Queries
 {
-    public sealed class GetHomeCategoriesQueryHandler(ICatalogDbContext dbContext, IMapper mapper) : IRequestHandler<GetHomeCategoriesQuery, List<HomeCategoryDto>>
+    internal sealed class GetHomeCategoriesQueryHandler(ICatalogDbContext dbContext, IMapper mapper) : IRequestHandler<GetHomeCategoriesQuery, List<HomeCategoryDto>>
     {
         public async Task<List<HomeCategoryDto>> Handle(GetHomeCategoriesQuery request, CancellationToken cancellationToken)
         {

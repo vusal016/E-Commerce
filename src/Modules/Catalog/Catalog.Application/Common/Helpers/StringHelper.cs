@@ -1,6 +1,6 @@
 namespace Catalog.Application.Common.Helpers
 {
-    public static class StringHelper
+    internal static class StringHelper
     {
         public static int ComputeLevenshteinDistance(string source, string target)
         {

@@ -27,13 +27,13 @@ namespace Cart.Application.Features.AddItem
             }
             if (existingItem != null)
             {
-                if(existingItem.IsSavedForLater)
+                if(existingItem.IsSavedForLater)        
                     existingItem.ToggleSaveForLater();
                 existingItem.UpdateQuantity(newTotalQuantity);
             }
             else
             {
-                cart.Items.Add(new Domain.CartAggregate.CartItem(cart.Id, request.ProductVariantId, request.Quantity, false));
+                cart.Items.Add(new CartItem(cart.Id, request.ProductVariantId, request.Quantity, false));
             }
             await dbContext.SaveChangesAsync(cancellationToken);
             return await mediator.Send(new GetCartQuery(request.UserId, request.SessionId), cancellationToken);

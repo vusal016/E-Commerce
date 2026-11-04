@@ -4,7 +4,7 @@ namespace Cart.Application.Features.ClearCart
     {
         public async Task Handle(ClearCartCommand request, CancellationToken cancellationToken)
         {
-            var cart = await dbContext.Carts.Include(c => c.Items).FirstOrDefaultAsync(c => (request.UserId != null && c.UserId == request.UserId) || (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
+            var cart = await dbContext.Carts.Include(c => c.Items).ForOwner(request.UserId, request.SessionId).FirstOrDefaultAsync(cancellationToken);
             if (cart != null)
             {
                 dbContext.Carts.Remove(cart);

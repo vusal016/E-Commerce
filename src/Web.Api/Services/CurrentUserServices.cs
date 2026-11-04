@@ -10,15 +10,17 @@ namespace Web.Api.Services
                 if (context?.User.Identity?.IsAuthenticated != true)
                     return null;
                 var idClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                return idClaim is not null ? Guid.Parse(idClaim) : null;
+                return Guid.TryParse(idClaim, out var userId) && userId != Guid.Empty ? userId : null;
             }
         }
+        public Guid RequiredUserId => UserId ?? throw new UnauthorizedAccessException("User is not authenticated.");
         public string? SessionId
         {
             get
             {
                 var context = accessor.HttpContext;
-                return context?.Request.Headers["x-session-id"].FirstOrDefault();
+                var raw = context?.Request.Headers["x-session-id"].FirstOrDefault()?.Trim();
+                return !string.IsNullOrWhiteSpace(raw) && raw.Length <= 128 ? raw : null;
             }
         }
     }

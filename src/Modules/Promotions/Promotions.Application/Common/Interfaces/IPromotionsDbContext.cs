@@ -1,6 +1,6 @@
 namespace Promotions.Application.Common.Interfaces
 {
-    public interface IPromotionsDbContext
+    internal interface IPromotionsDbContext
     {
         DbSet<HeroBanner> HeroBanners { get; set; }
         DbSet<FlashSale> FlashSales { get; set; }

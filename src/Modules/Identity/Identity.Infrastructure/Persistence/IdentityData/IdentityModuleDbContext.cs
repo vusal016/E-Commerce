@@ -1,6 +1,6 @@
 namespace Identity.Infrastructure.Persistence.IdentityData
 {
-    public sealed class IdentityModuleDbContext(DbContextOptions<IdentityModuleDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IIdentityDbContext
+    internal sealed class IdentityModuleDbContext(DbContextOptions<IdentityModuleDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IIdentityDbContext
     {
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
@@ -12,12 +12,13 @@ namespace Identity.Infrastructure.Persistence.IdentityData
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            foreach (var entityType in builder.Model.GetEntityTypes())
+            foreach (var entityType in builder.Model.GetEntityTypes()
+                            .Where(t => typeof(BaseEntity).IsAssignableFrom(t.ClrType)))
             {
                 var idProperty = entityType.FindProperty("Id");
                 if (idProperty != null && idProperty.ClrType == typeof(Guid))
                 {
-                    idProperty.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.Never;
+                    idProperty.ValueGenerated = ValueGenerated.Never;
                 }
             }
             builder.HasDefaultSchema("identity");

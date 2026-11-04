@@ -1,6 +1,6 @@
 namespace Ordering.Domain.OrderAggregate
 {
-    public sealed class Order : AuditEntity
+    internal sealed class Order : AuditEntity
     {
         private Order()
         {
@@ -41,7 +41,8 @@ namespace Ordering.Domain.OrderAggregate
         }
         public void ChangeStatus(string newStatus)
         {
-            Status = newStatus;
+            SetStatus(newStatus);
+            StatusHistory.Add(new OrderStatusHistory(Id, newStatus));
         }
         private void SetUserId(Guid? userId) => UserId = userId;
         private void SetOrderNumber(string orderNumber)

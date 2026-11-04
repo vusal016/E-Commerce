@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.CreateWishlist
 {
-    public sealed class CreateWishlistCommandHandler(ICartDbContext dbContext) : IRequestHandler<CreateWishlistCommand, Guid>
+    internal sealed class CreateWishlistCommandHandler(ICartDbContext dbContext) : IRequestHandler<CreateWishlistCommand, Guid>
     {
         public async Task<Guid> Handle(CreateWishlistCommand request, CancellationToken cancellationToken)
         {

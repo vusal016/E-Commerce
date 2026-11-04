@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/flash-sales")]
     [ApiController]
-    internal class FlashSalesController(IMediator mediator) : ControllerBase
+    public class FlashSalesController(IMediator mediator) : ControllerBase
     {
         [HttpGet("active")]
         public async Task<IActionResult> GetActiveFlashSales(CancellationToken cancellationToken = default)

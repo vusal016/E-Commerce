@@ -1,6 +1,6 @@
 namespace Catalog.Domain.Catalog
 {
-    public sealed class Category : BaseEntity
+    internal sealed class Category : BaseEntity
     {
         private Category()
         {

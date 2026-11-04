@@ -1,6 +1,6 @@
 namespace Promotions.Infrastructure.Persistence.Configurations
 {
-    public sealed class HeroBannerConfigurations : IEntityTypeConfiguration<HeroBanner>
+    internal sealed class HeroBannerConfigurations : IEntityTypeConfiguration<HeroBanner>
     {
         public void Configure(EntityTypeBuilder<HeroBanner> builder)
         {

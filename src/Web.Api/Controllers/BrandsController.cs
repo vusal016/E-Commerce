@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class BrandsController(IMediator mediator) : ControllerBase
+    public class BrandsController(IMediator mediator) : ControllerBase
     {
         [HttpGet("{slug}")]
         public async Task<IActionResult> GetBrandStore(string slug, CancellationToken cancellationToken = default)

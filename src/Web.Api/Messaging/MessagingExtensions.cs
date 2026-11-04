@@ -8,8 +8,8 @@ namespace Web.Api.Messaging
             {
                 cfg.RegisterServicesFromAssemblies(
                     typeof(Program).Assembly,
-                    typeof(Ordering.Application.Features.PlaceOrder.PlaceOrderCommand).Assembly,
-                    typeof(Cart.Application.Features.AddItem.AddItemCommand).Assembly
+                    typeof(PlaceOrderCommand).Assembly,
+                    typeof(AddItemCommand).Assembly
                 );
             });
             services.AddSingleton<InMemoryMessageQueue>();

@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class ProductsController(IMediator mediator) : ControllerBase
+    public class ProductsController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery(Name = "category")] string? category = null, string? sort = null, string? size = null, string? color = null, decimal? minPrice = null, decimal? maxPrice = null, int page = 1, int limit = 10, CancellationToken cancellationToken = default)

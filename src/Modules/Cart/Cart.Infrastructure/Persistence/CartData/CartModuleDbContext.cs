@@ -1,6 +1,6 @@
 namespace Cart.Infrastructure.Persistence.CartData
 {
-    public sealed class CartModuleDbContext(DbContextOptions<CartModuleDbContext> options) : DbContext(options), ICartDbContext
+    internal sealed class CartModuleDbContext(DbContextOptions<CartModuleDbContext> options) : DbContext(options), ICartDbContext
     {
         public DbSet<Domain.CartAggregate.Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }

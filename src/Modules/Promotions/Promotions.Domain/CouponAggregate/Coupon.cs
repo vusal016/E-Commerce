@@ -1,6 +1,6 @@
 namespace Promotions.Domain.CouponAggregate
 {
-    public sealed class Coupon : AuditEntity
+    internal sealed class Coupon : AuditEntity
     {
         private Coupon()
         {

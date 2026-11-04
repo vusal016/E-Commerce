@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.NotifyWishlistItem
 {
-    public sealed class NotifyWishlistItemCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<NotifyWishlistItemCommand, bool>
+    internal sealed class NotifyWishlistItemCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<NotifyWishlistItemCommand, bool>
     {
         public async Task<bool> Handle(NotifyWishlistItemCommand request, CancellationToken cancellationToken)
         {

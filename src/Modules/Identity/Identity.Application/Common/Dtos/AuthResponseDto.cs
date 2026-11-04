@@ -1,6 +1,6 @@
 namespace Identity.Application.Common.Dtos
 {
-    public record AuthResponseDto
+    internal sealed record AuthResponseDto
     (
         UserDto User,
         string AccessToken,

@@ -1,6 +1,6 @@
 namespace Catalog.Application.Features.CuratedPicks.Queries
 {
-    public sealed class GetCuratedPicksQueryHandler(ICatalogDbContext catalogDbContext) : IRequestHandler<GetCuratedPicksQuery, List<CuratedPickDto>>
+    internal sealed class GetCuratedPicksQueryHandler(ICatalogDbContext catalogDbContext) : IRequestHandler<GetCuratedPicksQuery, List<CuratedPickDto>>
     {
         public async Task<List<CuratedPickDto>> Handle(GetCuratedPicksQuery request, CancellationToken cancellationToken)
         {

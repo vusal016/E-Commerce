@@ -1,4 +1,4 @@
 namespace Web.Api.Requests.Promotions
 {
-    internal sealed record NotifyFlashSaleRequest(string Email);
+    public sealed record NotifyFlashSaleRequest(string Email);
 }

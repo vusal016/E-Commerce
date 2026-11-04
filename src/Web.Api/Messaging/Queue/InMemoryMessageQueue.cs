@@ -6,4 +6,4 @@ namespace Web.Api.Messaging.Queue
         public ChannelWriter<IIntegrationEvent> Writer => _channel.Writer;
         public ChannelReader<IIntegrationEvent> Reader => _channel.Reader;
     }
-}
+}   

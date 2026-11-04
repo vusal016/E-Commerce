@@ -1,6 +1,6 @@
 namespace Catalog.Application.Common.Mapper
 {
-    public sealed class CatalogMapper : Profile
+    internal sealed class CatalogMapper : Profile
     {
         public CatalogMapper()
         {

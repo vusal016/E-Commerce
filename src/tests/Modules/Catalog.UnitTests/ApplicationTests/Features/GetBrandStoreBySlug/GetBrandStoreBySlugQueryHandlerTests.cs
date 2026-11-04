@@ -16,7 +16,7 @@ namespace Catalog.UnitTests.ApplicationTests.Features.GetBrandStoreBySlug
             typeof(Brand).GetProperty("Id")?.SetValue(brand, Guid.NewGuid());
             typeof(Brand).GetProperty("IsActive")?.SetValue(brand, true);
             var product = new Product("Air Force 1", "Shoes", 120, true, brand.Id, Guid.NewGuid());
-            var productTag = new ProductTag(product.Id, Catalog.Domain.Enums.TagType.BestSeller, "BestSeller");
+            var productTag = new ProductTag(product.Id, TagType.BestSeller, "BestSeller");
             var tagsProp = typeof(Product).GetProperty("ProductTags");
             var tagsList = new List<ProductTag> { productTag };
             tagsProp?.SetValue(product, tagsList);

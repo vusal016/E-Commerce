@@ -1,6 +1,6 @@
 namespace Identity.Domain.RefreshToken
 {
-    public sealed class RefreshToken : AuditEntity
+    internal sealed class RefreshToken : AuditEntity
     {
         private RefreshToken()
         {

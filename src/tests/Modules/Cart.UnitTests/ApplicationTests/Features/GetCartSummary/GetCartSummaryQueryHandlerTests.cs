@@ -16,7 +16,7 @@ namespace Cart.UnitTests.ApplicationTests.Features.GetCartSummary
         [Fact]
         public async Task Handle_ShouldReturnEmptySummary_WhenCartDoesNotExist()
         {
-            var mockCarts = new List<Cart.Domain.CartAggregate.Cart>().BuildMockDbSet();
+            var mockCarts = new List<CartEntity>().BuildMockDbSet();
             _dbContext.Carts.Returns(mockCarts);
             var query = new GetCartSummaryQuery(Guid.NewGuid(), null);
             var result = await _handler.Handle(query, CancellationToken.None);

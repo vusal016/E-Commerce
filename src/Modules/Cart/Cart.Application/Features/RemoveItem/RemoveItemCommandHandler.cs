@@ -1,14 +1,13 @@
 namespace Cart.Application.Features.RemoveItem
 {
-    public sealed class RemoveItemCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<RemoveItemCommand, CartDto>
+    internal sealed class RemoveItemCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<RemoveItemCommand, CartDto>
     {
         public async Task<CartDto> Handle(RemoveItemCommand request, CancellationToken cancellationToken)
         {
             var cart = await dbContext.Carts
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c =>
-                    (request.UserId != null && c.UserId == request.UserId) ||
-                    (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
+                .ForOwner(request.UserId, request.SessionId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (cart == null) throw new KeyNotFoundException("Cart not found.");
             var item = cart.Items.FirstOrDefault(i => i.Id == request.ItemId);
             if (item == null) throw new KeyNotFoundException("Cart item not found.");

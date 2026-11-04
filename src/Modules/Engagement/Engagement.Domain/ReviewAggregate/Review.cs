@@ -1,6 +1,6 @@
 namespace Engagement.Domain.ReviewAggregate
 {
-    public sealed class Review : AuditEntity
+    internal sealed class Review : AuditEntity
     {
         private Review()
         {

@@ -3,4 +3,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Engagement.Application" />
+    <InternalsVisibleTo Include="Engagement.Infrastructure" />
+    <InternalsVisibleTo Include="Engagement.UnitTests" />
+    <InternalsVisibleTo Include="Ordering.UnitTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
 </Project>

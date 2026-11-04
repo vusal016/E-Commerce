@@ -1,6 +1,6 @@
 namespace Catalog.Application.Features.GetBrandStoreBySlug
 {
-    public sealed class GetBrandStoreBySlugQueryHandler(ICatalogDbContext catalogDbContext) : IRequestHandler<GetBrandStoreBySlugQuery, BrandStoreDto>
+    internal sealed class GetBrandStoreBySlugQueryHandler(ICatalogDbContext catalogDbContext) : IRequestHandler<GetBrandStoreBySlugQuery, BrandStoreDto>
     {
         public async Task<BrandStoreDto> Handle(GetBrandStoreBySlugQuery request, CancellationToken cancellationToken)
         {

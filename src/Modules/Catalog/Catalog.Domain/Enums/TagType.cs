@@ -1,6 +1,6 @@
 namespace Catalog.Domain.Enums
 {
-    public enum TagType
+    internal enum TagType
     {
         New,
         Sale,

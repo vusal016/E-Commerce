@@ -1,6 +1,6 @@
 namespace Ordering.Infrastructure.Persistence.Configurations
 {
-    public sealed class OrderConfigurations : IEntityTypeConfiguration<Order>
+    internal sealed class OrderConfigurations : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {

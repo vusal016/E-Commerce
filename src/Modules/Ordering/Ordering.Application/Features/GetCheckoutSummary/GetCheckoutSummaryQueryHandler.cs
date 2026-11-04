@@ -1,10 +1,10 @@
 namespace Ordering.Application.Features.GetCheckoutSummary
 {
-    public sealed class GetCheckoutSummaryQueryHandler(IOrderingDbContext orderingDb, ICartPublicApi cartPublicApi) : IRequestHandler<GetCheckoutSummaryQuery, CheckoutSummaryDto>
+    internal sealed class GetCheckoutSummaryQueryHandler(IOrderingDbContext orderingDb, ICartPublicApi cartPublicApi) : IRequestHandler<GetCheckoutSummaryQuery, CheckoutSummaryDto>
     {
         public async Task<CheckoutSummaryDto> Handle(GetCheckoutSummaryQuery request, CancellationToken cancellationToken)
         {
-            var checkOutSession = await orderingDb.CheckoutSessions.AsNoTracking().FirstOrDefaultAsync(cs => (request.UserId != null && cs.UserId == request.UserId) || (request.SessionId != null && cs.SessionId == request.SessionId), cancellationToken);
+            var checkOutSession = await orderingDb.CheckoutSessions.AsNoTracking().ForOwner(request.UserId, request.SessionId).FirstOrDefaultAsync(cancellationToken);
             if (checkOutSession is null)
             {
                 throw new KeyNotFoundException("Checkout session not found.");

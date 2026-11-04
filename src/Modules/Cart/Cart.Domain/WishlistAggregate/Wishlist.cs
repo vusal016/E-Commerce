@@ -1,6 +1,6 @@
 namespace Cart.Domain.WishlistAggregate
 {
-    public sealed class Wishlist : AuditEntity
+    internal sealed class Wishlist : AuditEntity
     {
         private Wishlist()
         {

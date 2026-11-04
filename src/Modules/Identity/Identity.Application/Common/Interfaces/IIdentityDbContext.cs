@@ -1,6 +1,6 @@
 namespace Identity.Application.Common.Interfaces
 {
-    public interface IIdentityDbContext
+    internal interface IIdentityDbContext
     {
         DbSet<User> Users { get; set; }
         DbSet<RefreshToken> RefreshTokens { get; set; }

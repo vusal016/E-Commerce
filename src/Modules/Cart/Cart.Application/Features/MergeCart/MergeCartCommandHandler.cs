@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.MergeCart
 {
-    public sealed class MergeCartCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<MergeCartCommand, CartDto>
+    internal sealed class MergeCartCommandHandler(ICartDbContext dbContext, IMediator mediator) : IRequestHandler<MergeCartCommand, CartDto>
     {
         public async Task<CartDto> Handle(MergeCartCommand request, CancellationToken cancellationToken)
         {

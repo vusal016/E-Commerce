@@ -1,6 +1,6 @@
 namespace Ordering.Domain.ReturnRequestAggregate
 {
-    public sealed class ReturnRequest : AuditEntity
+    internal sealed class ReturnRequest : AuditEntity
     {
         private ReturnRequest()
         {

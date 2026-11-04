@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.RemoveWishlistItem
 {
-    public sealed class RemoveWishlistItemCommandHandler(ICartDbContext dbContext) : IRequestHandler<RemoveWishlistItemCommand, bool>
+    internal sealed class RemoveWishlistItemCommandHandler(ICartDbContext dbContext) : IRequestHandler<RemoveWishlistItemCommand, bool>
     {
         public async Task<bool> Handle(RemoveWishlistItemCommand request, CancellationToken cancellationToken)
         {

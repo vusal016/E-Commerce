@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class CartController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
+    public class CartController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetCart(CancellationToken cancellationToken = default)

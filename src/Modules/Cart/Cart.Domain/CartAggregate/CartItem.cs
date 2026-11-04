@@ -1,6 +1,6 @@
 namespace Cart.Domain.CartAggregate
 {
-    public sealed class CartItem : AuditEntity
+    internal sealed class CartItem : AuditEntity
     {
         private CartItem()
         {

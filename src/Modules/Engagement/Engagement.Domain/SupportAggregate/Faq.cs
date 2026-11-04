@@ -1,6 +1,6 @@
 namespace Engagement.Domain.SupportAggregate
 {
-    public sealed class Faq : AuditEntity
+    internal sealed class Faq : AuditEntity
     {
         private Faq()
         {

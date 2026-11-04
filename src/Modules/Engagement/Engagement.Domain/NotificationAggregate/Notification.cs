@@ -1,6 +1,6 @@
 namespace Engagement.Domain.NotificationAggregate
 {
-    public sealed class Notification : AuditEntity
+    internal sealed class Notification : AuditEntity
     {
         private Notification()
         {

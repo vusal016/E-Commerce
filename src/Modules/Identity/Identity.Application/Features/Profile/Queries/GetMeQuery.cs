@@ -1,4 +1,4 @@
 namespace Identity.Application.Features.Profile.Queries
 {
-    public record GetMeQuery(Guid UserId) : IRequest<UserDto>;
+    internal sealed record GetMeQuery(Guid UserId) : IRequest<UserDto>;
 }

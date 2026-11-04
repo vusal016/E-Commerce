@@ -1,6 +1,6 @@
 namespace Cart.Infrastructure.Persistence.Configurations
 {
-    public sealed class WishlistConfigurations : IEntityTypeConfiguration<Wishlist>
+    internal sealed class WishlistConfigurations : IEntityTypeConfiguration<Wishlist>
     {
         public void Configure(EntityTypeBuilder<Wishlist> builder)
         {

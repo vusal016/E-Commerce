@@ -1,6 +1,6 @@
 namespace Identity.Domain.AddressAggregate
 {
-    public sealed class Address : AuditEntity
+    internal sealed class Address : AuditEntity
     {
         private Address()
         {

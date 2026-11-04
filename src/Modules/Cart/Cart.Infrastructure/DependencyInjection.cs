@@ -12,8 +12,8 @@ namespace Cart.Infrastructure
             });
             services.AddScoped<ICartDbContext>(provider => provider.GetRequiredService<CartModuleDbContext>());
             services.AddScoped<DatabaseInitializer>();
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Cart.Application.Features.AddItem.AddItemCommand).Assembly));
-            services.AddScoped<Cart.Contracts.ICartPublicApi, Cart.Application.PublicApi.CartPublicApi>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddItemCommand).Assembly));
+            services.AddScoped<ICartPublicApi, CartPublicApi>();
             return services;
         }
     }

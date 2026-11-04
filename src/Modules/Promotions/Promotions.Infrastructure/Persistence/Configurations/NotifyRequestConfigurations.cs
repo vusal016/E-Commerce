@@ -1,6 +1,6 @@
 namespace Promotions.Infrastructure.Persistence.Configurations
 {
-    public sealed class NotifyRequestConfigurations : IEntityTypeConfiguration<NotifyRequest>
+    internal sealed class NotifyRequestConfigurations : IEntityTypeConfiguration<NotifyRequest>
     {
         public void Configure(EntityTypeBuilder<NotifyRequest> builder)
         {

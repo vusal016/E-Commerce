@@ -1,6 +1,6 @@
 namespace Ordering.Domain.OrderAggregate
 {
-    public sealed class OrderItem : AuditEntity
+    internal sealed class OrderItem : AuditEntity
     {
         private OrderItem()
         {

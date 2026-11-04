@@ -1,6 +1,6 @@
 namespace Ordering.Infrastructure.Persistence.Configurations
 {
-    public sealed class ReturnRequestConfigurations : IEntityTypeConfiguration<ReturnRequest>
+    internal sealed class ReturnRequestConfigurations : IEntityTypeConfiguration<ReturnRequest>
     {
         public void Configure(EntityTypeBuilder<ReturnRequest> builder)
         {

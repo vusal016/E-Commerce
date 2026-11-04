@@ -1,6 +1,6 @@
 namespace Engagement.Infrastructure.Persistence.EngagementData
 {
-    public sealed class EngagementModuleDbContext(DbContextOptions<EngagementModuleDbContext> options) : DbContext(options), IEngagementDbContext
+    internal sealed class EngagementModuleDbContext(DbContextOptions<EngagementModuleDbContext> options) : DbContext(options), IEngagementDbContext
     {
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Faq> Faqs { get; set; }

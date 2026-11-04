@@ -1,11 +1,12 @@
 namespace Cart.Infrastructure.Persistence.Configurations
 {
-    public sealed class WishlistItemConfigurations : IEntityTypeConfiguration<WishlistItem>
+    internal sealed class WishlistItemConfigurations : IEntityTypeConfiguration<WishlistItem>
     {
         public void Configure(EntityTypeBuilder<WishlistItem> builder)
         {
             builder.ToTable("wishlist_items");
             builder.HasKey(i => i.Id);
+            builder.HasIndex(i => new { i.WishlistId, i.ProductVariantId }).IsUnique();
         }
     }
 }

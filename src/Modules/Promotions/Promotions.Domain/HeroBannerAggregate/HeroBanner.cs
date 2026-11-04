@@ -1,6 +1,6 @@
 namespace Promotions.Domain.HeroBannerAggregate
 {
-    public sealed class HeroBanner : AuditEntity
+    internal sealed class HeroBanner : AuditEntity
     {
         private HeroBanner()
         {
@@ -26,17 +26,17 @@ namespace Promotions.Domain.HeroBannerAggregate
         public bool IsActive { get; private set; }
         private void SetTitle(string title)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace("Hero banner title cannot be empty.");
+            ArgumentException.ThrowIfNullOrWhiteSpace(title, "Hero banner title cannot be empty.");
             Title = title;
         }
         private void SetImageUrl(string imageUrl)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace("Hero banner image URL cannot be empty.");
+            ArgumentException.ThrowIfNullOrWhiteSpace(imageUrl, "Hero banner image URL cannot be empty.");
             ImageUrl = imageUrl;
         }
         private void SetLinkUrl(string linkUrl)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace("Hero banner link URL cannot be empty.");
+            ArgumentException.ThrowIfNullOrWhiteSpace(linkUrl, "Hero banner link URL cannot be empty.");
             LinkUrl = linkUrl;
         }
         private void SetDisplayOrder(int displayOrder)

@@ -17,7 +17,7 @@ namespace Cart.UnitTests.ApplicationTests.Features.GetCart
         public async Task Handle_ShouldThrowKeyNotFoundException_WhenCartDoesNotExist()
         {
             var query = new GetCartQuery(Guid.NewGuid(), "session-123");
-            var carts = new List<Cart.Domain.CartAggregate.Cart>().BuildMockDbSet();
+            var carts = new List<CartEntity>().BuildMockDbSet();
             _dbContext.Carts.Returns(carts);
             await FluentActions.Invoking(() => _handler.Handle(query, CancellationToken.None))
                 .Should().ThrowAsync<KeyNotFoundException>()
@@ -29,18 +29,17 @@ namespace Cart.UnitTests.ApplicationTests.Features.GetCart
             var userId = Guid.NewGuid();
             var sessionId = "session-123";
             var query = new GetCartQuery(userId, sessionId);
-            var cart = new Cart.Domain.CartAggregate.Cart(userId, sessionId);
-            // Use reflection to set Id
-            typeof(Cart.Domain.CartAggregate.Cart).GetProperty("Id")?.SetValue(cart, Guid.NewGuid());
+            var cart = new CartEntity(userId, sessionId);
+            typeof(CartEntity).GetProperty("Id")?.SetValue(cart, Guid.NewGuid());
             var variantId1 = Guid.NewGuid();
             var variantId2 = Guid.NewGuid();
-            var cartItem1 = new Cart.Domain.CartAggregate.CartItem(cart.Id, variantId1, 2, false);
-            typeof(Cart.Domain.CartAggregate.CartItem).GetProperty("Id")?.SetValue(cartItem1, Guid.NewGuid());
-            var cartItem2 = new Cart.Domain.CartAggregate.CartItem(cart.Id, variantId2, 1, false);
-            typeof(Cart.Domain.CartAggregate.CartItem).GetProperty("Id")?.SetValue(cartItem2, Guid.NewGuid());
+            var cartItem1 = new CartItem(cart.Id, variantId1, 2, false);
+            typeof(CartItem).GetProperty("Id")?.SetValue(cartItem1, Guid.NewGuid());
+            var cartItem2 = new CartItem(cart.Id, variantId2, 1, false);
+            typeof(CartItem).GetProperty("Id")?.SetValue(cartItem2, Guid.NewGuid());
             cart.Items.Add(cartItem1);
             cart.Items.Add(cartItem2);
-            var carts = new List<Cart.Domain.CartAggregate.Cart> { cart }.BuildMockDbSet();
+            var carts = new List<CartEntity> { cart }.BuildMockDbSet();
             _dbContext.Carts.Returns(carts);
             var basketProducts = new List<BasketProductDto>
             {
@@ -68,6 +67,28 @@ namespace Cart.UnitTests.ApplicationTests.Features.GetCart
             item2.Price.Should().Be(15.0m);
             item2.Quantity.Should().Be(1);
             item2.StockWarning.Should().Be("Only 3 left");
+        }
+        [Fact]
+        public async Task Handle_ShouldPreventIdor_WhenAuthenticatedUserUsesGuestSessionId()
+        {
+            var guestCart = new CartEntity(null, "guest-session-123");
+            var carts = new List<CartEntity> { guestCart }.BuildMockDbSet();
+            _dbContext.Carts.Returns(carts);
+            var query = new GetCartQuery(Guid.NewGuid(), "guest-session-123");
+            await FluentActions.Invoking(() => _handler.Handle(query, CancellationToken.None))
+                .Should().ThrowAsync<KeyNotFoundException>()
+                .WithMessage("Basket not found.");
+        }
+        [Fact]
+        public async Task Handle_ShouldPreventIdor_WhenGuestUsesAuthenticatedUsersSessionId()
+        {
+            var ownerCart = new CartEntity(Guid.NewGuid(), "user-session-123");
+            var carts = new List<CartEntity> { ownerCart }.BuildMockDbSet();
+            _dbContext.Carts.Returns(carts);
+            var query = new GetCartQuery(null, "user-session-123");
+            await FluentActions.Invoking(() => _handler.Handle(query, CancellationToken.None))
+                .Should().ThrowAsync<KeyNotFoundException>()
+                .WithMessage("Basket not found.");
         }
     }
 }

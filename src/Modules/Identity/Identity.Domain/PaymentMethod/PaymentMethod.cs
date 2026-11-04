@@ -1,6 +1,6 @@
 namespace Identity.Domain.PaymentMethod
 {
-    public sealed class PaymentMethod : BaseEntity
+    internal sealed class PaymentMethod : BaseEntity
     {
         private PaymentMethod()
         {

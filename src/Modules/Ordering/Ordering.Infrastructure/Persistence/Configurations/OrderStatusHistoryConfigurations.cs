@@ -1,6 +1,6 @@
 namespace Ordering.Infrastructure.Persistence.Configurations
 {
-    public sealed class OrderStatusHistoryConfigurations : IEntityTypeConfiguration<OrderStatusHistory>
+    internal sealed class OrderStatusHistoryConfigurations : IEntityTypeConfiguration<OrderStatusHistory>
     {
         public void Configure(EntityTypeBuilder<OrderStatusHistory> builder)
         {

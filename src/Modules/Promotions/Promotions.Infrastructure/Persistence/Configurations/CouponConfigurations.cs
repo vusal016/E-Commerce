@@ -1,6 +1,6 @@
 namespace Promotions.Infrastructure.Persistence.Configurations
 {
-    public sealed class CouponConfigurations : IEntityTypeConfiguration<Coupon>
+    internal sealed class CouponConfigurations : IEntityTypeConfiguration<Coupon>
     {
         public void Configure(EntityTypeBuilder<Coupon> builder)
         {

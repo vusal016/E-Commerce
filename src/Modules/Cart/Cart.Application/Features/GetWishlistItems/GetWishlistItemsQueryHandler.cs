@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.GetWishlistItems
 {
-    public sealed class GetWishlistItemsQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<GetWishlistItemsQuery, IEnumerable<WishlistItemDetailDto>>
+    internal sealed class GetWishlistItemsQueryHandler(ICartDbContext dbContext, ICatalogPublicApi catalogApi) : IRequestHandler<GetWishlistItemsQuery, IEnumerable<WishlistItemDetailDto>>
     {
         public async Task<IEnumerable<WishlistItemDetailDto>> Handle(GetWishlistItemsQuery request, CancellationToken cancellationToken)
         {

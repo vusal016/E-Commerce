@@ -1,6 +1,6 @@
 namespace Engagement.Infrastructure.Persistence.Configurations
 {
-    public sealed class ReviewConfigurations : IEntityTypeConfiguration<Review>
+    internal sealed class ReviewConfigurations : IEntityTypeConfiguration<Review>
     {
         public void Configure(EntityTypeBuilder<Review> builder)
         {

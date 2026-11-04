@@ -1,6 +1,6 @@
 namespace Engagement.Domain.SupportAggregate
 {
-    public sealed class SupportArticle : AuditEntity
+    internal sealed class SupportArticle : AuditEntity
     {
         private SupportArticle()
         {

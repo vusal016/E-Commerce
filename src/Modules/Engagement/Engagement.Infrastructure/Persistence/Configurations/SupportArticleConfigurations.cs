@@ -1,6 +1,6 @@
 namespace Engagement.Infrastructure.Persistence.Configurations
 {
-    public sealed class SupportArticleConfigurations : IEntityTypeConfiguration<SupportArticle>
+    internal sealed class SupportArticleConfigurations : IEntityTypeConfiguration<SupportArticle>
     {
         public void Configure(EntityTypeBuilder<SupportArticle> builder)
         {

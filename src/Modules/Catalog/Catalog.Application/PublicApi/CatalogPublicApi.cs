@@ -9,6 +9,7 @@ namespace Catalog.Application.PublicApi
             return await catalogDbContext.Products
                 .AsNoTracking()
                 .SelectMany(p => p.ProductVariants, (p, v) => new { Product = p, Variant = v })
+                .Where(x => x.Product.IsActive && x.Variant.IsActive)
                 .Where(x => variantIdList.Contains(x.Variant.Id))
                 .Select(x => new ProductSummaryDto(
                     x.Product.Id,
@@ -27,6 +28,7 @@ namespace Catalog.Application.PublicApi
             return await catalogDbContext.Products
                 .AsNoTracking()
                 .SelectMany(p => p.ProductVariants, (p, v) => new { Product = p, Variant = v })
+                .Where(x => x.Product.IsActive && x.Variant.IsActive)
                 .Where(x => variantIdList.Contains(x.Variant.Id))
                 .Select(x => new BasketProductDto(
                     x.Variant.Id,
@@ -39,6 +41,23 @@ namespace Catalog.Application.PublicApi
                     x.Variant.StockQuantity
                 ))
                 .ToListAsync(cancellationToken);
+        }
+        public async Task<bool> TryReserveStockAsync(Guid variantId, int quantity, CancellationToken cancellationToken = default)
+        {
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than zero.");
+            var affected = await catalogDbContext.ProductVariants
+                .Where(v => v.Id == variantId && v.IsActive && v.StockQuantity >= quantity)
+                .ExecuteUpdateAsync(s => s.SetProperty(v => v.StockQuantity, v => v.StockQuantity - quantity), cancellationToken);
+            return affected == 1;
+        }
+        public async Task ReleaseStockAsync(Guid variantId, int quantity, CancellationToken cancellationToken = default)
+        {
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than zero.");
+            await catalogDbContext.ProductVariants
+                .Where(v => v.Id == variantId)
+                .ExecuteUpdateAsync(s => s.SetProperty(v => v.StockQuantity, v => v.StockQuantity + quantity), cancellationToken);
         }
     }
 }

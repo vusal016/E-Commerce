@@ -14,7 +14,7 @@ namespace Cart.UnitTests.ApplicationTests.Features.RemoveItem
         [Fact]
         public async Task Handle_ShouldThrowKeyNotFoundException_WhenCartDoesNotExist()
         {
-            var mockCarts = new List<Cart.Domain.CartAggregate.Cart>().BuildMockDbSet();
+            var mockCarts = new List<CartEntity>().BuildMockDbSet();
             _dbContext.Carts.Returns(mockCarts);
             var command = new RemoveItemCommand(Guid.NewGuid(), null, Guid.NewGuid());
             await FluentActions.Invoking(() => _handler.Handle(command, CancellationToken.None))

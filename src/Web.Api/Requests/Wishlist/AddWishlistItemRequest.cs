@@ -1,4 +1,4 @@
 namespace Web.Api.Requests.Wishlist
 {
-    internal sealed record AddWishlistItemRequest(Guid ProductVariantId);
+    public sealed record AddWishlistItemRequest(Guid ProductVariantId);
 }

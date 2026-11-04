@@ -1,6 +1,6 @@
 namespace Promotions.Application.Common.Mapper
 {
-    public sealed class PromotionsMapper : Profile
+    internal sealed class PromotionsMapper : Profile
     {
         public PromotionsMapper()
         {

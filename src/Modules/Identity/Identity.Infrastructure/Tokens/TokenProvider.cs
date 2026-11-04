@@ -1,6 +1,6 @@
 namespace Identity.Infrastructure.Tokens
 {
-    public sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenProvider
+    internal sealed class TokenProvider(IOptions<JwtSettings> jwtSettings) : ITokenProvider
     {
         private readonly JwtSettings configuration = jwtSettings.Value;
         public DateTime RefreshTokenExpiresAt => DateTime.UtcNow.AddDays(configuration.RefreshTokenExpiresDays);

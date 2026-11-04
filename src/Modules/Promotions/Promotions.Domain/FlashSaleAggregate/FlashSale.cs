@@ -1,6 +1,6 @@
 namespace Promotions.Domain.FlashSaleAggregate
 {
-    public sealed class FlashSale : AuditEntity
+    internal sealed class FlashSale : AuditEntity
     {
         private FlashSale()
         {

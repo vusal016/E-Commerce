@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class HomeController(IMediator mediator) : ControllerBase
+    public class HomeController(IMediator mediator) : ControllerBase
     {
         [HttpGet("hero-banners")]
         public async Task<IActionResult> GetHeroBanners(CancellationToken cancellationToken)

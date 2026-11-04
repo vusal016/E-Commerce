@@ -1,6 +1,6 @@
 namespace Engagement.Application.Common.Interfaces
 {
-    public interface IEngagementDbContext
+    internal interface IEngagementDbContext
     {
         DbSet<Review> Reviews { get; set; }
         DbSet<Faq> Faqs { get; set; }

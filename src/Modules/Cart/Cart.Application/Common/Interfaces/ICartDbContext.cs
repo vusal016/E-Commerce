@@ -1,6 +1,6 @@
 namespace Cart.Application.Common.Interfaces
 {
-    public interface ICartDbContext
+    internal interface ICartDbContext
     {
         DbSet<CartEntity> Carts { get; set; }
         DbSet<CartItem> CartItems { get; set; }

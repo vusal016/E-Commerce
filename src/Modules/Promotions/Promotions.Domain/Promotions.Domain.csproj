@@ -2,5 +2,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Promotions.Application" />
+    <InternalsVisibleTo Include="Promotions.Infrastructure" />
+    <InternalsVisibleTo Include="Promotions.UnitTests" />
+    <InternalsVisibleTo Include="Ordering.UnitTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
 </Project>
 

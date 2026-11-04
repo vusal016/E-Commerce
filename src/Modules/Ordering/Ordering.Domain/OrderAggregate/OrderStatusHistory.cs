@@ -1,6 +1,6 @@
 namespace Ordering.Domain.OrderAggregate
 {
-    public sealed class OrderStatusHistory : AuditEntity
+    internal sealed class OrderStatusHistory : AuditEntity
     {
         private OrderStatusHistory()
         {

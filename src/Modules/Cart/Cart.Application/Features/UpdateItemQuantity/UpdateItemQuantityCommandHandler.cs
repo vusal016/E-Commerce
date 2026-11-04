@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.UpdateItemQuantity
 {
-    public sealed class UpdateItemQuantityCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IMediator mediator) : IRequestHandler<UpdateItemQuantityCommand, CartDto>
+    internal sealed class UpdateItemQuantityCommandHandler(ICartDbContext dbContext, ICatalogPublicApi catalogPublicApi, IMediator mediator) : IRequestHandler<UpdateItemQuantityCommand, CartDto>
     {
         public async Task<CartDto> Handle(UpdateItemQuantityCommand request, CancellationToken cancellationToken)
         {
@@ -8,9 +8,8 @@ namespace Cart.Application.Features.UpdateItemQuantity
                 throw new ArgumentException("Quantity must be greater than zero.");
             var cart = await dbContext.Carts
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c =>
-                    (request.UserId != null && c.UserId == request.UserId) ||
-                    (request.SessionId != null && c.SessionId == request.SessionId), cancellationToken);
+                .ForOwner(request.UserId, request.SessionId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (cart == null) throw new KeyNotFoundException("Cart not found.");
             var item = cart.Items.FirstOrDefault(i => i.Id == request.ItemId);
             if (item == null) throw new KeyNotFoundException("Cart item not found.");

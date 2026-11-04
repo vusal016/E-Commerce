@@ -1,6 +1,6 @@
 namespace Identity.Domain.Enums
 {
-    public enum CardType
+    internal enum CardType
     {
         Visa,
         MasterCard,

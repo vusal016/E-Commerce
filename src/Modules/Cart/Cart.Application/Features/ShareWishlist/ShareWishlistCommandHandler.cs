@@ -1,6 +1,6 @@
 namespace Cart.Application.Features.ShareWishlist
 {
-    public sealed class ShareWishlistCommandHandler(ICartDbContext dbContext) : IRequestHandler<ShareWishlistCommand, string>
+    internal sealed class ShareWishlistCommandHandler(ICartDbContext dbContext) : IRequestHandler<ShareWishlistCommand, string>
     {
         public async Task<string> Handle(ShareWishlistCommand request, CancellationToken cancellationToken)
         {

@@ -1,6 +1,6 @@
 namespace Ordering.Application.Common.Interfaces
 {
-    public interface IOrderingDbContext
+    internal interface IOrderingDbContext
     {
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }

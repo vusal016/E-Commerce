@@ -1,15 +1,3 @@
-using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using Ordering.Application.Common.Interfaces;
-using Ordering.Application.Features.GetInvoice;
-using Ordering.Domain.OrderAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 namespace Ordering.UnitTests.ApplicationTests.Features.GetInvoice
 {
     public sealed class GetInvoiceQueryHandlerTests
@@ -17,10 +5,10 @@ namespace Ordering.UnitTests.ApplicationTests.Features.GetInvoice
         [Fact]
         public async Task Handle_ShouldReturnInvoice_WhenOrderExists()
         {
-            var options = new DbContextOptionsBuilder<Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext>()
+            var options = new DbContextOptionsBuilder<TestOrderingDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext(options);
+            var dbContext = new TestOrderingDbContext(options);
             var userId = Guid.NewGuid();
             var order = new Order(userId, "ORD-777", "Delivered", 100, 10, 5, 0, 115, Guid.NewGuid(), Guid.NewGuid(), "Standard", "TRK001", "FedEx", DateTime.UtcNow.AddDays(-2), null, null);
             order.AddItem(Guid.NewGuid(), "iPhone 14", 100, 2);
@@ -42,10 +30,10 @@ namespace Ordering.UnitTests.ApplicationTests.Features.GetInvoice
         [Fact]
         public async Task Handle_ShouldThrowException_WhenOrderNotFound()
         {
-            var options = new DbContextOptionsBuilder<Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext>()
+            var options = new DbContextOptionsBuilder<TestOrderingDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext(options);
+            var dbContext = new TestOrderingDbContext(options);
             var mockDbContext = Substitute.For<IOrderingDbContext>();
             mockDbContext.Orders.Returns(dbContext.Orders);
             var handler = new GetInvoiceQueryHandler(mockDbContext);

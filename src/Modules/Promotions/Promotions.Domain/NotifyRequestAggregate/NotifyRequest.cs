@@ -1,6 +1,6 @@
 namespace Promotions.Domain.NotifyRequestAggregate
 {
-    public sealed class NotifyRequest : AuditEntity
+    internal sealed class NotifyRequest : AuditEntity
     {
         private NotifyRequest()
         {

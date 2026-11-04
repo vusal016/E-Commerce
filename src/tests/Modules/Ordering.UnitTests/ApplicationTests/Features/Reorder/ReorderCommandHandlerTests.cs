@@ -1,16 +1,3 @@
-using Cart.Contracts;
-using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using Ordering.Application.Common.Interfaces;
-using Ordering.Application.Features.Reorder;
-using Ordering.Domain.OrderAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 namespace Ordering.UnitTests.ApplicationTests.Features.Reorder
 {
     public sealed class ReorderCommandHandlerTests
@@ -18,10 +5,10 @@ namespace Ordering.UnitTests.ApplicationTests.Features.Reorder
         [Fact]
         public async Task Handle_ShouldReturnSuccess_AndNoWarnings_WhenAllItemsAdded()
         {
-            var options = new DbContextOptionsBuilder<Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext>()
+            var options = new DbContextOptionsBuilder<TestOrderingDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext(options);
+            var dbContext = new TestOrderingDbContext(options);
             var userId = Guid.NewGuid();
             var order = new Order(userId, "ORD-12345", "Delivered", 100, 10, 5, 0, 115, Guid.NewGuid(), Guid.NewGuid(), "Standard", "TRK001", "FedEx", DateTime.UtcNow.AddDays(-2), null, null);
             var variantId = Guid.NewGuid();
@@ -41,10 +28,10 @@ namespace Ordering.UnitTests.ApplicationTests.Features.Reorder
         [Fact]
         public async Task Handle_ShouldReturnSuccess_WithWarnings_WhenSomeItemsFail()
         {
-            var options = new DbContextOptionsBuilder<Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext>()
+            var options = new DbContextOptionsBuilder<TestOrderingDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext(options);
+            var dbContext = new TestOrderingDbContext(options);
             var userId = Guid.NewGuid();
             var order = new Order(userId, "ORD-12345", "Delivered", 100, 10, 5, 0, 115, Guid.NewGuid(), Guid.NewGuid(), "Standard", "TRK001", "FedEx", DateTime.UtcNow.AddDays(-2), null, null);
             var variantId1 = Guid.NewGuid();
@@ -68,10 +55,10 @@ namespace Ordering.UnitTests.ApplicationTests.Features.Reorder
         [Fact]
         public async Task Handle_ShouldThrowException_WhenOrderNotFound()
         {
-            var options = new DbContextOptionsBuilder<Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext>()
+            var options = new DbContextOptionsBuilder<TestOrderingDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new Ordering.UnitTests.ApplicationTests.Features.GetOrders.TestOrderingDbContext(options);
+            var dbContext = new TestOrderingDbContext(options);
             var mockDbContext = Substitute.For<IOrderingDbContext>();
             mockDbContext.Orders.Returns(dbContext.Orders);
             var mockCartApi = Substitute.For<ICartPublicApi>();

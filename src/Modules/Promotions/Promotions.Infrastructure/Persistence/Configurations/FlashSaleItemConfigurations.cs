@@ -1,6 +1,6 @@
 namespace Promotions.Infrastructure.Persistence.Configurations
 {
-    public sealed class FlashSaleItemConfigurations : IEntityTypeConfiguration<FlashSaleItem>
+    internal sealed class FlashSaleItemConfigurations : IEntityTypeConfiguration<FlashSaleItem>
     {
         public void Configure(EntityTypeBuilder<FlashSaleItem> builder)
         {

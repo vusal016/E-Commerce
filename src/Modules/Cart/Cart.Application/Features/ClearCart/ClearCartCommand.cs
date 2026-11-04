@@ -1,4 +1,4 @@
 namespace Cart.Application.Features.ClearCart
 {
-    public sealed record ClearCartCommand(Guid? UserId, string? SessionId) : IRequest;
+    internal sealed record ClearCartCommand(Guid? UserId, string? SessionId) : IRequest;
 }

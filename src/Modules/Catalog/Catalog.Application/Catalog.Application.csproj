@@ -13,6 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Catalog.Infrastructure" />
+    <InternalsVisibleTo Include="Catalog.UnitTests" />
+    <InternalsVisibleTo Include="Ordering.UnitTests" />
+    <InternalsVisibleTo Include="Web.Api" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 </Project>
-

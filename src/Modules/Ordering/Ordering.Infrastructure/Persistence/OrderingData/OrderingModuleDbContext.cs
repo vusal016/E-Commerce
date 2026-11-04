@@ -1,6 +1,6 @@
 namespace Ordering.Infrastructure.Persistence.OrderingData
 {
-    public sealed class OrderingModuleDbContext(DbContextOptions<OrderingModuleDbContext> options) : DbContext(options), IOrderingDbContext
+    internal sealed class OrderingModuleDbContext(DbContextOptions<OrderingModuleDbContext> options) : DbContext(options), IOrderingDbContext
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }

@@ -1,6 +1,6 @@
 namespace Catalog.Infrastructure.Persistence.Configurations
 {
-    public sealed class CategoryConfigurations : IEntityTypeConfiguration<Category>
+    internal sealed class CategoryConfigurations : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {

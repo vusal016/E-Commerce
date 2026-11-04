@@ -1,6 +1,6 @@
 namespace Catalog.Domain.Brand
 {
-    public sealed class Brand : BaseEntity
+    internal sealed class Brand : BaseEntity
     {
         private Brand()
         {

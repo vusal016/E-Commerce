@@ -1,6 +1,6 @@
 namespace Promotions.Infrastructure.Persistence.PromotionsData
 {
-    public sealed class PromotionsModuleDbContext(DbContextOptions<PromotionsModuleDbContext> options) : DbContext(options), IPromotionsDbContext
+    internal sealed class PromotionsModuleDbContext(DbContextOptions<PromotionsModuleDbContext> options) : DbContext(options), IPromotionsDbContext
     {
         public DbSet<HeroBanner> HeroBanners { get; set; }
         public DbSet<FlashSale> FlashSales { get; set; }

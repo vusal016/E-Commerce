@@ -1,13 +1,13 @@
 namespace Ordering.Application.Features.SubmitPayment
 {
-    public sealed class SubmitPaymentCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitPaymentCommand, Guid>
+    internal sealed class SubmitPaymentCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitPaymentCommand, Guid>
     {
         public async Task<Guid> Handle(SubmitPaymentCommand request, CancellationToken cancellationToken)
         {
-            var checkOutSession = await orderingDb.CheckoutSessions.FirstOrDefaultAsync(cs => (request.UserId != null && cs.UserId == request.UserId) || (request.SessionId != null && cs.SessionId == request.SessionId), cancellationToken);
+            var checkOutSession = await orderingDb.CheckoutSessions.ForOwner(request.UserId, request.SessionId).FirstOrDefaultAsync(cancellationToken);
             if (checkOutSession is null)
             {
-                checkOutSession = new CheckoutSession(request.UserId, request.SessionId!);
+                checkOutSession = new CheckoutSession(request.UserId, request.SessionId);
                 orderingDb.CheckoutSessions.Add(checkOutSession);
             }
             string? cardLast4 = null;

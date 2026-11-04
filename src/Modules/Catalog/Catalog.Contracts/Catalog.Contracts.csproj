@@ -1,6 +1,2 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\Engagement\Engagement.Infrastructure\Engagement.Infrastructure.csproj" />
-  </ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
 </Project>

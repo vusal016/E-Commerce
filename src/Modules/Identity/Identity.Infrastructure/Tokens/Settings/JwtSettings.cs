@@ -1,6 +1,6 @@
 namespace Identity.Infrastructure.Tokens.Settings
 {
-    public sealed class JwtSettings
+    internal sealed class JwtSettings
     {
         public const string SectionName = "Jwt";
         public string Secret { get; init; } = string.Empty;

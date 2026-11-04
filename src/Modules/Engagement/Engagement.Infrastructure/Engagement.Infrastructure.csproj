@@ -14,4 +14,10 @@
     <ProjectReference Include="..\Engagement.Application\Engagement.Application.csproj" />
     <ProjectReference Include="..\Engagement.Contracts\Engagement.Contracts.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Engagement.UnitTests" />
+    <InternalsVisibleTo Include="Ordering.UnitTests" />
+    <InternalsVisibleTo Include="Web.Api" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
 </Project>

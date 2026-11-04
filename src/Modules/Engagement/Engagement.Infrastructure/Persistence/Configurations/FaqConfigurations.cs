@@ -1,6 +1,6 @@
 namespace Engagement.Infrastructure.Persistence.Configurations
 {
-    public sealed class FaqConfigurations : IEntityTypeConfiguration<Faq>
+    internal sealed class FaqConfigurations : IEntityTypeConfiguration<Faq>
     {
         public void Configure(EntityTypeBuilder<Faq> builder)
         {

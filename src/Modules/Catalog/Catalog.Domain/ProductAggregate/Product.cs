@@ -1,6 +1,6 @@
 namespace Catalog.Domain.ProductAggregate
 {
-    public sealed class Product : AuditEntity
+    internal sealed class Product : AuditEntity
     {
         private Product()
         {

@@ -1,6 +1,6 @@
 namespace Catalog.Domain.ProductAggregate
 {
-    public sealed class ProductVariant : BaseEntity
+    internal sealed class ProductVariant : BaseEntity
     {
         private ProductVariant()
         {

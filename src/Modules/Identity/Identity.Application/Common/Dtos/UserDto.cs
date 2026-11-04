@@ -1,6 +1,6 @@
 namespace Identity.Application.Common.Dtos
 {
-    public record UserDto
+    internal sealed record UserDto
     (
         Guid Id,
        string FirstName,

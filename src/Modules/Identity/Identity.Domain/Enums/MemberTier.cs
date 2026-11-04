@@ -1,6 +1,6 @@
 namespace Identity.Domain.Enums
 {
-    public enum MemberTier
+    internal enum MemberTier
     {
         Bronze,
         Silver,

@@ -18,7 +18,7 @@ namespace Cart.UnitTests.ApplicationTests.Features.ApplyCoupon
         [Fact]
         public async Task Handle_ShouldThrowKeyNotFoundException_WhenCartDoesNotExist()
         {
-            var mockCarts = new List<Cart.Domain.CartAggregate.Cart>().BuildMockDbSet();
+            var mockCarts = new List<CartEntity>().BuildMockDbSet();
             _dbContext.Carts.Returns(mockCarts);
             var command = new ApplyCouponCommand(Guid.NewGuid(), null, "SALE10");
             await FluentActions.Invoking(() => _handler.Handle(command, CancellationToken.None))

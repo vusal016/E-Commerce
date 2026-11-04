@@ -6,9 +6,7 @@ namespace Cart.Application.EventHandlers
         public async Task Handle(OrderPlacedIntegrationEvent integrationEvent, CancellationToken cancellationToken)
         {
             await dbContext.Carts
-                .Where(c =>
-                    (integrationEvent.UserId != null && c.UserId == integrationEvent.UserId) ||
-                    c.SessionId == integrationEvent.SessionId)
+                .ForOwner(integrationEvent.UserId, integrationEvent.SessionId)
                 .ExecuteDeleteAsync(cancellationToken);
         }
     }

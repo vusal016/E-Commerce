@@ -1,6 +1,6 @@
 namespace Catalog.Application.Common.Interfaces
 {
-    public interface ICatalogDbContext
+    internal interface ICatalogDbContext
     {
         DbSet<Product> Products { get; set; }
         DbSet<ProductVariant> ProductVariants { get; set; }

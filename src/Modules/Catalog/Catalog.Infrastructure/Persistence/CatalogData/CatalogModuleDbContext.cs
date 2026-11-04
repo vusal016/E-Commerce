@@ -1,6 +1,6 @@
 namespace Catalog.Infrastructure.Persistence.CatalogData
 {
-    public sealed class CatalogModuleDbContext(DbContextOptions<CatalogModuleDbContext> options) : DbContext(options), ICatalogDbContext
+    internal sealed class CatalogModuleDbContext(DbContextOptions<CatalogModuleDbContext> options) : DbContext(options), ICatalogDbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }

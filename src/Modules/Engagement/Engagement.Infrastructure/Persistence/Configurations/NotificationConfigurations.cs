@@ -1,6 +1,6 @@
 namespace Engagement.Infrastructure.Persistence.Configurations
 {
-    public sealed class NotificationConfigurations : IEntityTypeConfiguration<Notification>
+    internal sealed class NotificationConfigurations : IEntityTypeConfiguration<Notification>
     {
         public void Configure(EntityTypeBuilder<Notification> builder)
         {

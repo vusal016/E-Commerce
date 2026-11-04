@@ -1,13 +1,13 @@
 namespace Ordering.Application.Features.SubmitShipping
 {
-    public sealed class SubmitShippingCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitShippingCommand, Guid>
+    internal sealed class SubmitShippingCommandHandler(IOrderingDbContext orderingDb) : IRequestHandler<SubmitShippingCommand, Guid>
     {
         public async Task<Guid> Handle(SubmitShippingCommand request, CancellationToken cancellationToken)
         {
-            var checkOutSession = await orderingDb.CheckoutSessions.FirstOrDefaultAsync(cs => (request.UserId != null && cs.UserId == request.UserId) || (request.SessionId != null && cs.SessionId == request.SessionId), cancellationToken);
+            var checkOutSession = await orderingDb.CheckoutSessions.ForOwner(request.UserId, request.SessionId).FirstOrDefaultAsync(cancellationToken);
             if (checkOutSession is null)
             {
-                checkOutSession = new CheckoutSession(request.UserId, request.SessionId!);
+                checkOutSession = new CheckoutSession(request.UserId, request.SessionId);
                 orderingDb.CheckoutSessions.Add(checkOutSession);
             }
             decimal shippingPrice = request.ShippingMethod switch

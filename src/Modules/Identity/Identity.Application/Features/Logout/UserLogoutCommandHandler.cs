@@ -1,6 +1,6 @@
 namespace Identity.Application.Features.Logout
 {
-    public sealed class UserLogoutCommandHandler(IIdentityDbContext identityDbContext) : IRequestHandler<UserLogoutCommand, bool>
+    internal sealed class UserLogoutCommandHandler(IIdentityDbContext identityDbContext) : IRequestHandler<UserLogoutCommand, bool>
     {
         public async Task<bool> Handle(UserLogoutCommand request, CancellationToken cancellationToken)
         {

@@ -2,7 +2,7 @@ namespace Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class CheckoutController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
+    public class CheckoutController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
     {
         [HttpGet("summary")]
         public async Task<IActionResult> GetCheckoutSummary(CancellationToken cancellationToken = default)

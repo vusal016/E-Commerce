@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\Catalog\Catalog.Contracts\Catalog.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="Ordering.Infrastructure" />
     <InternalsVisibleTo Include="Web.Api" />
     <InternalsVisibleTo Include="Ordering.UnitTests" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />

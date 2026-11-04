@@ -1,6 +1,6 @@
 namespace Identity.Application.Features.GetRefreshToken
 {
-    public sealed class GetRefreshTokenCommandHandler(UserManager<User> userManager, IIdentityDbContext identityDbContext, ITokenProvider tokenProvider) : IRequestHandler<GetRefreshTokenCommand, RefreshTokenDto>
+    internal sealed class GetRefreshTokenCommandHandler(UserManager<User> userManager, IIdentityDbContext identityDbContext, ITokenProvider tokenProvider) : IRequestHandler<GetRefreshTokenCommand, RefreshTokenDto>
     {
         public async Task<RefreshTokenDto> Handle(GetRefreshTokenCommand request, CancellationToken cancellationToken)
         {
@@ -8,9 +8,13 @@ namespace Identity.Application.Features.GetRefreshToken
             var refToken = await identityDbContext.RefreshTokens.AsNoTracking()
            .FirstOrDefaultAsync(x => x.Token == request.RefreshToken, cancellationToken)
            ?? throw new UnauthorizedAccessException("Invalid refresh token.");
+            if (refToken.ExpiresAt <= DateTime.UtcNow)
+                throw new UnauthorizedAccessException("Refresh token expired.");
             var user = await userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == refToken.UserId, cancellationToken)
             ?? throw new UnauthorizedAccessException("User not found.");
-            await identityDbContext.RefreshTokens.Where(r => r.Id == refToken.Id).ExecuteDeleteAsync(cancellationToken);
+            var deletedCount = await identityDbContext.RefreshTokens.Where(r => r.Id == refToken.Id).ExecuteDeleteAsync(cancellationToken);
+            if (deletedCount == 0)
+                throw new UnauthorizedAccessException("Invalid refresh token.");
             var accessToken = tokenProvider.GenerateAccessToken(user);
             var refreshToken = tokenProvider.GenerateRefreshToken();
             var newRefreshToken = new RefreshToken

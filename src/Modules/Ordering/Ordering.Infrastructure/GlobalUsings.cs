@@ -1,10 +1,12 @@
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Migrations;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Ordering.Application.Common.Interfaces;
+global using Ordering.Application.Features.PlaceOrder;
 global using Ordering.Domain.CheckoutAggregate;
 global using Ordering.Domain.OrderAggregate;
 global using Ordering.Domain.ReturnRequestAggregate;

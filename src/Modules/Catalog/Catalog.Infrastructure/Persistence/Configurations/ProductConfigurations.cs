@@ -1,6 +1,6 @@
 namespace Catalog.Infrastructure.Persistence.Configurations
 {
-    public sealed class ProductConfigurations : IEntityTypeConfiguration<Product>
+    internal sealed class ProductConfigurations : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

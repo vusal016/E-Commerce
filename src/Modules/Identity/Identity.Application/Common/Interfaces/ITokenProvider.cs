@@ -1,6 +1,6 @@
 namespace Identity.Application.Common.Interfaces
 {
-    public interface ITokenProvider
+    internal interface ITokenProvider
     {
         string GenerateAccessToken(User user);
         string GenerateRefreshToken();

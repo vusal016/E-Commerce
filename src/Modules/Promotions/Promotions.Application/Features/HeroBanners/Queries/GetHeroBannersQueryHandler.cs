@@ -1,6 +1,6 @@
 namespace Promotions.Application.Features.HeroBanners.Queries
 {
-    public sealed class GetHeroBannersQueryHandler(IPromotionsDbContext dbContext, IMapper mapper) : IRequestHandler<GetHeroBannersQuery, List<HeroBannerDto>>
+    internal sealed class GetHeroBannersQueryHandler(IPromotionsDbContext dbContext, IMapper mapper) : IRequestHandler<GetHeroBannersQuery, List<HeroBannerDto>>
     {
         public async Task<List<HeroBannerDto>> Handle(GetHeroBannersQuery request, CancellationToken cancellationToken)
         {

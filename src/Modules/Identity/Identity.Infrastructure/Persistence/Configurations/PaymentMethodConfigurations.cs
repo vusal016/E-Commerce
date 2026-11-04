@@ -1,6 +1,6 @@
 namespace Identity.Infrastructure.Persistence.Configurations
 {
-    public sealed class PaymentMethodConfigurations : IEntityTypeConfiguration<PaymentMethod>
+    internal sealed class PaymentMethodConfigurations : IEntityTypeConfiguration<PaymentMethod>
     {
         public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {

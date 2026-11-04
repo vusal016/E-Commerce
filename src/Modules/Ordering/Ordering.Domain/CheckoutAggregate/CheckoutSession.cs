@@ -1,11 +1,11 @@
 namespace Ordering.Domain.CheckoutAggregate
 {
-    public sealed class CheckoutSession : AuditEntity
+    internal sealed class CheckoutSession : AuditEntity
     {
         private CheckoutSession()
         {
         }
-        public CheckoutSession(Guid? userId, string sessionId)
+        public CheckoutSession(Guid? userId, string? sessionId)
         {
             SetUserId(userId);
             SetSessionId(sessionId);
@@ -24,6 +24,7 @@ namespace Ordering.Domain.CheckoutAggregate
         public string? PaymentMethod { get; private set; }
         public string? CardLast4 { get; private set; }
         public bool IsCompleted { get; private set; }
+        public uint Version { get; private set; }
         public void SetShippingInfo(string email, string firstName, string lastName, string address, string city, string zipCode, string shippingMethod, decimal shippingPrice)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(email, "Email cannot be empty.");
@@ -48,8 +49,13 @@ namespace Ordering.Domain.CheckoutAggregate
             IsCompleted = true;
         }
         private void SetUserId(Guid? userId) => UserId = userId;
-        private void SetSessionId(string sessionId)
+        private void SetSessionId(string? sessionId)
         {
+            if (UserId.HasValue && UserId.Value != Guid.Empty)
+            {
+                SessionId = string.IsNullOrWhiteSpace(sessionId) ? Guid.NewGuid().ToString("N") : sessionId;
+                return;
+            }
             ArgumentException.ThrowIfNullOrWhiteSpace(sessionId, "Session ID cannot be empty.");
             SessionId = sessionId;
         }

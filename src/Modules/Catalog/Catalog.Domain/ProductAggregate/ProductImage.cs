@@ -1,6 +1,6 @@
 namespace Catalog.Domain.ProductAggregate
 {
-    public sealed class ProductImage : BaseEntity
+    internal sealed class ProductImage : BaseEntity
     {
         private ProductImage()
         {

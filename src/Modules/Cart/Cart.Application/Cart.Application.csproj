@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
@@ -9,5 +9,12 @@
     <ProjectReference Include="..\..\Promotions\Promotions.Contracts\Promotions.Contracts.csproj" />
     <ProjectReference Include="..\Cart.Contracts\Cart.Contracts.csproj" />
     <ProjectReference Include="..\..\Ordering\Ordering.Contracts\Ordering.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Cart.Infrastructure" />
+    <InternalsVisibleTo Include="Cart.UnitTests" />
+    <InternalsVisibleTo Include="Ordering.UnitTests" />
+    <InternalsVisibleTo Include="Web.Api" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 </Project>

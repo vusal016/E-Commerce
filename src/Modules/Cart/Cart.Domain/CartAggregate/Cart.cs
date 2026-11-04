@@ -1,11 +1,11 @@
 namespace Cart.Domain.CartAggregate
 {
-    public sealed class Cart : AuditEntity
+    internal sealed class Cart : AuditEntity
     {
         private Cart()
         {
         }
-        public Cart(Guid? userId, string sessionId)
+        public Cart(Guid? userId, string? sessionId)
         {
             SetUserId(userId);
             SetSessionId(sessionId);
@@ -32,8 +32,13 @@ namespace Cart.Domain.CartAggregate
                 throw new ArgumentException("User ID cannot be empty.");
             UserId = userId;
         }
-        private void SetSessionId(string sessionId)
+        private void SetSessionId(string? sessionId)
         {
+            if (UserId.HasValue && UserId.Value != Guid.Empty)
+            {
+                SessionId = string.IsNullOrWhiteSpace(sessionId) ? Guid.NewGuid().ToString("N") : sessionId;
+                return;
+            }
             ArgumentException.ThrowIfNullOrWhiteSpace(sessionId, "Session ID cannot be empty.");
             SessionId = sessionId;
         }

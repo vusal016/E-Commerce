@@ -1,4 +1,4 @@
 namespace Web.Api.Requests.Cart
 {
-    internal sealed record ApplyCouponRequest(string Code);
+    public sealed record ApplyCouponRequest(string Code);
 }
